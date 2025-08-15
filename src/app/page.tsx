@@ -41,8 +41,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
 
-        <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6 lg:grid-cols-2">
-            <div className="space-y-6 text-center lg:text-left">
+        <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6">
+            <div className="space-y-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -51,15 +51,43 @@ export default function Home() {
                     <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-headline">
                         Your Journey, <TypewriterEffect text="Unburdened" />
                     </h1>
-                    <p className="mt-4 max-w-2xl text-lg text-slate-300 lg:mx-0">
+                    <p className="mt-4 max-w-3xl mx-auto text-lg text-slate-300">
                         Experience seamless travel with SwiftMove. Our AI-powered platform connects you with professional porters instantly. Get a quick estimate and book your service in under a minute.
                     </p>
+                </motion.div>
+                 <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mt-8"
+                >
+                    <Card className="max-w-4xl mx-auto bg-white/5 backdrop-blur-lg border-white/10 shadow-2xl p-4 sm:p-6">
+                        <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
+                            <div className="space-y-1 text-left">
+                                <Label htmlFor="pickup" className="text-xs font-semibold text-white/80">PICKUP</Label>
+                                <Input id="pickup" placeholder="Enter pickup address" className="bg-white/10 border-white/20 h-9" />
+                            </div>
+                             <div className="space-y-1 text-left">
+                                <Label htmlFor="drop" className="text-xs font-semibold text-white/80">DROP</Label>
+                                <Input id="drop" placeholder="Enter drop address" className="bg-white/10 border-white/20 h-9" />
+                            </div>
+                            <div className="space-y-1 text-left">
+                                <Label htmlFor="name" className="text-xs font-semibold text-white/80">NAME</Label>
+                                <Input id="name" placeholder="Your name" className="bg-white/10 border-white/20 h-9" />
+                            </div>
+                             <div className="space-y-1 text-left">
+                                <Label htmlFor="phone" className="text-xs font-semibold text-white/80">PHONE</Label>
+                                <Input id="phone" type="tel" placeholder="Phone number" className="bg-white/10 border-white/20 h-9" />
+                            </div>
+                            <Button className="w-full bg-accent hover:bg-accent/90 h-9" onClick={() => setIsEstimateModalOpen(true)}>Get Estimate</Button>
+                        </div>
+                    </Card>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4"
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4"
                 >
                     {stats.map((stat, index) => (
                     <div key={index} className="flex flex-col items-center gap-2 rounded-lg bg-white/10 p-4 backdrop-blur-sm">
@@ -70,26 +98,6 @@ export default function Home() {
                     ))}
                 </motion.div>
             </div>
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="relative mt-12 lg:mt-0"
-            >
-                <Card className="w-full max-w-md mx-auto bg-white/5 backdrop-blur-lg border-white/10 shadow-2xl">
-                    <CardHeader className="text-center">
-                        <CardTitle className="text-2xl font-bold text-white">
-                           <Rocket className="inline-block h-8 w-8 mr-2 text-primary" /> Instant Booking
-                        </CardTitle>
-                        <CardDescription className="text-slate-300">
-                            Fill in the details for an instant quote.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <BookingForm />
-                    </CardContent>
-                </Card>
-            </motion.div>
         </div>
       </section>
 
@@ -339,13 +347,43 @@ export default function Home() {
             <p className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto">
               Book your porter now and experience the SwiftMove difference. Your smoothest journey awaits.
             </p>
-             <Button size="lg" className="bg-accent hover:bg-accent/90 text-white">
+             <Button size="lg" className="bg-accent hover:bg-accent/90 text-white" onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}>
                 Book Now
             </Button>
         </div>
       </section>
+
+      <Dialog open={isEstimateModalOpen} onOpenChange={setIsEstimateModalOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Your Estimate</DialogTitle>
+            <DialogDescription>
+              Here is an estimated cost for your porter service.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-2 items-center gap-4">
+              <Label>Base Fare:</Label>
+              <span className="font-semibold text-right">$25.00</span>
+            </div>
+             <div className="grid grid-cols-2 items-center gap-4">
+              <Label>Distance (approx):</Label>
+              <span className="font-semibold text-right">$5.00</span>
+            </div>
+            <div className="grid grid-cols-2 items-center gap-4">
+              <Label>Service Fee:</Label>
+              <span className="font-semibold text-right">$3.00</span>
+            </div>
+            <div className="grid grid-cols-2 items-center gap-4 font-bold text-lg border-t pt-4 mt-2">
+              <Label>Total Estimate:</Label>
+              <span className="text-right">$33.00</span>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button type="submit" className="w-full bg-accent hover:bg-accent/90">Confirm Booking</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
-
-    
