@@ -5,7 +5,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Clock, ShieldCheck, Star, Users, ArrowRight, LifeBuoy, CreditCard, ShoppingCart, Info, Luggage, Gift, Flame } from 'lucide-react';
+import { CheckCircle, Clock, ShieldCheck, Star, Users, ArrowRight, LifeBuoy, CreditCard, ShoppingCart, Info, Luggage, Gift, Flame, Rocket, Handshake, Smartphone } from 'lucide-react';
 import Link from 'next/link';
 import AppLayout from '../app-layout';
 import BookingForm from '@/components/BookingForm';
@@ -33,17 +33,17 @@ const whyBookWithUs = [
 
 const bookingSteps = [
     {
-        icon: ShoppingCart,
+        icon: Smartphone,
         title: "1. Fill Your Details",
         description: "Complete the form with your journey information. It's quick and easy.",
     },
     {
-        icon: CreditCard,
+        icon: Handshake,
         title: "2. Confirm & Pay",
         description: "Review your details and complete the secure payment process.",
     },
     {
-        icon: Users,
+        icon: Rocket,
         title: "3. Meet Your Porter",
         description: "We'll assign a porter and you'll receive their details instantly.",
     }
@@ -100,7 +100,7 @@ export default function BookingPage() {
                 transition={{ duration: 0.5 }}
             >
                 <Badge variant="outline" className="mb-4 border-primary text-primary">Secure Booking</Badge>
-                <h1 className="text-4xl md:text-5xl font-bold font-headline">Book Your Porter Service</h1>
+                <h1 className="text-5xl md:text-6xl font-bold font-headline">Book Your Porter Service</h1>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                     Just a few details and you'll be on your way to a stress-free travel experience.
                 </p>
@@ -163,21 +163,23 @@ export default function BookingPage() {
                 <p className="max-w-2xl mx-auto text-muted-foreground mb-12">
                     We've simplified the booking process to save you time and effort.
                 </p>
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="relative grid md:grid-cols-3 gap-8">
+                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary/20 -translate-y-1/2 hidden md:block" />
+                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary origin-left hidden md:block" />
                      {bookingSteps.map((step, index) => (
                          <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-background p-8 rounded-lg shadow-lg text-center"
+                            className="relative flex flex-col items-center text-center p-8 bg-background rounded-xl shadow-lg border border-transparent hover:border-primary transition-all duration-300 z-10"
                         >
-                            <div className="mx-auto bg-primary/10 text-primary h-16 w-16 flex items-center justify-center rounded-full mb-6">
-                                <step.icon className="h-8 w-8" />
+                             <div className="absolute top-0 -translate-y-1/2 flex items-center justify-center h-20 w-20 rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
+                                <step.icon className="h-10 w-10" />
                             </div>
-                            <h3 className="text-xl font-bold font-headline mb-2">{step.title}</h3>
-                            <p className="text-muted-foreground">{step.description}</p>
+                            <h3 className="text-2xl font-bold font-headline mt-12 mb-3">{step.title}</h3>
+                            <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
                         </motion.div>
                      ))}
                 </div>
@@ -191,28 +193,27 @@ export default function BookingPage() {
                 <p className="max-w-2xl mx-auto text-muted-foreground mb-12">
                     From single backpacks to oversized items, our porters are equipped to handle it all.
                 </p>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                      {luggageTypes.map((item, index) => (
                          <motion.div
                             key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, amount: 0.5 }}
+                            className="group relative flex flex-col items-center justify-center text-center"
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                          >
-                            <Card className="overflow-hidden group">
+                            <div className="relative w-40 h-40">
                                 <Image 
                                     src={item.image} 
                                     alt={item.name} 
                                     data-ai-hint={item.hint}
-                                    width={200} 
-                                    height={200} 
-                                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                                    width={160} 
+                                    height={160} 
+                                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
                                 />
-                                <CardContent className="p-4">
-                                    <h3 className="font-semibold text-center">{item.name}</h3>
-                                </CardContent>
-                            </Card>
+                            </div>
+                            <h3 className="font-semibold text-lg mt-4">{item.name}</h3>
                         </motion.div>
                      ))}
                 </div>
