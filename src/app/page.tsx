@@ -70,11 +70,6 @@ const features = [
     title: "AI-Powered Efficiency",
     description: "Our smart platform optimizes routes and assignments, ensuring the quickest and most efficient service, saving you time and hassle.",
     },
-  {
-    icon: <DollarSign className="h-10 w-10 text-primary" />,
-    title: "Transparent Pricing",
-    description: "No hidden fees or surprises. Get a clear, upfront estimate before you book, so you know exactly what you're paying for.",
-    },
       {
     icon: <UserCheck className="h-10 w-10 text-primary" />,
     title: "Personalized Service",
@@ -331,7 +326,7 @@ export default function Home() {
                         className="space-y-6"
                     >
                        <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
-                         {features.slice(0, 4).map((feature, index) => (
+                         {features.slice(0, 6).map((feature, index) => (
                            <AccordionItem value={`item-${index}`} key={index} className="border-b">
                              <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-4 rounded-lg px-4 data-[state=open]:bg-primary/10 data-[state=open]:text-primary transition-all">
                                <div className="flex items-center gap-4">
@@ -585,34 +580,45 @@ export default function Home() {
       </section>
 
       {/* Safety Commitment Section */}
-       <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-         <div className="container px-4 md:px-6">
-           <div className="text-center">
-             <Shield className="h-16 w-16 mx-auto text-primary mb-4" />
-             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Our Commitment to Safety</h2>
-             <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl/relaxed mb-12">
-               Your safety and the security of your belongings are our top priorities. We take every measure to ensure a secure and trustworthy experience.
-             </p>
-           </div>
-           <div className="grid md:grid-cols-3 gap-8 text-center">
-             <div className="flex flex-col items-center">
-               <Users className="h-10 w-10 mb-2 text-primary"/>
-               <h3 className="font-bold text-lg">Verified Porters</h3>
-               <p className="text-muted-foreground">All porters are background-checked and thoroughly trained.</p>
-             </div>
-             <div className="flex flex-col items-center">
-                <CheckCircle className="h-10 w-10 mb-2 text-primary"/>
-               <h3 className="font-bold text-lg">Secure Handling</h3>
-               <p className="text-muted-foreground">We follow strict protocols to ensure your luggage is handled with care.</p>
-             </div>
-             <div className="flex flex-col items-center">
-               <PhoneCall className="h-10 w-10 mb-2 text-primary"/>
-               <h3 className="font-bold text-lg">24/7 Support</h3>
-               <p className="text-muted-foreground">Our support team is always available to assist you with any concerns.</p>
-             </div>
-           </div>
-         </div>
-       </section>
+      <section className="relative w-full py-12 md:py-24 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-secondary/50 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background z-0"></div>
+        <div className="container relative z-10 px-4 md:px-6">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Our Commitment to Safety</h2>
+                <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+                    Your safety and the security of your belongings are our top priorities. We take every measure to ensure a secure and trustworthy experience.
+                </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+                {[
+                    { icon: Users, title: "Verified Porters", description: "All porters are background-checked and thoroughly trained." },
+                    { icon: CheckCircle, title: "Secure Handling", description: "We follow strict protocols to ensure your luggage is handled with care." },
+                    { icon: PhoneCall, title: "24/7 Support", description: "Our support team is always available to assist you with any concerns." },
+                ].map((item, index) => (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, delay: index * 0.15 }}
+                    >
+                        <Card className="text-center h-full bg-background/80 backdrop-blur-sm border-primary/20 hover:border-primary transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-primary/20">
+                            <CardHeader>
+                                <div className="mx-auto bg-primary/10 text-primary p-4 rounded-full w-fit">
+                                    <item.icon className="h-10 w-10" />
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <h3 className="font-bold text-xl mb-2">{item.title}</h3>
+                                <p className="text-muted-foreground">{item.description}</p>
+                            </CardContent>
+                        </Card>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    </section>
       
       {/* Blog/Tips Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
