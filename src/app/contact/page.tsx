@@ -1,7 +1,7 @@
 
 "use client";
 
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -14,6 +14,9 @@ import AppLayout from '../app-layout';
 import { motion } from "framer-motion";
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
 const contactPoints = [
     {
@@ -77,12 +80,34 @@ const locations = [
 
 export default function ContactPage() {
     const [activeLocation, setActiveLocation] = React.useState(locations[0]);
+    const { toast } = useToast();
+    const [isFeedbackDialogOpen, setIsFeedbackDialogOpen] = useState(false);
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>, title: string) => {
+        e.preventDefault();
+        toast({
+            title: title,
+            description: "We've received your message and will get back to you shortly.",
+        });
+        (e.target as HTMLFormElement).reset();
+    };
+
+    const handleFeedbackSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        toast({
+            title: "Feedback Submitted!",
+            description: "Thank you for helping us improve our service.",
+        });
+        (e.target as HTMLFormElement).reset();
+        setIsFeedbackDialogOpen(false);
+    }
+
     return (
         <AppLayout>
             {/* 1. Hero Section */}
             <section className="relative bg-primary text-primary-foreground py-20 md:py-32 text-center overflow-hidden">
                 <div className="absolute inset-0 -z-10">
-                    <svg className="absolute bottom-0 text-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="currentColor" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,208C384,213,480,203,576,176C672,149,768,107,864,117.3C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+                    <svg className="absolute bottom-0 text-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="currentColor" d="M0,160L48,170.7C96,181,192,203,288,208C384,213,480,203,576,176C672,149,768,107,864,117.3C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
                 </div>
                 <div className="container relative">
                     <motion.div
@@ -93,7 +118,7 @@ export default function ContactPage() {
                         <Badge variant="secondary" className="mb-4">Get in Touch</Badge>
                         <h1 className="text-4xl md:text-6xl font-bold font-headline">We're Here to Help</h1>
                         <p className="mt-4 max-w-2xl mx-auto text-lg opacity-90">
-                            Have a question, a suggestion, or need support? Our team is ready to assist you.
+                            Have a question, a suggestion, or need support? Our team is ready to assist you. Whether you're a customer, a potential partner, or just curious, we'd love to hear from you.
                         </p>
                     </motion.div>
                 </div>
@@ -115,12 +140,12 @@ export default function ContactPage() {
                                     <CardDescription>We'll get back to you as soon as possible.</CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <form className="space-y-4">
+                                    <form onSubmit={(e) => handleFormSubmit(e, "Message Sent!")} className="space-y-4">
                                         <div className="grid sm:grid-cols-2 gap-4">
-                                            <Input placeholder="Your Name" />
-                                            <Input type="email" placeholder="Your Email" />
+                                            <Input placeholder="Your Name" required/>
+                                            <Input type="email" placeholder="Your Email" required/>
                                         </div>
-                                        <Select>
+                                        <Select required>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Reason for contacting" />
                                             </SelectTrigger>
@@ -131,7 +156,7 @@ export default function ContactPage() {
                                                 <SelectItem value="press">Press</SelectItem>
                                             </SelectContent>
                                         </Select>
-                                        <Textarea placeholder="Your Message" rows={5} />
+                                        <Textarea placeholder="Your Message" rows={5} required/>
                                         <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90">Submit Message</Button>
                                     </form>
                                 </CardContent>
@@ -247,18 +272,18 @@ export default function ContactPage() {
                                     </div>
                                 </CardHeader>
                                 <CardContent className="p-0">
-                                    <form className="space-y-4">
+                                    <form onSubmit={(e) => handleFormSubmit(e, "Question Submitted!")} className="space-y-4">
                                         <div className="relative">
                                             <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                                            <Input id="faq-name" placeholder="Your name" className="pl-10" />
+                                            <Input id="faq-name" placeholder="Your name" className="pl-10" required/>
                                         </div>
                                         <div className="relative">
                                             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                                            <Input id="faq-email" type="email" placeholder="Your email address" className="pl-10" />
+                                            <Input id="faq-email" type="email" placeholder="Your email address" className="pl-10" required/>
                                         </div>
                                         <div className="relative">
                                             <HelpCircle className="absolute left-3 top-4 h-5 w-5 text-muted-foreground" />
-                                            <Textarea id="faq-question" placeholder="Ask us anything..." rows={4} className="pl-10" />
+                                            <Textarea id="faq-question" placeholder="Ask us anything..." rows={4} className="pl-10" required/>
                                         </div>
                                         <Button type="submit" className="w-full bg-accent hover:bg-accent/90">Submit Question</Button>
                                     </form>
@@ -338,20 +363,22 @@ export default function ContactPage() {
                         <div className="md:col-span-2 relative h-[500px] w-full rounded-2xl overflow-hidden shadow-xl">
                              <Image src={`https://placehold.co/1200x500.png?text=${encodeURIComponent(activeLocation.name)}`} layout="fill" objectFit="cover" alt="World map with office locations" data-ai-hint="world map pins" className="transition-all duration-500" key={activeLocation.name}/>
                         </div>
-                        <div className="flex flex-col gap-4">
-                            {locations.map((loc) => (
-                                <Card 
-                                    key={loc.name} 
-                                    className={`cursor-pointer transition-all duration-300 ${activeLocation.name === loc.name ? 'border-primary shadow-lg' : 'hover:shadow-md'}`}
-                                    onClick={() => setActiveLocation(loc)}
-                                >
-                                    <CardHeader>
-                                        <CardTitle className="text-lg">{loc.name}</CardTitle>
-                                        <CardDescription>{loc.address}</CardDescription>
-                                    </CardHeader>
-                                </Card>
-                            ))}
-                        </div>
+                        <aside className="md:sticky top-24 h-fit">
+                            <div className="flex flex-col gap-4">
+                                {locations.map((loc) => (
+                                    <Card 
+                                        key={loc.name} 
+                                        className={`cursor-pointer transition-all duration-300 ${activeLocation.name === loc.name ? 'border-primary shadow-lg' : 'hover:shadow-md'}`}
+                                        onClick={() => setActiveLocation(loc)}
+                                    >
+                                        <CardHeader>
+                                            <CardTitle className="text-lg">{loc.name}</CardTitle>
+                                            <CardDescription>{loc.address}</CardDescription>
+                                        </CardHeader>
+                                    </Card>
+                                ))}
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </section>
@@ -412,8 +439,8 @@ export default function ContactPage() {
                         <p className="max-w-2xl mx-auto text-muted-foreground mt-4 mb-8">
                             Subscribe to our newsletter for exclusive offers, new destination announcements, and travel tips. No spam, we promise.
                         </p>
-                        <form className="flex sm:flex-row flex-col gap-2 max-w-md mx-auto">
-                            <Input type="email" placeholder="Enter your email" className="flex-1 h-12" />
+                        <form onSubmit={(e) => handleFormSubmit(e, "Subscribed!")} className="flex sm:flex-row flex-col gap-2 max-w-md mx-auto">
+                            <Input type="email" placeholder="Enter your email" className="flex-1 h-12" required/>
                             <Button type="submit" size="lg" className="bg-primary hover:bg-primary/90 h-12">Subscribe</Button>
                         </form>
                     </div>
@@ -427,10 +454,37 @@ export default function ContactPage() {
                     <p className="max-w-2xl mx-auto text-muted-foreground mt-4 mb-8">
                         Your suggestions help us improve. Share your experience or ideas with us.
                     </p>
-                    <Button size="lg" variant="outline">
-                        <MessageSquare className="mr-2 h-5 w-5" />
-                        Share Feedback
-                    </Button>
+                    <Dialog open={isFeedbackDialogOpen} onOpenChange={setIsFeedbackDialogOpen}>
+                        <DialogTrigger asChild>
+                           <Button size="lg" variant="outline">
+                                <MessageSquare className="mr-2 h-5 w-5" />
+                                Share Feedback
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Share Your Feedback</DialogTitle>
+                                <DialogDescription>We appreciate you taking the time to share your thoughts.</DialogDescription>
+                            </DialogHeader>
+                            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="feedback-name">Name</Label>
+                                    <Input id="feedback-name" placeholder="Your Name" required/>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="feedback-email">Email</Label>
+                                    <Input id="feedback-email" type="email" placeholder="Your Email" required/>
+                                </div>
+                                 <div className="space-y-2">
+                                    <Label htmlFor="feedback-message">Message</Label>
+                                    <Textarea id="feedback-message" placeholder="Your feedback..." required/>
+                                </div>
+                                <DialogFooter>
+                                    <Button type="submit">Submit Feedback</Button>
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </section>
 
@@ -455,3 +509,5 @@ export default function ContactPage() {
         </AppLayout>
     );
 }
+
+    

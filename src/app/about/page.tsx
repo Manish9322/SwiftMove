@@ -36,10 +36,10 @@ const coreValues = [
 ];
 
 const differentiators = [
-    { icon: Rocket, title: "AI-Powered Logistics", description: "Our smart system optimizes porter matching and routing for unparalleled efficiency." },
-    { icon: Check, title: "Rigorous Vetting Process", description: "Every porter undergoes extensive background checks and training for your safety." },
-    { icon: ThumbsUp, title: "Seamless User Experience", description: "From booking to destination, our platform is designed to be intuitive and hassle-free." },
-    { icon: Handshake, title: "Strong Partnerships", description: "We collaborate with airports and travel providers to ensure a smooth, integrated service." },
+    { icon: Rocket, title: "AI-Powered Logistics", description: "Our smart system optimizes porter matching and routing for unparalleled efficiency, reducing wait times and ensuring a smooth handover." },
+    { icon: Check, title: "Rigorous Vetting Process", description: "Every porter undergoes extensive background checks, interviews, and comprehensive training for your safety and peace of mind." },
+    { icon: ThumbsUp, title: "Seamless User Experience", description: "From a 60-second booking process to real-time updates, our platform is designed to be intuitive and completely hassle-free." },
+    { icon: Handshake, title: "Strong Partnerships", description: "We collaborate closely with airports, airlines, and travel providers to ensure a smooth, integrated service from curb to gate." },
 ];
 
 const openPositions = [
@@ -86,25 +86,25 @@ export default function AboutPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.6 }}
-                            className="space-y-8"
+                            className="space-y-4"
                         >
-                            <div className="p-6 rounded-lg bg-muted border-l-4 border-primary">
+                            <div className="p-6 rounded-lg bg-muted">
                                 <div className="flex items-center gap-4 mb-3">
                                     <div className="bg-primary/10 text-primary p-3 rounded-full">
                                         <Target className="h-6 w-6" />
                                     </div>
                                     <h2 className="text-2xl font-bold font-headline">Our Mission</h2>
                                 </div>
-                                <p className="text-muted-foreground">To unburden travelers worldwide by providing a reliable, secure, and user-friendly platform for porter services, turning stressful journeys into seamless experiences.</p>
+                                <p className="text-muted-foreground">To unburden travelers worldwide by providing a reliable, secure, and hyper-efficient platform for porter services, turning stressful journeys into seamless, positive experiences from the first click to the final destination.</p>
                             </div>
-                            <div className="p-6 rounded-lg bg-muted border-l-4 border-primary">
+                            <div className="p-6 rounded-lg bg-muted">
                                 <div className="flex items-center gap-4 mb-3">
                                     <div className="bg-primary/10 text-primary p-3 rounded-full">
                                         <Sparkles className="h-6 w-6" />
                                     </div>
                                     <h2 className="text-2xl font-bold font-headline">Our Vision</h2>
                                 </div>
-                                <p className="text-muted-foreground">To become the global standard for on-demand travel assistance, recognized for our innovation, reliability, and unwavering commitment to customer satisfaction.</p>
+                                <p className="text-muted-foreground">To become the global standard for on-demand travel assistance, integrating predictive AI and exceptional human service to be an indispensable part of every modern journey, recognized for our innovation and unwavering commitment to customer satisfaction.</p>
                             </div>
                         </motion.div>
                         <motion.div
@@ -230,9 +230,9 @@ export default function AboutPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.6 }}
-                            className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg"
+                            className="relative aspect-square rounded-2xl overflow-hidden shadow-lg"
                         >
-                             <Image src="https://placehold.co/500x625.png" alt="A porter assisting a customer" data-ai-hint="friendly porter customer" layout="fill" objectFit="cover" />
+                             <Image src="https://placehold.co/500x500.png" alt="A porter assisting a customer" data-ai-hint="friendly porter customer" layout="fill" objectFit="cover" />
                         </motion.div>
                          <motion.div
                             initial={{ opacity: 0, x: 50 }}
@@ -244,7 +244,7 @@ export default function AboutPage() {
                             <p className="text-muted-foreground text-lg mb-8">We're not just another service; we are a travel revolution built on a foundation of unique strengths that set us apart.</p>
                             <div className="space-y-6">
                                 {differentiators.map((item, index) => (
-                                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg bg-muted/50 transition-all hover:bg-muted">
+                                    <div key={index} className="flex items-start gap-4">
                                         <div className="bg-primary/10 text-primary p-3 rounded-full mt-1">
                                             <item.icon className="h-6 w-6" />
                                         </div>
@@ -270,17 +270,17 @@ export default function AboutPage() {
                         </p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
-                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:-translate-y-2">
                             <Rocket className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
                             <h3 className="text-xl font-bold">Smart Matching Algorithm</h3>
                             <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">Our AI instantly connects you with the best available porter based on location, time, and ratings.</p>
                         </Card>
-                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:-translate-y-2">
                             <GitBranch className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
                             <h3 className="text-xl font-bold">Optimized Route Planning</h3>
                             <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">We calculate the most efficient routes within transport hubs to save you precious time.</p>
                         </Card>
-                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:-translate-y-2">
                             <Shield className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
                             <h3 className="text-xl font-bold">Secure, Scalable Platform</h3>
                             <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">Built on robust infrastructure to ensure your data is safe and our service is always available.</p>
@@ -423,3 +423,5 @@ export default function AboutPage() {
         </AppLayout>
     );
 }
+
+    
