@@ -129,8 +129,8 @@ export default function AboutPage() {
                             From a simple idea to a trusted service, our story is one of passion and perseverance.
                         </p>
                     </div>
-                    <div className="relative">
-                        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 hidden md:block" />
+                    <div className="relative max-w-4xl mx-auto">
+                        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/20" />
                         {timelineEvents.map((event, index) => (
                             <motion.div
                                 key={index}
@@ -138,16 +138,16 @@ export default function AboutPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: 0.5 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className={`relative flex md:justify-center items-center w-full my-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                                className={`relative flex items-center w-full my-4 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
                             >
-                                <div className={`md:w-1/2 p-4 md:p-8 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                                    <div className="bg-background rounded-lg shadow-lg p-6">
+                                <div className={`md:w-1/2 p-4 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                                    <div className={`bg-background rounded-lg shadow-lg p-6 border-l-4 ${index % 2 === 0 ? 'border-primary' : 'border-accent'}`}>
                                         <Badge variant="default" className="mb-2">{event.year}</Badge>
                                         <h3 className="text-xl font-bold">{event.title}</h3>
                                         <p className="text-muted-foreground mt-2">{event.description}</p>
                                     </div>
                                 </div>
-                                <div className="absolute left-1/2 -translate-x-1/2 bg-primary h-4 w-4 rounded-full ring-8 ring-secondary hidden md:block" />
+                                <div className="absolute left-1/2 -translate-x-1/2 bg-primary h-4 w-4 rounded-full ring-8 ring-secondary" />
                             </motion.div>
                         ))}
                     </div>
@@ -380,20 +380,20 @@ export default function AboutPage() {
                         >
                             <h2 className="text-3xl font-bold font-headline">More Than a Service</h2>
                              <p className="text-muted-foreground text-lg mt-4 mb-6">
-                                We believe in giving back to the communities we operate in and creating a positive impact beyond travel.
+                                We believe in giving back to the communities we operate in and creating a positive impact beyond travel. We are dedicated to fostering local employment, promoting sustainable practices, and supporting community-driven initiatives.
                             </p>
                             <ul className="space-y-4">
-                                <li className="flex items-start gap-3">
+                                <li className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary">
                                     <Heart className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                                    <span>Partnering with local charities to support employment initiatives and community development.</span>
+                                    <span><strong>Local Partnerships:</strong> We collaborate with local charities to support employment initiatives and contribute to community development projects.</span>
                                 </li>
-                                 <li className="flex items-start gap-3">
+                                 <li className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary">
                                     <GitBranch className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                                    <span>Implementing green initiatives to minimize our environmental footprint in transport hubs.</span>
+                                    <span><strong>Green Initiatives:</strong> We actively implement eco-friendly practices within transport hubs to minimize our environmental footprint and promote sustainability.</span>
                                 </li>
-                                 <li className="flex items-start gap-3">
+                                 <li className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary">
                                     <Briefcase className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                                    <span>Providing fair wages and professional growth opportunities for all our porters.</span>
+                                    <span><strong>Fair Employment:</strong> We are committed to providing fair, living wages and creating professional growth opportunities for all our porters, empowering our team.</span>
                                 </li>
                             </ul>
                         </motion.div>
@@ -423,5 +423,3 @@ export default function AboutPage() {
         </AppLayout>
     );
 }
-
-    
