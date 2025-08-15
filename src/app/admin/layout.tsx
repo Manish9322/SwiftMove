@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   ListOrdered,
   LogOut,
+  PanelLeft,
   Settings,
   Truck,
   Users,
@@ -24,9 +25,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { cn } from "@/lib/utils";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   const isActive = (path: string) => {
     return pathname === path;
@@ -34,63 +37,77 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
-       <aside className="fixed inset-y-0 left-0 z-10 hidden w-60 flex-col border-r bg-background sm:flex">
+       <aside className={cn(
+          "fixed inset-y-0 left-0 z-10 hidden flex-col border-r bg-background transition-all duration-300 sm:flex",
+          isCollapsed ? "w-16" : "w-60"
+        )}>
         <nav className="flex flex-col items-center gap-4 px-2 py-4">
-          <Link
-            href="#"
-            className="group flex h-9 w-full items-center justify-center rounded-lg text-lg font-semibold text-primary-foreground md:h-8 md:w-full md:justify-start md:px-3"
-          >
-            <Truck className="h-6 w-6 transition-all group-hover:scale-110" />
-            <span className="ml-2 font-bold">SwiftMove</span>
-          </Link>
-          <Link
-            href="/admin/dashboard"
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/dashboard') ? 'bg-muted text-primary' : ''}`}
-          >
-            <LayoutDashboard className="h-4 w-4" />
-            Dashboard
-          </Link>
-          <Link
-            href="/admin/bookings"
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/bookings') ? 'bg-muted text-primary' : ''}`}
-          >
-            <ListOrdered className="h-4 w-4" />
-            Bookings
-          </Link>
-           <Link
-            href="/admin/porters"
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/porters') ? 'bg-muted text-primary' : ''}`}
-          >
-            <Truck className="h-4 w-4" />
-            Porters
-          </Link>
-           <Link
-            href="/admin/users"
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/users') ? 'bg-muted text-primary' : ''}`}
-          >
-            <Users className="h-4 w-4" />
-            Users
-          </Link>
+           <div className={cn("flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6", isCollapsed && "border-none px-0")}>
+              <Link href="/" className="flex items-center gap-2 font-semibold">
+                <Truck className="h-6 w-6" />
+                <span className={cn(isCollapsed && "hidden")}>SwiftMove</span>
+              </Link>
+           </div>
+           
+          <div className={cn("flex-1 overflow-auto py-2 w-full", isCollapsed && "flex flex-col items-center")}>
+            <Link
+              href="/admin/dashboard"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/dashboard') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <LayoutDashboard className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Dashboard</span>
+            </Link>
+            <Link
+              href="/admin/bookings"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/bookings') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <ListOrdered className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Bookings</span>
+            </Link>
+             <Link
+              href="/admin/porters"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/porters') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <Truck className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Porters</span>
+            </Link>
+             <Link
+              href="/admin/users"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/users') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <Users className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Users</span>
+            </Link>
+          </div>
         </nav>
-        <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
+        <nav className={cn("mt-auto flex flex-col items-center gap-4 px-2 py-4", isCollapsed && "px-0")}>
           <Link
               href="#"
-              className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isCollapsed ? 'justify-center' : ''}`}
             >
               <Settings className="h-4 w-4" />
-              Settings
+               <span className={cn(isCollapsed && "hidden")}>Settings</span>
             </Link>
              <Link
               href="/"
-              className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isCollapsed ? 'justify-center' : ''}`}
             >
               <LogOut className="h-4 w-4" />
-              Logout
+              <span className={cn(isCollapsed && "hidden")}>Logout</span>
             </Link>
         </nav>
       </aside>
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-60">
+      <div className={cn("flex flex-col sm:gap-4 sm:py-4 transition-all duration-300", isCollapsed ? "sm:pl-16" : "sm:pl-60")}>
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+          <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8"
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+              <PanelLeft className="h-4 w-4" />
+              <span className="sr-only">Toggle Sidebar</span>
+          </Button>
           <div className="relative flex-1">
              <h1 className="text-lg font-semibold">Admin Panel</h1>
           </div>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -11,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { mockPorters } from "@/lib/mock-data";
 import type { Porter, PorterStatus } from "@/lib/types";
+import { Pencil, PlusCircle, Trash2 } from "lucide-react";
 
 const getBadgeVariant = (status: PorterStatus) => {
   switch (status) {
@@ -70,7 +72,10 @@ export default function PortersTab() {
           <CardTitle>Manage Porters</CardTitle>
           <CardDescription>Add, edit, or remove porters from the system.</CardDescription>
         </div>
-        <Button onClick={openAddDialog}>Add Porter</Button>
+        <Button onClick={openAddDialog}>
+          <PlusCircle className="mr-2 h-4 w-4" />
+          Add Porter
+        </Button>
       </CardHeader>
       <CardContent>
         <Table>
@@ -89,8 +94,14 @@ export default function PortersTab() {
                 <TableCell>{porter.contact}</TableCell>
                 <TableCell><Badge variant={getBadgeVariant(porter.status)}>{porter.status}</Badge></TableCell>
                 <TableCell className="text-right space-x-2">
-                  <Button variant="outline" size="sm" onClick={() => openEditDialog(porter)}>Edit</Button>
-                  <Button variant="destructive" size="sm" onClick={() => handleDeletePorter(porter.id)}>Delete</Button>
+                  <Button variant="outline" size="icon" onClick={() => openEditDialog(porter)}>
+                    <Pencil className="h-4 w-4" />
+                    <span className="sr-only">Edit</span>
+                  </Button>
+                  <Button variant="destructive" size="icon" onClick={() => handleDeletePorter(porter.id)}>
+                    <Trash2 className="h-4 w-4" />
+                    <span className="sr-only">Delete</span>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
