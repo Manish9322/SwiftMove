@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -166,6 +166,28 @@ const faqs = [
   },
 ];
 
+const safetyCommitments = [
+    { 
+        icon: Users, 
+        title: "Verified & Trained Porters", 
+        description: "Every porter undergoes a comprehensive background check and is trained in safety protocols to ensure professional and secure handling of your belongings." 
+    },
+    { 
+        icon: ShieldCheck, 
+        title: "Secure Luggage Handling", 
+        description: "We follow strict, standardized procedures for luggage handling, from pickup to drop-off, to prevent damage or loss and give you complete peace of mind." 
+    },
+    { 
+        icon: PhoneCall, 
+        title: "24/7 Customer Support", 
+        description: "Our dedicated support team is always available to assist you with any concerns, providing real-time help whenever you need it." 
+    },
+    { 
+        icon: CheckCircle, 
+        title: "Insured Service", 
+        description: "For added protection, every booking is covered by our comprehensive insurance policy, safeguarding your items against unforeseen circumstances."
+    }
+];
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = React.useState(false);
@@ -579,43 +601,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Safety Commitment Section */}
-      <section className="relative w-full py-12 md:py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-secondary/50 z-0"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background z-0"></div>
-        <div className="container relative z-10 px-4 md:px-6">
-            <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Our Commitment to Safety</h2>
-                <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
-                    Your safety and the security of your belongings are our top priorities. We take every measure to ensure a secure and trustworthy experience.
-                </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-                {[
-                    { icon: Users, title: "Verified Porters", description: "All porters are background-checked and thoroughly trained." },
-                    { icon: CheckCircle, title: "Secure Handling", description: "We follow strict protocols to ensure your luggage is handled with care." },
-                    { icon: PhoneCall, title: "24/7 Support", description: "Our support team is always available to assist you with any concerns." },
-                ].map((item, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.5 }}
-                        transition={{ duration: 0.5, delay: index * 0.15 }}
-                    >
-                        <Card className="text-center h-full bg-background/80 backdrop-blur-sm border-primary/20 hover:border-primary transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-primary/20">
-                            <CardHeader>
-                                <div className="mx-auto bg-primary/10 text-primary p-4 rounded-full w-fit">
-                                    <item.icon className="h-10 w-10" />
+     {/* Safety Commitment Section */}
+     <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+        <div className="container px-4 md:px-6">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6 }}
+                    className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-lg"
+                >
+                    <Image
+                        src="https://placehold.co/500x625.png"
+                        layout="fill"
+                        objectFit="cover"
+                        alt="Porter assisting a customer with a smile"
+                        data-ai-hint="friendly porter assistance"
+                    />
+                    <div className="absolute inset-0 bg-primary/20"></div>
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="space-y-8"
+                >
+                    <div>
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
+                            Your Safety is Our Priority
+                        </h2>
+                        <p className="max-w-xl text-muted-foreground md:text-xl/relaxed mt-4">
+                            We are relentlessly committed to ensuring the safety of your belongings and providing a service you can trust without hesitation.
+                        </p>
+                    </div>
+                    <div className="space-y-6">
+                        {safetyCommitments.map((commitment, index) => (
+                            <div key={index} className="group relative flex items-start gap-4">
+                                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                                    <commitment.icon className="h-6 w-6" />
                                 </div>
-                            </CardHeader>
-                            <CardContent>
-                                <h3 className="font-bold text-xl mb-2">{item.title}</h3>
-                                <p className="text-muted-foreground">{item.description}</p>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                ))}
+                                <div>
+                                    <h3 className="text-xl font-bold">{commitment.title}</h3>
+                                    <p className="mt-1 text-muted-foreground">{commitment.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
             </div>
         </div>
     </section>
