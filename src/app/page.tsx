@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, StarIcon, CheckSquare, BarChart2 } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, StarIcon, CheckSquare, BarChart2, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -16,6 +16,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
+import { Textarea } from '@/components/ui/textarea';
 
 const Star = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -163,6 +164,10 @@ const faqs = [
   {
     question: "How do I identify my porter?",
     answer: "You will receive your porter's photo, name, and contact details in your booking confirmation. They will also be wearing a SwiftMove uniform.",
+  },
+    {
+    question: "What is your cancellation policy?",
+    answer: "We offer a flexible cancellation policy. You can cancel for a full refund up to 24 hours before your scheduled service time. Please refer to our terms and conditions for more details.",
   },
 ];
 
@@ -356,7 +361,12 @@ export default function Home() {
       {/* Testimonials Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">What Our Customers Say</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">What Our Customers Say</h2>
+            <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+                Real stories from our satisfied clients who experienced a seamless journey with us.
+            </p>
+          </div>
             <Carousel
                 opts={{
                     align: "start",
@@ -401,6 +411,12 @@ export default function Home() {
           <Globe className="absolute -bottom-1/4 -right-1/4 w-1/2 h-auto text-primary/50" />
         </div>
         <div className="container relative z-10 px-4 md:px-6">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">We've Got You Covered</h2>
+                <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+                    We operate in major airports, train stations, and transport hubs across the globe. Enter your city to see if we're in your area.
+                </p>
+            </div>
             <div className="grid md:grid-cols-2 gap-12 items-center">
                 <motion.div 
                   initial={{ opacity: 0, x: -50 }}
@@ -408,24 +424,18 @@ export default function Home() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">
-                      We've Got You Covered
-                    </h2>
-                    <p className="text-muted-foreground text-lg mb-6">
-                      We operate in major airports, train stations, and transport hubs across the globe. Enter your city to see if we're in your area.
-                    </p>
-                    <div className="relative max-w-md">
+                    <div className="relative max-w-md mx-auto">
                         <Input 
                             type="text" 
                             placeholder="Enter your city or airport code"
-                            className="h-12 pl-4 pr-12 text-base"
+                            className="h-12 pl-4 pr-12 text-base shadow-lg"
                         />
                         <Button variant="ghost" size="icon" className="absolute right-1 top-1 h-10 w-10 text-primary hover:bg-primary/10">
                           <Search className="h-5 w-5" />
                           <span className="sr-only">Search</span>
                         </Button>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-4">
+                    <p className="text-sm text-center text-muted-foreground mt-4">
                       Popular locations include: <span className="font-semibold text-foreground">JFK, LAX, LHR, CDG, HND</span> & many more.
                     </p>
                 </motion.div>
@@ -501,22 +511,72 @@ export default function Home() {
       
       {/* FAQ Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
-        <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
               Frequently Asked Questions
             </h2>
-            <Accordion type="single" collapsible className="w-full space-y-4">
-              {faqs.map((faq, index) => (
-                <AccordionItem value={`item-${index}`} key={index} className="bg-background border border-border rounded-lg shadow-sm">
-                  <AccordionTrigger className="text-lg font-semibold hover:no-underline px-6 py-4 text-left">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-4 pt-0 text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+              Find answers to common questions about our services. If you can't find what you're looking for, feel free to ask.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <Card className="p-6 lg:p-8">
+                <CardHeader className="p-0 mb-6">
+                  <div className="flex items-center gap-3">
+                    <MessageSquare className="h-8 w-8 text-primary" />
+                    <CardTitle className="text-2xl font-headline">Have a Question?</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Fill out the form below and we'll get back to you as soon as possible.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <form className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="faq-name">Name</Label>
+                      <Input id="faq-name" placeholder="Your name" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="faq-email">Email</Label>
+                      <Input id="faq-email" type="email" placeholder="Your email address" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="faq-question">Your Question</Label>
+                      <Textarea id="faq-question" placeholder="Ask us anything..." rows={4} />
+                    </div>
+                    <Button type="submit" className="w-full bg-accent hover:bg-accent/90">Submit Question</Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Accordion type="single" collapsible className="w-full space-y-4">
+                {faqs.map((faq, index) => (
+                  <AccordionItem value={`item-${index}`} key={index} className="bg-background border border-border rounded-lg shadow-sm">
+                    <AccordionTrigger className="text-lg font-semibold hover:no-underline px-6 py-4 text-left">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 pt-0 text-muted-foreground">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -527,7 +587,7 @@ export default function Home() {
              <Shield className="h-16 w-16 mx-auto text-primary mb-4" />
              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Our Commitment to Safety</h2>
              <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl/relaxed mb-12">
-               Your safety and the security of your belongings are our top priorities.
+               Your safety and the security of your belongings are our top priorities. We take every measure to ensure a secure and trustworthy experience.
              </p>
            </div>
            <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -553,7 +613,12 @@ export default function Home() {
       {/* Blog/Tips Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">Travel Smarter</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Travel Smarter</h2>
+            <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+              Check out our latest tips and articles to make your next journey even smoother.
+            </p>
+          </div>
           <div className="grid gap-8 md:grid-cols-3">
             {[
               { title: "5 Tips for a Stress-Free Airport Experience", image: "https://placehold.co/600x400.png", hint: "airport check-in" },
