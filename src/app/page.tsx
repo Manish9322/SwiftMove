@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, StarIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -407,20 +407,71 @@ export default function Home() {
       </section>
 
       {/* Partnership/Corporate Section */}
-       <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
-        <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Corporate &amp; Event Services</h2>
-            <p className="max-w-3xl mx-auto md:text-xl/relaxed mb-8">
-                Streamline logistics for your business travelers or event attendees. We offer tailored packages for companies and event organizers.
-            </p>
-            <Button size="lg" variant="secondary" asChild>
-                <Link href="/contact">Learn More</Link>
-            </Button>
+       <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+        <div className="container px-4 md:px-6">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <div className="space-y-4">
+                         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Corporate &amp; Event Services</h2>
+                        <p className="text-muted-foreground text-lg">
+                           Elevate the travel experience for your team or event attendees. SwiftMove offers tailored solutions for businesses and event organizers, ensuring seamless and stress-free journeys for everyone.
+                        </p>
+                        <ul className="space-y-3 mt-4">
+                            <li className="flex items-start gap-3">
+                                <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                                <div>
+                                    <h4 className="font-semibold">Dedicated Account Management</h4>
+                                    <p className="text-muted-foreground">Get a single point of contact to manage all your corporate booking needs.</p>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                                <div>
+                                    <h4 className="font-semibold">Centralized Billing</h4>
+                                    <p className="text-muted-foreground">Simplify your accounting with consolidated, monthly invoicing.</p>
+                                </div>
+                            </li>
+                             <li className="flex items-start gap-3">
+                                <CheckCircle className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                                <div>
+                                    <h4 className="font-semibold">Bulk &amp; Recurring Bookings</h4>
+                                    <p className="text-muted-foreground">Easily schedule services for large groups, VIPs, or frequent travelers.</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <Button size="lg" asChild className="mt-4 bg-accent hover:bg-accent/90">
+                           <Link href="/contact">Partner With Us</Link>
+                        </Button>
+                    </div>
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="relative h-[500px]"
+                >
+                    <Image
+                        src="https://placehold.co/600x700.png"
+                        layout="fill"
+                        objectFit="cover"
+                        alt="Corporate team at an airport"
+                        data-ai-hint="business people airport"
+                        className="rounded-2xl"
+                    />
+                     <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                </motion.div>
+            </div>
         </div>
       </section>
       
       {/* FAQ Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">Frequently Asked Questions</h2>
             <div className="space-y-4">
@@ -453,7 +504,7 @@ export default function Home() {
       </section>
 
       {/* Safety Commitment Section */}
-       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
+       <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
          <div className="container px-4 md:px-6">
            <div className="text-center">
              <Shield className="h-16 w-16 mx-auto text-primary mb-4" />
@@ -483,7 +534,7 @@ export default function Home() {
        </section>
       
       {/* Blog/Tips Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">Travel Smarter</h2>
           <div className="grid gap-8 md:grid-cols-3">
