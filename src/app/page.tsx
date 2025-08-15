@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -104,44 +104,67 @@ export default function Home() {
 
       {/* How It Works Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
-        <div className="container px-4 md:px-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">How It Works</h2>
-          <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mb-16">A hassle-free experience in just three simple steps.</p>
-          <div className="relative grid gap-8 md:grid-cols-3">
-             <div className="absolute top-1/2 left-0 w-full h-0.5 bg-border -translate-y-1/2 -z-10 hidden md:block" />
-            <Card className="text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-background/80 backdrop-blur-sm border-primary/20">
-              <CardHeader>
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-secondary">
-                   <Briefcase className="h-10 w-10 text-primary" />
-                </div>
-                <CardTitle className="text-2xl font-headline">1. Book Online</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Provide your journey details and luggage information to get an instant estimate and book your porter.</p>
-              </CardContent>
-            </Card>
-             <Card className="text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-background/80 backdrop-blur-sm border-primary/20">
-              <CardHeader>
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-secondary">
-                   <User className="h-10 w-10 text-primary" />
-                </div>
-                <CardTitle className="text-2xl font-headline">2. Meet Your Porter</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">A verified and professional porter will meet you at your designated pickup point right on time.</p>
-              </CardContent>
-            </Card>
-             <Card className="text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-background/80 backdrop-blur-sm border-primary/20">
-              <CardHeader>
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-secondary">
-                   <ArrowRight className="h-10 w-10 text-primary" />
-                </div>
-                <CardTitle className="text-2xl font-headline">3. Travel with Ease</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Relax and enjoy your journey as we handle your luggage securely to your destination.</p>
-              </CardContent>
-            </Card>
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">How It Works</h2>
+            <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+              Your seamless journey is just three steps away.
+            </p>
+          </div>
+          <div className="relative">
+            <div className="absolute left-1/2 top-12 bottom-12 w-0.5 bg-primary/20 hidden md:block" />
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+
+              {/* Step 1 */}
+              <div className="flex gap-6 items-start">
+                 <div className="flex-shrink-0 flex flex-col items-center gap-2">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
+                      <Smartphone className="h-8 w-8" />
+                    </div>
+                    <div className="w-0.5 h-24 bg-primary/20 md:hidden" />
+                 </div>
+                 <div>
+                    <h3 className="text-2xl font-bold font-headline mb-2 text-primary">1. Instant Booking</h3>
+                    <p className="text-muted-foreground">
+                      Enter your travel details on our website or mobile app. Get an instant price estimate and confirm your booking in seconds.
+                    </p>
+                 </div>
+              </div>
+              <div className="hidden md:block"/>
+
+              <div className="hidden md:block"/>
+              {/* Step 2 */}
+              <div className="flex gap-6 items-start">
+                 <div className="flex-shrink-0 flex flex-col items-center gap-2">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
+                      <UserCheck className="h-8 w-8" />
+                    </div>
+                    <div className="w-0.5 h-24 bg-primary/20 md:hidden" />
+                 </div>
+                 <div className="md:text-right">
+                    <h3 className="text-2xl font-bold font-headline mb-2 text-primary">2. Meet Your Porter</h3>
+                    <p className="text-muted-foreground">
+                      A professional, vetted porter will be waiting for you at your specified pickup point, ready to assist with your luggage.
+                    </p>
+                 </div>
+              </div>
+
+               {/* Step 3 */}
+              <div className="flex gap-6 items-start">
+                 <div className="flex-shrink-0 flex flex-col items-center gap-2">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
+                      <Rocket className="h-8 w-8" />
+                    </div>
+                 </div>
+                 <div>
+                    <h3 className="text-2xl font-bold font-headline mb-2 text-primary">3. Travel Freely</h3>
+                    <p className="text-muted-foreground">
+                      Enjoy a stress-free journey through the airport or station while we handle the heavy lifting, ensuring your bags get to your destination safely.
+                    </p>
+                 </div>
+              </div>
+               <div className="hidden md:block"/>
+            </div>
           </div>
         </div>
       </section>
