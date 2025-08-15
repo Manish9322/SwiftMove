@@ -4,7 +4,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
@@ -17,6 +17,8 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/com
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 import { Textarea } from '@/components/ui/textarea';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 
 const Star = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -188,6 +190,37 @@ const safetyCommitments = [
         description: "For added protection, every booking is covered by our comprehensive insurance policy, safeguarding your items against unforeseen circumstances."
     }
 ];
+
+const blogPosts = [
+  { 
+    title: "5 Tips for a Stress-Free Airport Experience", 
+    image: "https://placehold.co/600x400.png", 
+    hint: "airport check-in",
+    category: "Airport Tips",
+    author: "Jane Doe",
+    avatar: "https://placehold.co/40x40.png",
+    description: "From security lines to finding your gate, navigating the airport can be overwhelming. These five simple tips will help you breeze through your next airport visit with confidence."
+  },
+  { 
+    title: "How to Pack Like a Pro for Any Trip", 
+    image: "https://placehold.co/600x400.png", 
+    hint: "packing suitcase",
+    category: "Packing Guides",
+    author: "John Smith",
+    avatar: "https://placehold.co/40x40.png",
+    description: "Whether it's a weekend getaway or a month-long expedition, efficient packing is key. Learn our tried-and-tested techniques to maximize space and minimize stress."
+  },
+  { 
+    title: "Navigating Train Stations with Ease", 
+    image: "https://placehold.co/600x400.png", 
+    hint: "train station",
+    category: "Travel Hacks",
+    author: "Emily White",
+    avatar: "https://placehold.co/40x40.png",
+    description: "Train travel offers a unique charm, but large stations can be confusing. Follow our guide to confidently find your platform, manage your luggage, and enjoy the ride."
+  },
+];
+
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = React.useState(false);
@@ -660,25 +693,50 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Travel Smarter</h2>
             <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
-              Check out our latest tips and articles to make your next journey even smoother.
+              Explore our curated collection of articles and tips from travel experts to make your next journey even smoother.
             </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              { title: "5 Tips for a Stress-Free Airport Experience", image: "https://placehold.co/600x400.png", hint: "airport check-in" },
-              { title: "How to Pack Like a Pro", image: "https://placehold.co/600x400.png", hint: "packing suitcase" },
-              { title: "Navigating Train Stations with Ease", image: "https://placehold.co/600x400.png", hint: "train station" },
-            ].map((post, i) => (
-              <Card key={i} className="overflow-hidden">
-                <Image src={post.image} alt={post.title} data-ai-hint={post.hint} width={600} height={400} className="w-full h-48 object-cover" />
-                <CardContent className="p-4">
-                  <h3 className="font-bold text-lg mb-2">{post.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">A quick guide to improve your journey.</p>
-                  <Button variant="link" className="p-0">Read More</Button>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {blogPosts.map((post, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+              <Card className="overflow-hidden h-full flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <Link href="#" className="block overflow-hidden">
+                  <Image src={post.image} alt={post.title} data-ai-hint={post.hint} width={600} height={400} className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
+                </Link>
+                <CardHeader>
+                   <Badge variant="outline" className="w-fit mb-2">{post.category}</Badge>
+                   <CardTitle className="text-xl leading-tight group-hover:text-primary transition-colors duration-300">
+                      <Link href="#">{post.title}</Link>
+                   </CardTitle>
+                </CardHeader>
+                <CardContent className="flex-1">
+                  <p className="text-muted-foreground text-sm">{post.description}</p>
                 </CardContent>
+                <CardFooter className="flex items-center gap-4 bg-muted/50 p-4">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={post.avatar} alt={post.author} data-ai-hint="person avatar" />
+                      <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                        <p className="font-semibold text-sm">{post.author}</p>
+                        <p className="text-xs text-muted-foreground">Travel Expert</p>
+                    </div>
+                </CardFooter>
               </Card>
+              </motion.div>
             ))}
           </div>
+           <div className="text-center mt-16">
+                <Button size="lg" variant="outline" asChild>
+                    <Link href="#">View All Posts <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                </Button>
+            </div>
         </div>
       </section>
 
@@ -729,3 +787,5 @@ export default function Home() {
     </AppLayout>
   );
 }
+
+    
