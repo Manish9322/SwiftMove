@@ -226,7 +226,7 @@ export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = React.useState(false);
 
   const autoplayPlugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+    Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   return (
@@ -401,8 +401,8 @@ export default function Home() {
                     <p className="max-w-3xl mx-auto text-muted-foreground mb-6">
                         From our meticulously vetted porters to our intelligent, AI-driven platform, every aspect of SwiftMove is designed with your convenience and security in mind. We're not just moving your luggage; we're upgrading your entire travel experience.
                     </p>
-                    <Button size="lg" className="bg-accent hover:bg-accent/90" onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}>
-                        Book Your Porter Today
+                    <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+                        <Link href="/booking">Book Your Porter Today</Link>
                     </Button>
                 </div>
             </div>
@@ -424,8 +424,6 @@ export default function Home() {
                 }}
                 plugins={[autoplayPlugin.current]}
                 className="w-full"
-                onMouseEnter={autoplayPlugin.current.stop}
-                onMouseLeave={autoplayPlugin.current.reset}
             >
                 <CarouselContent>
                     {testimonials.map((testimonial, i) => (
@@ -762,9 +760,11 @@ export default function Home() {
                          <Button 
                             size="lg" 
                             className="group bg-accent hover:bg-accent/90 text-accent-foreground text-base font-semibold px-8 py-6 w-full md:w-auto" 
-                            onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}
+                            asChild
                         >
+                           <Link href="/booking">
                             Book Now <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                           </Link>
                         </Button>
                     </div>
                 </div>
@@ -799,7 +799,9 @@ export default function Home() {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" className="w-full bg-accent hover:bg-accent/90">Confirm Booking</Button>
+            <Button type="submit" className="w-full bg-accent hover:bg-accent/90" asChild>
+                <Link href="/booking">Confirm Booking</Link>
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

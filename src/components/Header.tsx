@@ -14,7 +14,6 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/booking", label: "Book Now" },
   { href: "/admin", label: "Admin" },
-  { href: "/auth/login", label: "Login" },
 ];
 
 export default function Header() {
@@ -87,6 +86,9 @@ export default function Header() {
         
         <div className="flex flex-1 items-center justify-end space-x-2">
             <ThemeToggle />
+            <Link href="/auth/login">
+                <Button variant="ghost">Login</Button>
+            </Link>
             <Link href="/auth/register">
                 <Button variant="outline" className="hidden md:inline-flex border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                     Register

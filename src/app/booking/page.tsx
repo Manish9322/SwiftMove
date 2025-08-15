@@ -12,6 +12,8 @@ import BookingForm from '@/components/BookingForm';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { motion } from "framer-motion";
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 
 const whyBookWithUs = [
   {
@@ -76,6 +78,18 @@ const testimonials = [
     avatar: "https://placehold.co/48x48.png",
     hint: "woman portrait"
   },
+  {
+    name: "Chris Lee",
+    comment: "The real-time availability checker is a fantastic feature. It gave me confidence that a porter would be available for my early morning flight.",
+    avatar: "https://placehold.co/48x48.png",
+    hint: "man portrait"
+  },
+  {
+    name: "Sophie Brown",
+    comment: "The pre-booking checklist is so thoughtful! It helped me ensure I had everything ready for a smooth handover. Great attention to detail.",
+    avatar: "https://placehold.co/48x48.png",
+    hint: "woman smiling"
+  },
 ];
 
 const checklistItems = [
@@ -90,6 +104,10 @@ const checklistItems = [
 
 
 export default function BookingPage() {
+    const autoplayPlugin = React.useRef(
+        Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true })
+    );
+
   return (
     <AppLayout>
       {/* 1. Hero Section */}
@@ -307,32 +325,34 @@ export default function BookingPage() {
                         See what other travelers are saying about our seamless booking experience.
                     </p>
                 </div>
-                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    {testimonials.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.5 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                        >
-                            <Card className="bg-background">
-                                <CardContent className="p-6">
-                                    <div className="flex items-start gap-4">
-                                        <Avatar>
-                                            <AvatarImage src={item.avatar} alt={item.name} data-ai-hint={item.hint}/>
-                                            <AvatarFallback>{item.name.charAt(0)}</AvatarFallback>
-                                        </Avatar>
-                                        <div>
-                                            <p className="italic text-muted-foreground">"{item.comment}"</p>
-                                            <p className="font-bold mt-4">- {item.name}</p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
-                    ))}
-                </div>
+                <Carousel
+                    opts={{ align: "start", loop: true }}
+                    plugins={[autoplayPlugin.current]}
+                    className="w-full max-w-4xl mx-auto"
+                >
+                    <CarouselContent>
+                        {testimonials.map((testimonial, i) => (
+                            <CarouselItem key={i} className="md:basis-1/2">
+                                <div className="p-1">
+                                    <Card className="bg-background h-full flex flex-col">
+                                        <CardContent className="p-6 flex-1">
+                                            <div className="flex items-start gap-4">
+                                                <Avatar>
+                                                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.hint}/>
+                                                    <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                                                </Avatar>
+                                                <div>
+                                                    <p className="italic text-muted-foreground">"{testimonial.comment}"</p>
+                                                    <p className="font-bold mt-4">- {testimonial.name}</p>
+                                                </div>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                </Carousel>
           </div>
       </section>
 
