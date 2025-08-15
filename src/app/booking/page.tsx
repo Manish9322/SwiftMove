@@ -58,9 +58,9 @@ const luggageTypes = [
 ];
 
 const addons = [
-    { icon: Flame, title: "Express Handling", description: "Priority service to get you on your way faster." },
-    { icon: Gift, title: "Special Luggage Care", description: "Extra attention for fragile or valuable items." },
-    { icon: Info, title: "Real-time Tracking", description: "Monitor your porter's location for peace of mind." },
+    { icon: Flame, title: "Express Handling", description: "Priority service to get you on your way faster. Our porters will use the most efficient routes." },
+    { icon: Gift, title: "Special Luggage Care", description: "Extra attention for fragile, valuable, or oversized items. We ensure they are handled with the utmost care." },
+    { icon: Info, title: "Real-time Tracking", description: "Monitor your porter's location and receive status updates for complete peace of mind from start to finish." },
 ];
 
 const testimonials = [
@@ -79,10 +79,12 @@ const testimonials = [
 ];
 
 const checklistItems = [
-    "Double-check your pickup time and location.",
-    "Keep your booking confirmation email handy.",
-    "Ensure your phone is charged to communicate with your porter.",
-    "Have your luggage ready for a swift handover.",
+    "Double-check your flight/train number and pickup time.",
+    "Verify the pickup location (e.g., Terminal, Gate, Platform).",
+    "Keep your booking confirmation email or SMS handy.",
+    "Ensure your phone is charged for communication with your porter.",
+    "Have your luggage packed and ready for a swift handover.",
+    "If you have special items, confirm they are noted in the booking.",
     "Relax and look forward to a hassle-free journey!"
 ];
 
@@ -230,7 +232,7 @@ export default function BookingPage() {
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold font-headline">Enhance Your Experience</h2>
                     <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
-                        Consider these optional add-ons for even greater convenience.
+                        Consider these optional add-ons for even greater convenience and peace of mind.
                     </p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
@@ -242,14 +244,14 @@ export default function BookingPage() {
                             viewport={{ once: true, amount: 0.5 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                            <Card className="text-center h-full hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                                <CardHeader>
+                            <Card className="text-center h-full hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                                <CardHeader className="flex-grow-0">
                                     <div className="mx-auto bg-primary/10 text-primary p-3 rounded-full w-fit">
                                         <addon.icon className="h-8 w-8" />
                                     </div>
                                     <CardTitle>{addon.title}</CardTitle>
                                 </CardHeader>
-                                <CardContent>
+                                <CardContent className="flex-grow">
                                     <p className="text-muted-foreground">{addon.description}</p>
                                 </CardContent>
                             </Card>
@@ -336,41 +338,47 @@ export default function BookingPage() {
 
       {/* 9. Pre-booking Checklist */}
       <section className="py-12 md:py-20">
-          <div className="container">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                   <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.6 }}
-                   >
-                       <Image 
-                            src="https://placehold.co/500x600.png" 
-                            alt="Traveler with luggage" 
-                            data-ai-hint="traveler luggage"
-                            width={500}
-                            height={600}
-                            className="rounded-lg shadow-xl object-cover"
-                        />
-                   </motion.div>
-                   <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.6 }}
-                   >
-                        <h2 className="text-3xl font-bold font-headline mb-6">Your Quick Checklist</h2>
-                        <ul className="space-y-4">
-                            {checklistItems.map((item, index) => (
-                                <li key={index} className="flex items-start gap-3">
-                                    <CheckCircle className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
-                                    <span className="text-muted-foreground">{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                   </motion.div>
-              </div>
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Image
+                src="https://placehold.co/500x600.png"
+                alt="Traveler with luggage looking prepared"
+                data-ai-hint="prepared traveler luggage"
+                width={500}
+                height={600}
+                className="rounded-lg shadow-xl object-cover"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold font-headline mb-2">
+                Your Pre-Travel Checklist
+              </h2>
+              <p className="text-muted-foreground mb-6">A little preparation goes a long way. Follow these steps to ensure a smooth start to your journey.</p>
+              <ul className="space-y-4">
+                {checklistItems.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary transition-all hover:bg-muted"
+                  >
+                    <CheckCircle className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
+                    <span className="text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </div>
+        </div>
       </section>
 
       {/* 10. Secure Payment Section */}
