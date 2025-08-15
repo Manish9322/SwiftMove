@@ -10,6 +10,7 @@ import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, Thum
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
+import TypewriterEffect from '@/components/TypewriterEffect';
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
@@ -26,30 +27,20 @@ export default function Home() {
           objectFit="cover"
           className="absolute z-0"
         />
-        <div className="absolute inset-0 bg-black/60 z-10" />
-        <div className="relative z-20 container px-4 md:px-6">
-          <h1 className="text-4xl md:text-6xl font-bold font-headline mb-4">Your Journey, Unburdened</h1>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent z-10" />
+        <div className="relative z-20 container px-4 md:px-6 flex flex-col items-center">
+          <h1 className="text-4xl md:text-6xl font-bold font-headline mb-4">Your Journey, <TypewriterEffect text="Unburdened" /></h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
             Experience seamless travel with SwiftMove. Our professional porters are ready to assist you at airports, train stations, and more. Get an instant estimate for your luggage handling needs and travel with peace of mind.
           </p>
-          <Card className="max-w-5xl mx-auto bg-background/20 backdrop-blur-sm border-none">
+          <Card className="max-w-5xl w-full mx-auto bg-white/10 backdrop-blur-md border-white/20 shadow-lg">
             <CardContent className="p-4">
-              <form onSubmit={(e) => { e.preventDefault(); setIsEstimateModalOpen(true); }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 items-center">
-                <Input placeholder="Your Name" required className="h-11 text-black" />
-                <Input type="tel" placeholder="Phone Number" required className="h-11 text-black" />
-                <Input placeholder="Pickup Address" required className="h-11 text-black" />
-                <Input placeholder="Drop-off Address" required className="h-11 text-black" />
-                <Select required>
-                  <SelectTrigger className="h-11 text-black">
-                    <SelectValue placeholder="Package Size" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="small">Small (1-2 bags)</SelectItem>
-                    <SelectItem value="medium">Medium (3-4 bags)</SelectItem>
-                    <SelectItem value="large">Large (5+ bags)</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Button type="submit" size="lg" className="h-11 w-full bg-accent hover:bg-accent/90 text-white">Get Estimate</Button>
+              <form onSubmit={(e) => { e.preventDefault(); setIsEstimateModalOpen(true); }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-center">
+                <Input placeholder="Your Name" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
+                <Input type="tel" placeholder="Phone Number" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
+                <Input placeholder="Pickup Address" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
+                <Input placeholder="Drop-off Address" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
+                <Button type="submit" size="lg" className="h-11 w-full bg-accent hover:bg-accent/90 text-white col-span-1 sm:col-span-2 lg:col-span-1">Get Estimate</Button>
               </form>
             </CardContent>
           </Card>
@@ -98,37 +89,35 @@ export default function Home() {
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">How It Works</h2>
           <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mb-16">A hassle-free experience in just three simple steps.</p>
           <div className="relative grid gap-8 md:grid-cols-3">
-             <div className="absolute top-1/2 left-0 w-full h-0.5 bg-border -translate-y-1/2 -z-10 hidden md:block">
-              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-primary/30 -translate-y-1/2" style={{clipPath: 'inset(0 100% 0 0)'}}></div>
-            </div>
-            <Card className="text-center hover:shadow-lg transition-shadow duration-300">
+             <div className="absolute top-1/2 left-0 w-full h-0.5 bg-border -translate-y-1/2 -z-10 hidden md:block" />
+            <Card className="text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-background/80 backdrop-blur-sm border-primary/20">
               <CardHeader>
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-background">
-                   <Briefcase className="h-8 w-8 text-primary" />
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-secondary">
+                   <Briefcase className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle>1. Book Online</CardTitle>
+                <CardTitle className="text-2xl font-headline">1. Book Online</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">Provide your journey details and luggage information to get an instant estimate and book your porter.</p>
               </CardContent>
             </Card>
-             <Card className="text-center hover:shadow-lg transition-shadow duration-300">
+             <Card className="text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-background/80 backdrop-blur-sm border-primary/20">
               <CardHeader>
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-background">
-                   <User className="h-8 w-8 text-primary" />
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-secondary">
+                   <User className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle>2. Meet Your Porter</CardTitle>
+                <CardTitle className="text-2xl font-headline">2. Meet Your Porter</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">A verified and professional porter will meet you at your designated pickup point right on time.</p>
               </CardContent>
             </Card>
-             <Card className="text-center hover:shadow-lg transition-shadow duration-300">
+             <Card className="text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-background/80 backdrop-blur-sm border-primary/20">
               <CardHeader>
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-background">
-                   <ArrowRight className="h-8 w-8 text-primary" />
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-secondary">
+                   <ArrowRight className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle>3. Travel with Ease</CardTitle>
+                <CardTitle className="text-2xl font-headline">3. Travel with Ease</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">Relax and enjoy your journey as we handle your luggage securely to your destination.</p>
