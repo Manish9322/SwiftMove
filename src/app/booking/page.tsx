@@ -100,7 +100,7 @@ export default function BookingPage() {
                 transition={{ duration: 0.5 }}
             >
                 <Badge variant="outline" className="mb-4 border-primary text-primary">Secure Booking</Badge>
-                <h1 className="text-5xl md:text-6xl font-bold font-headline">Book Your Porter Service</h1>
+                <h1 className="text-5xl md:text-7xl font-bold font-headline">Book Your Porter</h1>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                     Just a few details and you'll be on your way to a stress-free travel experience.
                 </p>
@@ -111,7 +111,7 @@ export default function BookingPage() {
       {/* 2. Main Booking Form Section */}
       <section className="py-12 md:py-20">
           <div className="container">
-               <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+               <div className="grid md:grid-cols-3 gap-8 lg:gap-12 items-start">
                    <div className="md:col-span-2">
                      <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -133,23 +133,27 @@ export default function BookingPage() {
                       </motion.div>
                    </div>
                    {/* 3. Why Book With Us Section */}
-                   <aside className="space-y-6">
+                   <aside className="space-y-6 md:sticky top-24">
                      <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, amount: 0.2 }}
                         transition={{ duration: 0.6 }}
                      >
-                        <h3 className="text-xl font-bold font-headline mb-4">Why Book with SwiftMove?</h3>
-                        {whyBookWithUs.map((item, index) => (
-                            <div key={index} className="flex items-start gap-4 mb-4">
-                                <div>{item.icon}</div>
-                                <div>
-                                    <h4 className="font-semibold">{item.title}</h4>
-                                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                        <div className="p-6 rounded-lg bg-muted border">
+                            <h3 className="text-xl font-bold font-headline mb-4">Why Book with SwiftMove?</h3>
+                            {whyBookWithUs.map((item, index) => (
+                                <div key={index} className="flex items-start gap-4 mb-6 last:mb-0">
+                                    <div className="bg-primary/10 text-primary p-2 rounded-full mt-1">
+                                        {item.icon}
+                                    </div>
+                                    <div>
+                                        <h4 className="font-semibold">{item.title}</h4>
+                                        <p className="text-sm text-muted-foreground">{item.description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                       </motion.div>
                    </aside>
                </div>
@@ -165,7 +169,7 @@ export default function BookingPage() {
                 </p>
                 <div className="relative grid md:grid-cols-3 gap-8">
                      <div className="absolute top-1/2 left-0 w-full h-1 bg-primary/20 -translate-y-1/2 hidden md:block" />
-                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary origin-left hidden md:block" />
+                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary origin-left hidden md:block" style={{ transform: 'scaleX(0.5)'}}/>
                      {bookingSteps.map((step, index) => (
                          <motion.div
                             key={index}
@@ -197,19 +201,19 @@ export default function BookingPage() {
                      {luggageTypes.map((item, index) => (
                          <motion.div
                             key={index}
-                            className="group relative flex flex-col items-center justify-center text-center"
+                            className="group relative flex flex-col items-center justify-center text-center p-4 rounded-lg bg-secondary/50 hover:bg-secondary transition-all"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                          >
-                            <div className="relative w-40 h-40">
+                            <div className="relative w-32 h-32">
                                 <Image 
                                     src={item.image} 
                                     alt={item.name} 
                                     data-ai-hint={item.hint}
-                                    width={160} 
-                                    height={160} 
+                                    width={128} 
+                                    height={128} 
                                     className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
                                 />
                             </div>
