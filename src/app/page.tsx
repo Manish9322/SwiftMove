@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck, Handshake } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -22,6 +22,25 @@ const stats = [
     { icon: <Star className="h-8 w-8 text-white" />, value: "4.9/5", label: "User Rating" },
     { icon: <CalendarDays className="h-8 w-8 text-white" />, value: "500+", label: "Bookings Daily" },
 ];
+
+const steps = [
+  {
+    icon: Smartphone,
+    title: "1. Instant Booking",
+    description: "Enter your travel details on our website or mobile app. Get an instant price estimate and confirm your booking in seconds.",
+  },
+  {
+    icon: Handshake,
+    title: "2. Meet Your Porter",
+    description: "A professional, vetted porter will be waiting for you at your specified pickup point, ready to assist with your luggage.",
+  },
+  {
+    icon: Rocket,
+    title: "3. Travel Freely",
+    description: "Enjoy a stress-free journey while we handle the heavy lifting, ensuring your bags get to your destination safely.",
+  },
+];
+
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
@@ -106,65 +125,35 @@ export default function Home() {
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">How It Works</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
+              How It Works
+            </h2>
             <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
               Your seamless journey is just three steps away.
             </p>
           </div>
-          <div className="relative">
-            <div className="absolute left-1/2 top-12 bottom-12 w-0.5 bg-primary/20 hidden md:block" />
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-
-              {/* Step 1 */}
-              <div className="flex gap-6 items-start">
-                 <div className="flex-shrink-0 flex flex-col items-center gap-2">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
-                      <Smartphone className="h-8 w-8" />
-                    </div>
-                    <div className="w-0.5 h-24 bg-primary/20 md:hidden" />
-                 </div>
-                 <div>
-                    <h3 className="text-2xl font-bold font-headline mb-2 text-primary">1. Instant Booking</h3>
-                    <p className="text-muted-foreground">
-                      Enter your travel details on our website or mobile app. Get an instant price estimate and confirm your booking in seconds.
-                    </p>
-                 </div>
-              </div>
-              <div className="hidden md:block"/>
-
-              <div className="hidden md:block"/>
-              {/* Step 2 */}
-              <div className="flex gap-6 items-start">
-                 <div className="flex-shrink-0 flex flex-col items-center gap-2">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
-                      <UserCheck className="h-8 w-8" />
-                    </div>
-                    <div className="w-0.5 h-24 bg-primary/20 md:hidden" />
-                 </div>
-                 <div className="md:text-right">
-                    <h3 className="text-2xl font-bold font-headline mb-2 text-primary">2. Meet Your Porter</h3>
-                    <p className="text-muted-foreground">
-                      A professional, vetted porter will be waiting for you at your specified pickup point, ready to assist with your luggage.
-                    </p>
-                 </div>
-              </div>
-
-               {/* Step 3 */}
-              <div className="flex gap-6 items-start">
-                 <div className="flex-shrink-0 flex flex-col items-center gap-2">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
-                      <Rocket className="h-8 w-8" />
-                    </div>
-                 </div>
-                 <div>
-                    <h3 className="text-2xl font-bold font-headline mb-2 text-primary">3. Travel Freely</h3>
-                    <p className="text-muted-foreground">
-                      Enjoy a stress-free journey through the airport or station while we handle the heavy lifting, ensuring your bags get to your destination safely.
-                    </p>
-                 </div>
-              </div>
-               <div className="hidden md:block"/>
-            </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="relative flex flex-col items-center text-center p-8 bg-background rounded-2xl shadow-lg border border-transparent hover:border-primary transition-all duration-300"
+              >
+                <div className="absolute top-0 -translate-y-1/2 flex items-center justify-center h-20 w-20 rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
+                  <step.icon className="h-10 w-10" />
+                </div>
+                <h3 className="text-2xl font-bold font-headline mt-12 mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -411,3 +400,5 @@ export default function Home() {
     </AppLayout>
   );
 }
+
+    
