@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck, Handshake, ChevronDown } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck, Handshake, ChevronDown, DollarSign } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -51,13 +51,23 @@ const features = [
   {
     icon: <Clock className="h-10 w-10 text-primary" />,
     title: "On-Time, Every Time",
-    description: "We respect your schedule. Punctuality is a cornerstone of our service, and our AI-powered dispatch system ensures your porter is there when you need them, without fail.",
+    description: "We respect your schedule. Punctuality is a cornerstone of our service, and our dispatch system ensures your porter is there when you need them, without fail.",
   },
   {
     icon: <ThumbsUp className="h-10 w-10 text-primary" />,
     title: "Flexible & Accommodating",
     description: "Travel plans can be unpredictable. That's why we offer easy, flexible booking modifications and a straightforward cancellation policy to adapt to your changing needs.",
   },
+  {
+    icon: <Zap className="h-10 w-10 text-primary" />,
+    title: "AI-Powered Efficiency",
+    description: "Our smart platform optimizes routes and assignments, ensuring the quickest and most efficient service, saving you time and hassle.",
+    },
+  {
+    icon: <DollarSign className="h-10 w-10 text-primary" />,
+    title: "Transparent Pricing",
+    description: "No hidden fees or surprises. Get a clear, upfront estimate before you book, so you know exactly what you're paying for.",
+    },
 ];
 
 
@@ -197,12 +207,12 @@ export default function Home() {
                         transition={{ duration: 0.6 }}
                      >
                         <Image
-                            src="https://placehold.co/600x600.png"
-                            width={600}
-                            height={600}
+                            src="https://placehold.co/500x500.png"
+                            width={500}
+                            height={500}
                             alt="A happy traveler with their luggage"
                             data-ai-hint="happy traveler"
-                            className="rounded-2xl object-cover shadow-lg"
+                            className="rounded-2xl object-cover shadow-lg mx-auto"
                         />
                     </motion.div>
                     <motion.div
@@ -228,6 +238,14 @@ export default function Home() {
                          ))}
                        </Accordion>
                     </motion.div>
+                </div>
+                <div className="text-center mt-16">
+                    <p className="max-w-3xl mx-auto text-muted-foreground mb-6">
+                        From our meticulously vetted porters to our intelligent, AI-driven platform, every aspect of SwiftMove is designed with your convenience and security in mind. We're not just moving your luggage; we're upgrading your entire travel experience.
+                    </p>
+                    <Button size="lg" className="bg-accent hover:bg-accent/90" onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}>
+                        Book Your Porter Today
+                    </Button>
                 </div>
             </div>
         </section>
