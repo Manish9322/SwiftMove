@@ -54,98 +54,100 @@ export default function RegisterPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-              <div className="grid gap-2">
-                  <Label htmlFor="full-name">Full Name</Label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                    <Input id="full-name" placeholder="John Doe" required className="pl-10"/>
-                  </div>
-              </div>
-               <div className="grid gap-2">
-                <Label htmlFor="email">Email Address</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                    className="pl-10"
-                  />
+            <form>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                <div className="grid gap-2">
+                    <Label htmlFor="full-name">Full Name</Label>
+                    <div className="relative flex items-center">
+                      <User className="absolute left-3 h-5 w-5 text-muted-foreground" />
+                      <Input id="full-name" placeholder="John Doe" required className="pl-10"/>
+                    </div>
                 </div>
-              </div>
-              <div className="grid gap-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                    <Input id="phone" type="tel" placeholder="+1 (555) 123-4567" required className="pl-10"/>
+                 <div className="grid gap-2">
+                  <Label htmlFor="email">Email Address</Label>
+                  <div className="relative flex items-center">
+                    <Mail className="absolute left-3 h-5 w-5 text-muted-foreground" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="m@example.com"
+                      required
+                      className="pl-10"
+                    />
                   </div>
-              </div>
-              <div className="grid gap-2">
-                  <Label htmlFor="user-type">I am a...</Label>
-                  <Select required>
-                    <SelectTrigger className="pl-10">
-                       <div className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground">
-                        <Building className="h-full w-full"/>
-                       </div>
-                      <SelectValue placeholder="Select account type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="person">Person</SelectItem>
-                      <SelectItem value="business">Business</SelectItem>
-                    </SelectContent>
-                  </Select>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <Input id="password" type={showPassword ? "text" : "password"} required className="pl-10 pr-10"/>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 text-muted-foreground hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <EyeOff className="h-5 w-5"/> : <Eye className="h-5 w-5"/>}
+                </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <div className="relative flex items-center">
+                      <Phone className="absolute left-3 h-5 w-5 text-muted-foreground" />
+                      <Input id="phone" type="tel" placeholder="+1 (555) 123-4567" required className="pl-10"/>
+                    </div>
+                </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="user-type">I am a...</Label>
+                    <div className="relative flex items-center">
+                      <Building className="absolute left-3 h-5 w-5 text-muted-foreground z-10" />
+                      <Select required>
+                        <SelectTrigger className="pl-10">
+                          <SelectValue placeholder="Select account type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="person">Person</SelectItem>
+                          <SelectItem value="business">Business</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="password">Password</Label>
+                  <div className="relative flex items-center">
+                    <KeyRound className="absolute left-3 h-5 w-5 text-muted-foreground" />
+                    <Input id="password" type={showPassword ? "text" : "password"} required className="pl-10 pr-10"/>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-1 h-7 w-7 text-muted-foreground hover:bg-transparent"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <EyeOff className="h-5 w-5"/> : <Eye className="h-5 w-5"/>}
+                    </Button>
+                  </div>
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="confirm-password">Confirm Password</Label>
+                   <div className="relative flex items-center">
+                    <KeyRound className="absolute left-3 h-5 w-5 text-muted-foreground" />
+                    <Input id="confirm-password" type={showConfirmPassword ? "text" : "password"} required className="pl-10 pr-10"/>
+                     <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-1 h-7 w-7 text-muted-foreground hover:bg-transparent"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? <EyeOff className="h-5 w-5"/> : <Eye className="h-5 w-5"/>}
+                    </Button>
+                  </div>
+                </div>
+                <div className="md:col-span-2 flex items-start space-x-3 mt-4">
+                  <Checkbox id="terms" required className="mt-0.5" />
+                  <div className="grid gap-1.5 leading-none">
+                    <label
+                      htmlFor="terms"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      I agree to the <Link href="#" className="text-primary hover:underline">Terms of Service</Link> and <Link href="#" className="text-primary hover:underline">Privacy Policy</Link>.
+                    </label>
+                  </div>
+                </div>
+                <div className="md:col-span-2 mt-4">
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+                    Create Account
                   </Button>
                 </div>
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="confirm-password">Confirm Password</Label>
-                 <div className="relative">
-                  <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <Input id="confirm-password" type={showConfirmPassword ? "text" : "password"} required className="pl-10 pr-10"/>
-                   <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 text-muted-foreground hover:bg-transparent"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
-                    {showConfirmPassword ? <EyeOff className="h-5 w-5"/> : <Eye className="h-5 w-5"/>}
-                  </Button>
-                </div>
-              </div>
-              <div className="md:col-span-2 flex items-start space-x-2 mt-4">
-                <Checkbox id="terms" required />
-                <div className="grid gap-1.5 leading-none">
-                  <label
-                    htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    I agree to the <Link href="#" className="text-primary hover:underline">Terms of Service</Link> and <Link href="#" className="text-primary hover:underline">Privacy Policy</Link>.
-                  </label>
-                </div>
-              </div>
-              <div className="md:col-span-2 mt-4">
-                <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-                  Create Account
-                </Button>
-              </div>
-            </div>
+            </form>
             <div className="mt-6 text-center text-sm">
               Already have an account?{" "}
               <Link href="/auth/login" className="font-semibold text-primary hover:underline">
