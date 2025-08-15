@@ -165,9 +165,37 @@ const faqs = [
     question: "How do I identify my porter?",
     answer: "You will receive your porter's photo, name, and contact details in your booking confirmation. They will also be wearing a SwiftMove uniform.",
   },
-    {
+  {
     question: "What is your cancellation policy?",
     answer: "We offer a flexible cancellation policy. You can cancel for a full refund up to 24 hours before your scheduled service time. Please refer to our terms and conditions for more details.",
+  },
+  {
+    question: "Do you offer services at train stations?",
+    answer: "Yes, we operate at major train stations in addition to airports. You can select your specific station during the booking process.",
+  },
+  {
+    question: "Is there a limit on the amount of luggage?",
+    answer: "Our standard service covers up to 3 bags. If you have more luggage, you can specify this during booking for a small additional fee.",
+  },
+  {
+    question: "Can I tip my porter?",
+    answer: "Tipping is not required but is always appreciated for excellent service. You can tip your porter in cash or through our app after the service is completed.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit cards, debit cards, and popular digital wallets like Apple Pay and Google Pay through our secure online payment system.",
+  },
+  {
+    question: "What happens if I can't find my porter?",
+    answer: "In the rare event that you have trouble connecting, you can contact your porter directly using the details provided or call our 24/7 support line for immediate assistance.",
+  },
+  {
+    question: "Do you provide assistance for passengers with reduced mobility?",
+    answer: "Yes, our porters are trained to provide assistance to passengers with special needs. Please mention any specific requirements when you book the service.",
+  },
+  {
+    question: "Can I book a porter service at the last minute?",
+    answer: "We recommend booking at least 24 hours in advance, but we do our best to accommodate last-minute requests depending on porter availability in your location.",
   },
 ];
 
