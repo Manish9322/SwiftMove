@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Clock, Mail, MapPin, Phone, MessageSquare, Building, Users, Briefcase, HelpCircle, ArrowRight } from 'lucide-react';
+import { Clock, Mail, MapPin, Phone, MessageSquare, Building, Users, Briefcase, HelpCircle, ArrowRight, User } from 'lucide-react';
 import Link from 'next/link';
 import AppLayout from '../app-layout';
 import { motion } from "framer-motion";
@@ -47,10 +47,26 @@ const contactPoints = [
 ];
 
 const faqs = [
-  { question: "How do I modify my booking?", answer: "You can modify your booking details, including time and location, through the 'My Bookings' section of your account up to 2 hours before the scheduled service time." },
-  { question: "What is your cancellation policy?", answer: "We offer free cancellations up to 24 hours before your service. Cancellations made within 24 hours may be subject to a small fee. Please see our terms for full details." },
-  { question: "How do I find my assigned porter?", answer: "Once your booking is confirmed, you'll receive your porter's name, photo, and real-time location tracking link. They will be waiting at the exact pickup point you specified." },
-  { question: "Are there any luggage restrictions?", answer: "We handle most standard luggage types. For oversized, overweight, or unusual items, please select the 'Special Luggage Care' add-on or contact us in advance to ensure we can accommodate your needs." },
+  {
+    question: "What if my flight is delayed?",
+    answer: "We monitor flight schedules and will adjust your porter's arrival time accordingly. No extra charges for flight delays.",
+  },
+  {
+    question: "Can I book for someone else?",
+    answer: "Yes, you can. Just enter the traveler's name and contact information during the booking process.",
+  },
+  {
+    question: "Is my luggage insured?",
+    answer: "Absolutely. We provide complimentary insurance coverage for your belongings while they are in our care for your complete peace of mind.",
+  },
+  {
+    question: "How do I identify my porter?",
+    answer: "You will receive your porter's photo, name, and contact details in your booking confirmation. They will also be wearing a SwiftMove uniform.",
+  },
+  {
+    question: "What is your cancellation policy?",
+    answer: "We offer a flexible cancellation policy. You can cancel for a full refund up to 24 hours before your scheduled service time. Please refer to our terms and conditions for more details.",
+  },
 ];
 
 const locations = [
@@ -60,6 +76,7 @@ const locations = [
 ]
 
 export default function ContactPage() {
+    const [activeLocation, setActiveLocation] = React.useState(locations[0]);
     return (
         <AppLayout>
             {/* 1. Hero Section */}
@@ -197,26 +214,77 @@ export default function ContactPage() {
             </section>
 
             {/* 4. FAQ Section */}
-            <section className="py-12 md:py-20">
-                <div className="container max-w-4xl mx-auto">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold font-headline">Quick Answers</h2>
-                        <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
-                            Before you reach out, you might find your answer here.
+             <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+                <div className="container px-4 md:px-6">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
+                            Quick Answers
+                        </h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+                            Find answers to common questions about our services. If you can't find what you're looking for, feel free to ask.
                         </p>
                     </div>
-                     <Accordion type="single" collapsible className="w-full space-y-4">
-                        {faqs.map((faq, index) => (
-                          <AccordionItem value={`item-${index}`} key={index} className="bg-background border border-border rounded-lg shadow-sm transition-all hover:shadow-md">
-                            <AccordionTrigger className="text-lg font-semibold hover:no-underline px-6 py-4 text-left">
-                              {faq.question}
-                            </AccordionTrigger>
-                            <AccordionContent className="px-6 pb-4 pt-0 text-muted-foreground">
-                              {faq.answer}
-                            </AccordionContent>
-                          </AccordionItem>
-                        ))}
-                      </Accordion>
+                    <div className="grid md:grid-cols-2 gap-12 items-start">
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.6 }}
+                            className="space-y-6"
+                        >
+                            <Card className="p-6 lg:p-8 shadow-lg">
+                                <CardHeader className="p-0 mb-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                            <MessageSquare className="h-6 w-6" />
+                                        </div>
+                                        <div>
+                                            <CardTitle className="text-2xl font-headline">Have a Question?</CardTitle>
+                                            <CardDescription className="mt-1">
+                                                We're here to help. Fill out the form and we'll get back to you.
+                                            </CardDescription>
+                                        </div>
+                                    </div>
+                                </CardHeader>
+                                <CardContent className="p-0">
+                                    <form className="space-y-4">
+                                        <div className="relative">
+                                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                            <Input id="faq-name" placeholder="Your name" className="pl-10" />
+                                        </div>
+                                        <div className="relative">
+                                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                                            <Input id="faq-email" type="email" placeholder="Your email address" className="pl-10" />
+                                        </div>
+                                        <div className="relative">
+                                            <HelpCircle className="absolute left-3 top-4 h-5 w-5 text-muted-foreground" />
+                                            <Textarea id="faq-question" placeholder="Ask us anything..." rows={4} className="pl-10" />
+                                        </div>
+                                        <Button type="submit" className="w-full bg-accent hover:bg-accent/90">Submit Question</Button>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                        >
+                            <Accordion type="single" collapsible className="w-full space-y-4">
+                                {faqs.map((faq, index) => (
+                                    <AccordionItem value={`item-${index}`} key={index} className="bg-secondary/50 border-l-4 border-primary rounded-lg shadow-sm transition-all hover:shadow-md">
+                                        <AccordionTrigger className="text-lg font-semibold hover:no-underline px-6 py-4 text-left">
+                                            {faq.question}
+                                        </AccordionTrigger>
+                                        <AccordionContent className="px-6 pb-4 pt-0 text-muted-foreground">
+                                            {faq.answer}
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -238,13 +306,17 @@ export default function ContactPage() {
                                 viewport={{ once: true, amount: 0.3 }}
                                 transition={{ duration: 0.5, delay: i * 0.1 }}
                             >
-                                <Card className="overflow-hidden h-full group">
-                                    <div className="overflow-hidden h-48">
+                                <Card className="overflow-hidden h-full group border-2 border-transparent hover:border-primary hover:shadow-2xl transition-all duration-300">
+                                    <div className="overflow-hidden h-48 relative">
                                      <Image src={loc.image} alt={loc.name} data-ai-hint={loc.hint} width={600} height={400} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                      <h3 className="font-bold text-xl text-white absolute bottom-4 left-6">{loc.name}</h3>
                                     </div>
                                     <CardContent className="p-6">
-                                        <h3 className="font-bold text-xl">{loc.name}</h3>
-                                        <p className="text-muted-foreground mt-2">{loc.address}</p>
+                                        <p className="text-muted-foreground mt-2 flex items-start gap-3">
+                                            <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-1"/>
+                                            <span>{loc.address}</span>
+                                        </p>
                                     </CardContent>
                                 </Card>
                             </motion.div>
@@ -255,9 +327,31 @@ export default function ContactPage() {
 
             {/* 6. Map Section */}
             <section className="py-12 md:py-20">
-                <div className="container">
-                    <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-xl">
-                        <Image src="https://placehold.co/1200x500.png" layout="fill" objectFit="cover" alt="World map with office locations" data-ai-hint="world map pins" />
+                 <div className="container">
+                     <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold font-headline">Find Us Anywhere</h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                            Our interactive map shows all our locations. Click on an address to see it on the map.
+                        </p>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <div className="md:col-span-2 relative h-[500px] w-full rounded-2xl overflow-hidden shadow-xl">
+                             <Image src={`https://placehold.co/1200x500.png?text=${encodeURIComponent(activeLocation.name)}`} layout="fill" objectFit="cover" alt="World map with office locations" data-ai-hint="world map pins" className="transition-all duration-500" key={activeLocation.name}/>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            {locations.map((loc) => (
+                                <Card 
+                                    key={loc.name} 
+                                    className={`cursor-pointer transition-all duration-300 ${activeLocation.name === loc.name ? 'border-primary shadow-lg' : 'hover:shadow-md'}`}
+                                    onClick={() => setActiveLocation(loc)}
+                                >
+                                    <CardHeader>
+                                        <CardTitle className="text-lg">{loc.name}</CardTitle>
+                                        <CardDescription>{loc.address}</CardDescription>
+                                    </CardHeader>
+                                </Card>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -311,13 +405,16 @@ export default function ContactPage() {
              <section className="bg-secondary py-12 md:py-20">
                 <div className="container max-w-4xl mx-auto">
                      <div className="text-center">
+                        <div className="mx-auto bg-primary/10 text-primary p-3 rounded-full w-fit mb-4">
+                           <Mail className="h-8 w-8" />
+                        </div>
                         <h2 className="text-3xl font-bold font-headline">Stay in the Loop</h2>
                         <p className="max-w-2xl mx-auto text-muted-foreground mt-4 mb-8">
-                            Subscribe to our newsletter for exclusive offers, new destination announcements, and travel tips.
+                            Subscribe to our newsletter for exclusive offers, new destination announcements, and travel tips. No spam, we promise.
                         </p>
                         <form className="flex sm:flex-row flex-col gap-2 max-w-md mx-auto">
-                            <Input type="email" placeholder="Enter your email" className="flex-1" />
-                            <Button type="submit" className="bg-primary hover:bg-primary/90">Subscribe</Button>
+                            <Input type="email" placeholder="Enter your email" className="flex-1 h-12" />
+                            <Button type="submit" size="lg" className="bg-primary hover:bg-primary/90 h-12">Subscribe</Button>
                         </form>
                     </div>
                 </div>

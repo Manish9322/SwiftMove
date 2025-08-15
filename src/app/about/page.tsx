@@ -86,24 +86,25 @@ export default function AboutPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.6 }}
+                            className="space-y-8"
                         >
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-4">
+                            <div className="p-6 rounded-lg bg-muted border-l-4 border-primary">
+                                <div className="flex items-center gap-4 mb-3">
                                     <div className="bg-primary/10 text-primary p-3 rounded-full">
-                                        <Target className="h-8 w-8" />
+                                        <Target className="h-6 w-6" />
                                     </div>
-                                    <h2 className="text-3xl font-bold font-headline">Our Mission</h2>
+                                    <h2 className="text-2xl font-bold font-headline">Our Mission</h2>
                                 </div>
-                                <p className="text-lg text-muted-foreground">To unburden travelers worldwide by providing a reliable, secure, and user-friendly platform for porter services, turning stressful journeys into seamless experiences.</p>
+                                <p className="text-muted-foreground">To unburden travelers worldwide by providing a reliable, secure, and user-friendly platform for porter services, turning stressful journeys into seamless experiences.</p>
                             </div>
-                            <div className="space-y-4 mt-12">
-                                <div className="flex items-center gap-4">
+                            <div className="p-6 rounded-lg bg-muted border-l-4 border-primary">
+                                <div className="flex items-center gap-4 mb-3">
                                     <div className="bg-primary/10 text-primary p-3 rounded-full">
-                                        <Sparkles className="h-8 w-8" />
+                                        <Sparkles className="h-6 w-6" />
                                     </div>
-                                    <h2 className="text-3xl font-bold font-headline">Our Vision</h2>
+                                    <h2 className="text-2xl font-bold font-headline">Our Vision</h2>
                                 </div>
-                                <p className="text-lg text-muted-foreground">To become the global standard for on-demand travel assistance, recognized for our innovation, reliability, and unwavering commitment to customer satisfaction.</p>
+                                <p className="text-muted-foreground">To become the global standard for on-demand travel assistance, recognized for our innovation, reliability, and unwavering commitment to customer satisfaction.</p>
                             </div>
                         </motion.div>
                         <motion.div
@@ -240,10 +241,10 @@ export default function AboutPage() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                          >
                             <h2 className="text-3xl font-bold font-headline mb-4">The SwiftMove Advantage</h2>
-                            <p className="text-muted-foreground text-lg mb-8">We're not just another service; we are a travel revolution built on a foundation of unique strengths.</p>
+                            <p className="text-muted-foreground text-lg mb-8">We're not just another service; we are a travel revolution built on a foundation of unique strengths that set us apart.</p>
                             <div className="space-y-6">
                                 {differentiators.map((item, index) => (
-                                    <div key={index} className="flex items-start gap-4">
+                                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg bg-muted/50 transition-all hover:bg-muted">
                                         <div className="bg-primary/10 text-primary p-3 rounded-full mt-1">
                                             <item.icon className="h-6 w-6" />
                                         </div>
@@ -265,24 +266,24 @@ export default function AboutPage() {
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold font-headline">Driven by Innovation</h2>
                         <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
-                            Technology is our engine for creating a seamless and efficient travel experience.
+                            Technology is our engine for creating a seamless and efficient travel experience. We leverage cutting-edge solutions to solve real-world travel challenges.
                         </p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
-                        <Card className="p-6 text-center">
-                            <Rocket className="h-12 w-12 mx-auto text-primary mb-4" />
+                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <Rocket className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
                             <h3 className="text-xl font-bold">Smart Matching Algorithm</h3>
-                            <p className="text-muted-foreground mt-2">Our AI instantly connects you with the best available porter based on location, time, and ratings.</p>
+                            <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">Our AI instantly connects you with the best available porter based on location, time, and ratings.</p>
                         </Card>
-                        <Card className="p-6 text-center">
-                            <GitBranch className="h-12 w-12 mx-auto text-primary mb-4" />
+                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <GitBranch className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
                             <h3 className="text-xl font-bold">Optimized Route Planning</h3>
-                            <p className="text-muted-foreground mt-2">We calculate the most efficient routes within transport hubs to save you precious time.</p>
+                            <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">We calculate the most efficient routes within transport hubs to save you precious time.</p>
                         </Card>
-                        <Card className="p-6 text-center">
-                            <Shield className="h-12 w-12 mx-auto text-primary mb-4" />
+                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                            <Shield className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
                             <h3 className="text-xl font-bold">Secure, Scalable Platform</h3>
-                            <p className="text-muted-foreground mt-2">Built on robust infrastructure to ensure your data is safe and our service is always available.</p>
+                            <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">Built on robust infrastructure to ensure your data is safe and our service is always available.</p>
                         </Card>
                     </div>
                 </div>
