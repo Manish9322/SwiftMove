@@ -145,7 +145,26 @@ const testimonials = [
     rating: 5,
     avatar: "https://placehold.co/48x48.png"
   },
-]
+];
+
+const faqs = [
+  {
+    question: "What if my flight is delayed?",
+    answer: "We monitor flight schedules and will adjust your porter's arrival time accordingly. No extra charges for flight delays.",
+  },
+  {
+    question: "Can I book for someone else?",
+    answer: "Yes, you can. Just enter the traveler's name and contact information during the booking process.",
+  },
+  {
+    question: "Is my luggage insured?",
+    answer: "Absolutely. We provide complimentary insurance coverage for your belongings while they are in our care for your complete peace of mind.",
+  },
+  {
+    question: "How do I identify my porter?",
+    answer: "You will receive your porter's photo, name, and contact details in your booking confirmation. They will also be wearing a SwiftMove uniform.",
+  },
+];
 
 
 export default function Home() {
@@ -483,33 +502,21 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>What if my flight is delayed?</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">We monitor flight schedules and will adjust your porter's arrival time accordingly. No extra charges for flight delays.</p>
-                    </CardContent>
-                </Card>
-                 <Card>
-                    <CardHeader>
-                        <CardTitle>Can I book for someone else?</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">Yes, you can. Just enter the traveler's name and contact information during the booking process.</p>
-                    </CardContent>
-                </Card>
-                 <Card>
-                    <CardHeader>
-                        <CardTitle>Is my luggage insured?</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">Absolutely. We provide complimentary insurance coverage for your belongings while they are in our care for your complete peace of mind.</p>
-                    </CardContent>
-                </Card>
-            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">
+              Frequently Asked Questions
+            </h2>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem value={`item-${index}`} key={index} className="bg-background border border-border rounded-lg shadow-sm">
+                  <AccordionTrigger className="text-lg font-semibold hover:no-underline px-6 py-4 text-left">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-4 pt-0 text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
         </div>
       </section>
 
