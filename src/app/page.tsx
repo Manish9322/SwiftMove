@@ -141,7 +141,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="relative flex flex-col items-center text-center p-8 bg-background rounded-2xl shadow-lg border border-transparent hover:border-primary transition-all duration-300"
+                className="relative flex flex-col items-center text-center p-8 bg-background rounded-lg shadow-lg border border-transparent hover:border-primary transition-all duration-300"
               >
                 <div className="absolute top-0 -translate-y-1/2 flex items-center justify-center h-20 w-20 rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
                   <step.icon className="h-10 w-10" />
@@ -400,5 +400,3 @@ export default function Home() {
     </AppLayout>
   );
 }
-
-    
