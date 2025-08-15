@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -6,11 +7,20 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import TypewriterEffect from '@/components/TypewriterEffect';
+import BookingForm from '@/components/BookingForm';
+import { motion } from "framer-motion";
+
+const stats = [
+    { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
+    { icon: <TrendingUp className="h-8 w-8 text-white" />, value: "98%", label: "On-Time Arrival" },
+    { icon: <Star className="h-8 w-8 text-white" />, value: "4.9/5", label: "User Rating" },
+    { icon: <CalendarDays className="h-8 w-8 text-white" />, value: "500+", label: "Bookings Daily" },
+];
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
@@ -18,70 +28,70 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[700px] w-full flex items-center justify-center text-center text-white">
-        <Image
-          src="https://placehold.co/1920x1080.png"
-          alt="Busy airport terminal with a porter helping a traveler"
-          data-ai-hint="airport terminal porter"
-          layout="fill"
-          objectFit="cover"
-          className="absolute z-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent z-10" />
-        <div className="relative z-20 container px-4 md:px-6 flex flex-col items-center">
-          <h1 className="text-4xl md:text-6xl font-bold font-headline mb-4">Your Journey, <TypewriterEffect text="Unburdened" /></h1>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
-            Experience seamless travel with SwiftMove. Our professional porters are ready to assist you at airports, train stations, and more. Get an instant estimate for your luggage handling needs and travel with peace of mind.
-          </p>
-          <Card className="max-w-5xl w-full mx-auto bg-white/10 backdrop-blur-md border-white/20 shadow-lg">
-            <CardContent className="p-4">
-              <form onSubmit={(e) => { e.preventDefault(); setIsEstimateModalOpen(true); }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-center">
-                <Input placeholder="Your Name" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
-                <Input type="tel" placeholder="Phone Number" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
-                <Input placeholder="Pickup Address" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
-                <Input placeholder="Drop-off Address" required className="h-11 bg-white/80 text-black placeholder:text-gray-600 border-none focus:ring-2 focus:ring-primary" />
-                <Button type="submit" size="lg" className="h-11 w-full bg-accent hover:bg-accent/90 text-white col-span-1 sm:col-span-2 lg:col-span-1">Get Estimate</Button>
-              </form>
-            </CardContent>
-          </Card>
+       <section className="relative w-full overflow-hidden bg-black text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://placehold.co/1920x1080.png"
+            alt="Busy airport terminal with a porter helping a traveler"
+            data-ai-hint="airport terminal porter"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+        </div>
+
+        <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6 lg:grid-cols-2">
+            <div className="space-y-6 text-center lg:text-left">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-headline">
+                        Your Journey, <TypewriterEffect text="Unburdened" />
+                    </h1>
+                    <p className="mt-4 max-w-2xl text-lg text-slate-300 lg:mx-0">
+                        Experience seamless travel with SwiftMove. Our AI-powered platform connects you with professional porters instantly. Get a quick estimate and book your service in under a minute.
+                    </p>
+                </motion.div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4"
+                >
+                    {stats.map((stat, index) => (
+                    <div key={index} className="flex flex-col items-center gap-2 rounded-lg bg-white/10 p-4 backdrop-blur-sm">
+                        {stat.icon}
+                        <p className="text-2xl font-bold">{stat.value}</p>
+                        <p className="text-sm text-slate-300">{stat.label}</p>
+                    </div>
+                    ))}
+                </motion.div>
+            </div>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="relative mt-12 lg:mt-0"
+            >
+                <Card className="w-full max-w-md mx-auto bg-white/5 backdrop-blur-lg border-white/10 shadow-2xl">
+                    <CardHeader className="text-center">
+                        <CardTitle className="text-2xl font-bold text-white">
+                           <Rocket className="inline-block h-8 w-8 mr-2 text-primary" /> Instant Booking
+                        </CardTitle>
+                        <CardDescription className="text-slate-300">
+                            Fill in the details for an instant quote.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <BookingForm />
+                    </CardContent>
+                </Card>
+            </motion.div>
         </div>
       </section>
-      
-      {/* Estimate Modal */}
-       <Dialog open={isEstimateModalOpen} onOpenChange={setIsEstimateModalOpen}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Your Estimate</DialogTitle>
-            <DialogDescription>
-              Here is an approximate estimate for your porter service.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="price" className="text-right">
-                Estimated Price
-              </Label>
-              <span id="price" className="col-span-3 font-bold text-2xl text-primary">$25.00</span>
-            </div>
-             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="distance" className="text-right">
-                Distance
-              </Label>
-              <span id="distance" className="col-span-3">Approx. 0.5 miles</span>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="time" className="text-right">
-                Estimated Time
-              </Label>
-              <span id="time" className="col-span-3">15-20 minutes</span>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button onClick={() => setIsEstimateModalOpen(false)} variant="outline">Cancel</Button>
-            <Button type="submit" className="bg-accent hover:bg-accent/90">Confirm Booking</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
 
       {/* How It Works Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
@@ -138,7 +148,7 @@ export default function Home() {
                 <div className="flex items-start gap-4">
                   <Shield className="h-8 w-8 text-primary mt-1" />
                   <div>
-                    <h3 className="font-bold">Trusted & Vetted Porters</h3>
+                    <h3 className="font-bold">Trusted &amp; Vetted Porters</h3>
                     <p className="text-muted-foreground">All our porters undergo rigorous background checks for your peace of mind.</p>
                   </div>
                 </div>
@@ -152,7 +162,7 @@ export default function Home() {
                  <div className="flex items-start gap-4">
                   <ThumbsUp className="h-8 w-8 text-primary mt-1" />
                   <div>
-                    <h3 className="font-bold">Flexible & Accommodating</h3>
+                    <h3 className="font-bold">Flexible &amp; Accommodating</h3>
                     <p className="text-muted-foreground">Plans change. We offer flexible booking and cancellation options.</p>
                   </div>
                 </div>
@@ -226,7 +236,7 @@ export default function Home() {
       {/* Partnership/Corporate Section */}
        <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
         <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Corporate & Event Services</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Corporate &amp; Event Services</h2>
             <p className="max-w-3xl mx-auto md:text-xl/relaxed mb-8">
                 Streamline logistics for your business travelers or event attendees. We offer tailored packages for companies and event organizers.
             </p>
@@ -337,3 +347,5 @@ export default function Home() {
     </>
   );
 }
+
+    
