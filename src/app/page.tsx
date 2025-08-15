@@ -741,15 +741,29 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="w-full py-20 md:py-32 bg-cover bg-center" style={{ backgroundImage: "url('https://placehold.co/1920x600.png')" }}>
-         <div className="container px-4 md:px-6 bg-black/50 py-12 rounded-lg text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-white mb-4">Ready for an Effortless Trip?</h2>
-            <p className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto">
-              Book your porter now and experience the SwiftMove difference. Your smoothest journey awaits.
-            </p>
-             <Button size="lg" className="bg-accent hover:bg-accent/90 text-white" onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}>
-                Book Now
-            </Button>
+      <section className="relative w-full py-20 md:py-32 bg-fixed bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://placehold.co/1920x600.png')" }}>
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative container mx-auto px-4 md:px-6 text-center">
+            <motion.div 
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-8 md:p-12 max-w-3xl mx-auto shadow-2xl"
+            >
+                <div className="absolute -top-3 -left-3 -right-3 -bottom-3 rounded-2xl border-2 border-accent opacity-50 animate-pulse" />
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-white mb-4">Ready for an Effortless Trip?</h2>
+                <p className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto">
+                    Book your porter now and experience the SwiftMove difference. Your smoothest journey awaits.
+                </p>
+                <Button 
+                    size="lg" 
+                    className="group bg-accent hover:bg-accent/90 text-accent-foreground text-base font-semibold" 
+                    onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                    Book Now <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+            </motion.div>
         </div>
       </section>
 
