@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, StarIcon, CheckSquare, BarChart2, MessageSquare } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -168,34 +168,6 @@ const faqs = [
   {
     question: "What is your cancellation policy?",
     answer: "We offer a flexible cancellation policy. You can cancel for a full refund up to 24 hours before your scheduled service time. Please refer to our terms and conditions for more details.",
-  },
-  {
-    question: "Do you offer services at train stations?",
-    answer: "Yes, we operate at major train stations in addition to airports. You can select your specific station during the booking process.",
-  },
-  {
-    question: "Is there a limit on the amount of luggage?",
-    answer: "Our standard service covers up to 3 bags. If you have more luggage, you can specify this during booking for a small additional fee.",
-  },
-  {
-    question: "Can I tip my porter?",
-    answer: "Tipping is not required but is always appreciated for excellent service. You can tip your porter in cash or through our app after the service is completed.",
-  },
-  {
-    question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards, debit cards, and popular digital wallets like Apple Pay and Google Pay through our secure online payment system.",
-  },
-  {
-    question: "What happens if I can't find my porter?",
-    answer: "In the rare event that you have trouble connecting, you can contact your porter directly using the details provided or call our 24/7 support line for immediate assistance.",
-  },
-  {
-    question: "Do you provide assistance for passengers with reduced mobility?",
-    answer: "Yes, our porters are trained to provide assistance to passengers with special needs. Please mention any specific requirements when you book the service.",
-  },
-  {
-    question: "Can I book a porter service at the last minute?",
-    answer: "We recommend booking at least 24 hours in advance, but we do our best to accommodate last-minute requests depending on porter availability in your location.",
   },
 ];
 
@@ -556,29 +528,33 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <Card className="p-6 lg:p-8">
+              <Card className="p-6 lg:p-8 shadow-lg">
                 <CardHeader className="p-0 mb-6">
-                  <div className="flex items-center gap-3">
-                    <MessageSquare className="h-8 w-8 text-primary" />
-                    <CardTitle className="text-2xl font-headline">Have a Question?</CardTitle>
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <MessageSquare className="h-6 w-6" />
+                    </div>
+                    <div>
+                        <CardTitle className="text-2xl font-headline">Have a Question?</CardTitle>
+                        <CardDescription className="mt-1">
+                            We're here to help. Fill out the form and we'll get back to you.
+                        </CardDescription>
+                    </div>
                   </div>
-                  <CardDescription>
-                    Fill out the form below and we'll get back to you as soon as possible.
-                  </CardDescription>
                 </CardHeader>
                 <CardContent className="p-0">
                   <form className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="faq-name">Name</Label>
-                      <Input id="faq-name" placeholder="Your name" />
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                      <Input id="faq-name" placeholder="Your name" className="pl-10" />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="faq-email">Email</Label>
-                      <Input id="faq-email" type="email" placeholder="Your email address" />
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                      <Input id="faq-email" type="email" placeholder="Your email address" className="pl-10" />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="faq-question">Your Question</Label>
-                      <Textarea id="faq-question" placeholder="Ask us anything..." rows={4} />
+                     <div className="relative">
+                      <HelpCircle className="absolute left-3 top-4 h-5 w-5 text-muted-foreground" />
+                      <Textarea id="faq-question" placeholder="Ask us anything..." rows={4} className="pl-10" />
                     </div>
                     <Button type="submit" className="w-full bg-accent hover:bg-accent/90">Submit Question</Button>
                   </form>
@@ -592,8 +568,8 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <Accordion type="single" collapsible className="w-full space-y-4">
-                {faqs.map((faq, index) => (
-                  <AccordionItem value={`item-${index}`} key={index} className="bg-background border border-border rounded-lg shadow-sm">
+                {faqs.slice(0, 5).map((faq, index) => (
+                  <AccordionItem value={`item-${index}`} key={index} className="bg-background border border-border rounded-lg shadow-sm transition-all hover:shadow-md">
                     <AccordionTrigger className="text-lg font-semibold hover:no-underline px-6 py-4 text-left">
                       {faq.question}
                     </AccordionTrigger>
