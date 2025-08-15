@@ -41,6 +41,24 @@ const steps = [
   },
 ];
 
+const features = [
+  {
+    icon: <Shield className="h-10 w-10 text-primary" />,
+    title: "Trusted & Vetted Porters",
+    description: "Your peace of mind is paramount. All our porters undergo rigorous background checks and comprehensive training to ensure the highest standards of professionalism and security.",
+  },
+  {
+    icon: <Clock className="h-10 w-10 text-primary" />,
+    title: "On-Time, Every Time",
+    description: "We respect your schedule. Punctuality is a cornerstone of our service, and our AI-powered dispatch system ensures your porter is there when you need them, without fail.",
+  },
+  {
+    icon: <ThumbsUp className="h-10 w-10 text-primary" />,
+    title: "Flexible & Accommodating",
+    description: "Travel plans can be unpredictable. That's why we offer easy, flexible booking modifications and a straightforward cancellation policy to adapt to your changing needs.",
+  },
+];
+
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
@@ -141,7 +159,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="relative flex flex-col items-center text-center p-8 bg-background rounded-lg shadow-lg border border-transparent hover:border-primary transition-all duration-300"
+                className="relative flex flex-col items-center text-center p-8 bg-background rounded-xl shadow-lg border border-transparent hover:border-primary transition-all duration-300"
               >
                 <div className="absolute top-0 -translate-y-1/2 flex items-center justify-center h-20 w-20 rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
                   <step.icon className="h-10 w-10" />
@@ -159,47 +177,44 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-12 md:grid-cols-2 items-center">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Why Choose SwiftMove?</h2>
-              <p className="text-muted-foreground mb-8">We are committed to providing an exceptional service that you can rely on, every time.</p>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <Shield className="h-8 w-8 text-primary mt-1" />
-                  <div>
-                    <h3 className="font-bold">Trusted &amp; Vetted Porters</h3>
-                    <p className="text-muted-foreground">All our porters undergo rigorous background checks for your peace of mind.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Clock className="h-8 w-8 text-primary mt-1" />
-                  <div>
-                    <h3 className="font-bold">On-Time, Every Time</h3>
-                    <p className="text-muted-foreground">We value your time. Punctuality is at the core of our service promise.</p>
-                  </div>
-                </div>
-                 <div className="flex items-start gap-4">
-                  <ThumbsUp className="h-8 w-8 text-primary mt-1" />
-                  <div>
-                    <h3 className="font-bold">Flexible &amp; Accommodating</h3>
-                    <p className="text-muted-foreground">Plans change. We offer flexible booking and cancellation options.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-             <Image
-                src="https://placehold.co/600x600.png"
-                width="600"
-                height="600"
-                alt="Porter helping a customer"
-                data-ai-hint="porter customer service"
-                className="mx-auto rounded-xl object-cover"
-            />
-          </div>
+      <section className="relative w-full overflow-hidden bg-background py-12 md:py-24 lg:py-32">
+        <div className="absolute inset-0 z-0 opacity-5">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(var(--primary-rgb),0.3),rgba(255,255,255,0))]"></div>
         </div>
-      </section>
+        <div className="container relative z-10 px-4 md:px-6">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
+                    Why Choose SwiftMove?
+                </h2>
+                <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+                    We are committed to providing an exceptional service that you can rely on, every time.
+                </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+                {features.map((feature, index) => (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: index * 0.15 }}
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        className="flex flex-col items-center text-center p-8 bg-card rounded-2xl shadow-lg border border-border/50 transition-all duration-300"
+                    >
+                        <div className="flex items-center justify-center h-20 w-20 rounded-full bg-primary/10 text-primary-foreground mb-6">
+                            {feature.icon}
+                        </div>
+                        <h3 className="text-2xl font-bold font-headline mb-3">
+                            {feature.title}
+                        </h3>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                            {feature.description}
+                        </p>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    </section>
 
       {/* Testimonials Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
