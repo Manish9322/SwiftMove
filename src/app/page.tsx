@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -26,7 +26,7 @@ const Star = ({ className }: { className?: string }) => (
 const stats = [
     { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
     { icon: <TrendingUp className="h-8 w-8 text-white" />, value: "98%", label: "On-Time Arrival" },
-    { icon: <Star className="h-4 w-4 fill-current" />, value: "4.9/5", label: "User Rating" },
+    { icon: <Star className="h-8 w-8 text-yellow-400" />, value: "4.9/5", label: "User Rating" },
     { icon: <CalendarDays className="h-8 w-8 text-white" />, value: "500+", label: "Bookings Daily" },
 ];
 
@@ -201,7 +201,7 @@ export default function Home() {
                 >
                     {stats.map((stat, index) => (
                     <div key={index} className="flex flex-col items-center gap-2 rounded-lg bg-white/10 p-4 backdrop-blur-sm">
-                        {stat.icon}
+                        {React.cloneElement(stat.icon, { className: "h-8 w-8"})}
                         <p className="text-2xl font-bold">{stat.value}</p>
                         <p className="text-sm text-slate-300">{stat.label}</p>
                     </div>
@@ -284,7 +284,7 @@ export default function Home() {
                         className="space-y-6"
                     >
                        <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
-                         {features.map((feature, index) => (
+                         {features.slice(0, 4).map((feature, index) => (
                            <AccordionItem value={`item-${index}`} key={index} className="border-b">
                              <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-4 rounded-lg px-4 data-[state=open]:bg-primary/10 data-[state=open]:text-primary transition-all">
                                <div className="flex items-center gap-4">
@@ -353,27 +353,55 @@ export default function Home() {
       </section>
 
       {/* Service Coverage Area Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-        <div className="container px-4 md:px-6">
+      <section className="relative w-full py-12 md:py-24 lg:py-32 bg-secondary overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-10">
+          <Globe className="absolute -top-1/4 -left-1/4 w-1/2 h-auto text-primary/50" />
+          <Globe className="absolute -bottom-1/4 -right-1/4 w-1/2 h-auto text-primary/50" />
+        </div>
+        <div className="container relative z-10 px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-                <Image
-                    src="https://placehold.co/600x450.png"
-                    width={600}
-                    height={450}
-                    alt="Map of service area"
-                    data-ai-hint="city map"
-                    className="rounded-lg object-cover"
-                />
-                <div>
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">We've Got You Covered</h2>
-                    <p className="text-muted-foreground mb-6">We operate in major airports, train stations, and bus terminals across the country. Enter your location to see if we're in your area.</p>
-                    <div className="flex gap-2">
-                        <span className="inline-block bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">New York</span>
-                        <span className="inline-block bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">Los Angeles</span>
-                        <span className="inline-block bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">Chicago</span>
-                        <span className="inline-block bg-primary/10 text-primary text-sm font-medium px-3 py-1 rounded-full">...and more!</span>
+                <motion.div 
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6 }}
+                >
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">
+                      We've Got You Covered
+                    </h2>
+                    <p className="text-muted-foreground text-lg mb-6">
+                      We operate in major airports, train stations, and transport hubs across the globe. Enter your city to see if we're in your area.
+                    </p>
+                    <div className="relative max-w-md">
+                        <Input 
+                            type="text" 
+                            placeholder="Enter your city or airport code"
+                            className="h-12 pl-4 pr-12 text-base"
+                        />
+                        <Button variant="ghost" size="icon" className="absolute right-1 top-1 h-10 w-10 text-primary hover:bg-primary/10">
+                          <Search className="h-5 w-5" />
+                          <span className="sr-only">Search</span>
+                        </Button>
                     </div>
-                </div>
+                    <p className="text-sm text-muted-foreground mt-4">
+                      Popular locations include: <span className="font-semibold text-foreground">JFK, LAX, LHR, CDG, HND</span> & many more.
+                    </p>
+                </motion.div>
+                 <motion.div 
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                 >
+                    <Image
+                        src="https://placehold.co/600x450.png"
+                        width={600}
+                        height={450}
+                        alt="Map of service area"
+                        data-ai-hint="world map illustration"
+                        className="rounded-xl object-cover shadow-2xl"
+                    />
+                </motion.div>
             </div>
         </div>
       </section>
@@ -524,3 +552,5 @@ export default function Home() {
     </AppLayout>
   );
 }
+
+    
