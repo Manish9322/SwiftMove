@@ -1,37 +1,46 @@
+"use client";
+
+import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar } from '@/components/ui/calendar';
-import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 
 export default function Home() {
+  const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
+
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[600px] w-full flex items-center justify-center text-center text-white">
+      <section className="relative h-[700px] w-full flex items-center justify-center text-center text-white">
         <Image
           src="https://placehold.co/1920x1080.png"
-          alt="Busy airport terminal"
-          data-ai-hint="airport terminal"
+          alt="Busy airport terminal with a porter helping a traveler"
+          data-ai-hint="airport terminal porter"
           layout="fill"
           objectFit="cover"
           className="absolute z-0"
         />
-        <div className="absolute inset-0 bg-black/50 z-10" />
+        <div className="absolute inset-0 bg-black/60 z-10" />
         <div className="relative z-20 container px-4 md:px-6">
           <h1 className="text-4xl md:text-6xl font-bold font-headline mb-4">Your Journey, Unburdened</h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
-            Instant, reliable porter services at your fingertips. Move with ease, wherever you are.
+            Experience seamless travel with SwiftMove. Our professional porters are ready to assist you at airports, train stations, and more. Get an instant estimate for your luggage handling needs and travel with peace of mind.
           </p>
-          <Card className="max-w-4xl mx-auto bg-background/20 backdrop-blur-sm border-none">
+          <Card className="max-w-5xl mx-auto bg-background/20 backdrop-blur-sm border-none">
             <CardContent className="p-4">
-              <form className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr_auto] gap-4 items-center">
-                <Input placeholder="Enter Location (e.g., JFK Terminal 4)" className="h-12 text-black" />
-                <Select>
-                  <SelectTrigger className="h-12 text-black">
+              <form onSubmit={(e) => { e.preventDefault(); setIsEstimateModalOpen(true); }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3 items-center">
+                <Input placeholder="Your Name" required className="h-11 text-black" />
+                <Input type="tel" placeholder="Phone Number" required className="h-11 text-black" />
+                <Input placeholder="Pickup Address" required className="h-11 text-black" />
+                <Input placeholder="Drop-off Address" required className="h-11 text-black" />
+                <Select required>
+                  <SelectTrigger className="h-11 text-black">
                     <SelectValue placeholder="Package Size" />
                   </SelectTrigger>
                   <SelectContent>
@@ -40,40 +49,91 @@ export default function Home() {
                     <SelectItem value="large">Large (5+ bags)</SelectItem>
                   </SelectContent>
                 </Select>
-                 <Input type="date" className="h-12 text-black" />
-                <Button size="lg" className="h-12 w-full bg-accent hover:bg-accent/90 text-white">Search</Button>
+                <Button type="submit" size="lg" className="h-11 w-full bg-accent hover:bg-accent/90 text-white">Get Estimate</Button>
               </form>
             </CardContent>
           </Card>
         </div>
       </section>
+      
+      {/* Estimate Modal */}
+       <Dialog open={isEstimateModalOpen} onOpenChange={setIsEstimateModalOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Your Estimate</DialogTitle>
+            <DialogDescription>
+              Here is an approximate estimate for your porter service.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="price" className="text-right">
+                Estimated Price
+              </Label>
+              <span id="price" className="col-span-3 font-bold text-2xl text-primary">$25.00</span>
+            </div>
+             <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="distance" className="text-right">
+                Distance
+              </Label>
+              <span id="distance" className="col-span-3">Approx. 0.5 miles</span>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="time" className="text-right">
+                Estimated Time
+              </Label>
+              <span id="time" className="col-span-3">15-20 minutes</span>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={() => setIsEstimateModalOpen(false)} variant="outline">Cancel</Button>
+            <Button type="submit" className="bg-accent hover:bg-accent/90">Confirm Booking</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* How It Works Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-12">How It Works in 3 Easy Steps</h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="flex flex-col items-center">
-              <div className="flex items-center justify-center bg-primary text-primary-foreground rounded-full h-16 w-16 mb-4">
-                <span className="text-2xl font-bold">1</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Book Online</h3>
-              <p className="text-muted-foreground">Enter your details and schedule a porter in seconds.</p>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">How It Works</h2>
+          <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mb-16">A hassle-free experience in just three simple steps.</p>
+          <div className="relative grid gap-8 md:grid-cols-3">
+             <div className="absolute top-1/2 left-0 w-full h-0.5 bg-border -translate-y-1/2 -z-10 hidden md:block">
+              <div className="absolute top-1/2 left-0 w-full h-0.5 bg-primary/30 -translate-y-1/2" style={{clipPath: 'inset(0 100% 0 0)'}}></div>
             </div>
-            <div className="flex flex-col items-center">
-              <div className="flex items-center justify-center bg-primary text-primary-foreground rounded-full h-16 w-16 mb-4">
-                <span className="text-2xl font-bold">2</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Meet Your Porter</h3>
-              <p className="text-muted-foreground">Our professional will meet you at your specified location.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="flex items-center justify-center bg-primary text-primary-foreground rounded-full h-16 w-16 mb-4">
-                <span className="text-2xl font-bold">3</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Travel Stress-Free</h3>
-              <p className="text-muted-foreground">Enjoy a seamless journey while we handle your luggage.</p>
-            </div>
+            <Card className="text-center hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-background">
+                   <Briefcase className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle>1. Book Online</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Provide your journey details and luggage information to get an instant estimate and book your porter.</p>
+              </CardContent>
+            </Card>
+             <Card className="text-center hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-background">
+                   <User className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle>2. Meet Your Porter</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">A verified and professional porter will meet you at your designated pickup point right on time.</p>
+              </CardContent>
+            </Card>
+             <Card className="text-center hover:shadow-lg transition-shadow duration-300">
+              <CardHeader>
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-4 ring-8 ring-background">
+                   <ArrowRight className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle>3. Travel with Ease</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">Relax and enjoy your journey as we handle your luggage securely to your destination.</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -148,25 +208,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Porters Section */}
-       <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-        <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Meet Our Professional Porters</h2>
-            <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl/relaxed mb-12">Friendly, strong, and dedicated to making your travel easier.</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                 {[...Array(4)].map((_, i) => (
-                    <div key={i} className="flex flex-col items-center gap-2">
-                        <Image src={`https://placehold.co/200x200.png`} alt="Porter" data-ai-hint="porter professional portrait" width={200} height={200} className="rounded-full object-cover" />
-                        <h3 className="font-bold">John D.</h3>
-                        <p className="text-sm text-primary">5 Years Experience</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-      </section>
-
       {/* Service Coverage Area Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
         <div className="container px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
                 <Image
