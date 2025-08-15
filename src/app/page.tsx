@@ -741,28 +741,33 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="relative w-full py-20 md:py-32 bg-fixed bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://placehold.co/1920x600.png')" }}>
+      <section className="relative w-full py-16 md:py-24 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://placehold.co/1920x600.png')" }}>
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative container mx-auto px-4 md:px-6 text-center">
+        <div className="relative container mx-auto px-4 md:px-6">
             <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-8 md:p-12 max-w-3xl mx-auto shadow-2xl"
+                className="bg-background/80 backdrop-blur-sm border border-border rounded-xl p-8 md:p-12 max-w-4xl mx-auto shadow-2xl"
             >
-                <div className="absolute -top-3 -left-3 -right-3 -bottom-3 rounded-2xl border-2 border-accent opacity-50 animate-pulse" />
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-white mb-4">Ready for an Effortless Trip?</h2>
-                <p className="text-lg text-slate-200 mb-8 max-w-2xl mx-auto">
-                    Book your porter now and experience the SwiftMove difference. Your smoothest journey awaits.
-                </p>
-                <Button 
-                    size="lg" 
-                    className="group bg-accent hover:bg-accent/90 text-accent-foreground text-base font-semibold" 
-                    onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                    Book Now <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                    <div className="text-center md:text-left">
+                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-foreground mb-3">Ready for an Effortless Trip?</h2>
+                        <p className="text-lg text-muted-foreground">
+                            Book your porter now and experience the SwiftMove difference. Your smoothest journey awaits.
+                        </p>
+                    </div>
+                    <div className="flex justify-center md:justify-end">
+                         <Button 
+                            size="lg" 
+                            className="group bg-accent hover:bg-accent/90 text-accent-foreground text-base font-semibold px-8 py-6 w-full md:w-auto" 
+                            onClick={() => document.querySelector('#pickup')?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                            Book Now <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                        </Button>
+                    </div>
+                </div>
             </motion.div>
         </div>
       </section>
@@ -801,5 +806,3 @@ export default function Home() {
     </AppLayout>
   );
 }
-
-    
