@@ -17,6 +17,12 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/com
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
 
+const Star = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+    </svg>
+);
+
 const stats = [
     { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
     { icon: <TrendingUp className="h-8 w-8 text-white" />, value: "98%", label: "On-Time Arrival" },
@@ -117,12 +123,6 @@ const testimonials = [
     avatar: "https://placehold.co/48x48.png"
   },
 ]
-
-const Star = ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
-        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-    </svg>
-);
 
 
 export default function Home() {
@@ -322,6 +322,8 @@ export default function Home() {
                 }}
                 plugins={[autoplayPlugin.current]}
                 className="w-full"
+                onMouseEnter={autoplayPlugin.current.stop}
+                onMouseLeave={autoplayPlugin.current.reset}
             >
                 <CarouselContent>
                     {testimonials.map((testimonial, i) => (
@@ -522,5 +524,3 @@ export default function Home() {
     </AppLayout>
   );
 }
-
-    
