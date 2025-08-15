@@ -12,6 +12,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/booking", label: "Book Now" },
   { href: "/admin", label: "Admin" },
   { href: "/auth/login", label: "Login" },
 ];
