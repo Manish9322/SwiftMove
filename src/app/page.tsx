@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import TypewriterEffect from '@/components/TypewriterEffect';
 import BookingForm from '@/components/BookingForm';
 import { motion } from "framer-motion";
+import AppLayout from './app-layout';
 
 const stats = [
     { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
@@ -26,7 +27,7 @@ export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
 
   return (
-    <>
+    <AppLayout>
       {/* Hero Section */}
        <section className="relative w-full overflow-hidden bg-black text-white">
         <div className="absolute inset-0 z-0">
@@ -384,6 +385,6 @@ export default function Home() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </>
+    </AppLayout>
   );
 }

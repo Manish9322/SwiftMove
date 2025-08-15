@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -7,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -83,6 +85,7 @@ export default function Header() {
         </Link>
         
         <div className="flex flex-1 items-center justify-end space-x-2">
+            <ThemeToggle />
             <Link href="/auth/register">
                 <Button variant="outline" className="hidden md:inline-flex border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                     Register
