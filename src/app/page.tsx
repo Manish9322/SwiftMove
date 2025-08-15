@@ -1,13 +1,13 @@
 
 "use client";
 
-import { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck, Handshake } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck, Handshake, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -15,6 +15,7 @@ import TypewriterEffect from '@/components/TypewriterEffect';
 import BookingForm from '@/components/BookingForm';
 import { motion } from "framer-motion";
 import AppLayout from './app-layout';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const stats = [
     { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
@@ -61,7 +62,7 @@ const features = [
 
 
 export default function Home() {
-  const [isEstimateModalOpen, setIsEstimateModalOpen] = useState(false);
+  const [isEstimateModalOpen, setIsEstimateModalOpen] = React.useState(false);
 
   return (
     <AppLayout>
@@ -139,82 +140,97 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
-        <div className="container px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
-              How It Works
-            </h2>
-            <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
-              Your seamless journey is just three steps away.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="relative flex flex-col items-center text-center p-8 bg-background rounded-xl shadow-lg border border-transparent hover:border-primary transition-all duration-300"
-              >
-                <div className="absolute top-0 -translate-y-1/2 flex items-center justify-center h-20 w-20 rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
-                  <step.icon className="h-10 w-10" />
+       {/* How It Works Section */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
+            <div className="container px-4 md:px-6">
+                <div className="text-center mb-16">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
+                        How It Works
+                    </h2>
+                    <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+                        Your seamless journey is just three steps away.
+                    </p>
                 </div>
-                <h3 className="text-2xl font-bold font-headline mt-12 mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <div className="relative grid md:grid-cols-3 gap-8">
+                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary/20 -translate-y-1/2 hidden md:block" />
+                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary origin-left hidden md:block" />
+                    {steps.map((step, index) => (
+                        <motion.div
+                            key={index}
+                             initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                            viewport={{ once: true, amount: 0.3 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className="relative flex flex-col items-center text-center p-8 bg-background rounded-xl shadow-lg border border-transparent hover:border-primary transition-all duration-300 z-10"
+                        >
+                             <div className="absolute top-0 -translate-y-1/2 flex items-center justify-center h-20 w-20 rounded-full bg-primary text-primary-foreground ring-8 ring-secondary z-10">
+                                <step.icon className="h-10 w-10" />
+                            </div>
+                            <h3 className="text-2xl font-bold font-headline mt-12 mb-3">
+                                {step.title}
+                            </h3>
+                            <p className="text-muted-foreground text-sm leading-relaxed">
+                                {step.description}
+                            </p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
 
       {/* Why Choose Us Section */}
-      <section className="relative w-full overflow-hidden bg-background py-12 md:py-24 lg:py-32">
-        <div className="absolute inset-0 z-0 opacity-5">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(var(--primary-rgb),0.3),rgba(255,255,255,0))]"></div>
-        </div>
-        <div className="container relative z-10 px-4 md:px-6">
-            <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
-                    Why Choose SwiftMove?
-                </h2>
-                <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
-                    We are committed to providing an exceptional service that you can rely on, every time.
-                </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-                {features.map((feature, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+            <div className="container px-4 md:px-6">
+                 <div className="text-center mb-16">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">
+                        Why Choose SwiftMove?
+                    </h2>
+                    <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
+                        We are committed to providing an exceptional service that you can rely on, every time.
+                    </p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                     <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.6, delay: index * 0.15 }}
-                        whileHover={{ scale: 1.05, y: -5 }}
-                        className="flex flex-col items-center text-center p-8 bg-card rounded-2xl shadow-lg border border-border/50 transition-all duration-300"
-                    >
-                        <div className="flex items-center justify-center h-20 w-20 rounded-full bg-primary/10 text-primary-foreground mb-6">
-                            {feature.icon}
-                        </div>
-                        <h3 className="text-2xl font-bold font-headline mb-3">
-                            {feature.title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                            {feature.description}
-                        </p>
+                        transition={{ duration: 0.6 }}
+                     >
+                        <Image
+                            src="https://placehold.co/600x600.png"
+                            width={600}
+                            height={600}
+                            alt="A happy traveler with their luggage"
+                            data-ai-hint="happy traveler"
+                            className="rounded-2xl object-cover shadow-lg"
+                        />
                     </motion.div>
-                ))}
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="space-y-6"
+                    >
+                       <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
+                         {features.map((feature, index) => (
+                           <AccordionItem value={`item-${index}`} key={index} className="border-b-0">
+                             <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-4 rounded-lg px-4 data-[state=open]:bg-primary/10 data-[state=open]:text-primary transition-all">
+                               <div className="flex items-center gap-4">
+                                {React.cloneElement(feature.icon, {className: "h-8 w-8 text-primary"})}
+                                <span>{feature.title}</span>
+                               </div>
+                             </AccordionTrigger>
+                             <AccordionContent className="pt-0 pb-4 px-4 text-muted-foreground">
+                               {feature.description}
+                             </AccordionContent>
+                           </AccordionItem>
+                         ))}
+                       </Accordion>
+                    </motion.div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
       {/* Testimonials Section */}
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
