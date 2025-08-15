@@ -16,6 +16,8 @@ import BookingForm from '@/components/BookingForm';
 import { motion } from "framer-motion";
 import AppLayout from './app-layout';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 
 const stats = [
     { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
@@ -68,7 +70,55 @@ const features = [
     title: "Transparent Pricing",
     description: "No hidden fees or surprises. Get a clear, upfront estimate before you book, so you know exactly what you're paying for.",
     },
+      {
+    icon: <UserCheck className="h-10 w-10 text-primary" />,
+    title: "Personalized Service",
+    description: "From extra luggage to special handling requests, our service is tailored to meet your unique travel needs and preferences.",
+  },
+  {
+    icon: <PhoneCall className="h-10 w-10 text-primary" />,
+    title: "24/7 Customer Support",
+    description: "Our dedicated support team is available around the clock to assist you with any questions or concerns that may arise.",
+  },
 ];
+
+const testimonials = [
+  {
+    name: "Sarah L.",
+    designation: "Frequent Flyer",
+    comment: "SwiftMove was a lifesaver! My porter was on time, professional, and made my airport experience so much smoother. Highly recommend!",
+    rating: 5,
+    avatar: "https://placehold.co/48x48.png"
+  },
+  {
+    name: "Michael B.",
+    designation: "Business Traveler",
+    comment: "The booking process was incredibly simple and the service was impeccable. I'll be using SwiftMove for all my future business trips.",
+    rating: 5,
+    avatar: "https://placehold.co/48x48.png"
+  },
+  {
+    name: "Jessica P.",
+    designation: "Family Vacationer",
+    comment: "Traveling with kids and tons of luggage is always a challenge. SwiftMove made it feel effortless. What a fantastic service!",
+    rating: 5,
+    avatar: "https://placehold.co/48x48.png"
+  },
+   {
+    name: "David R.",
+    designation: "International Student",
+    comment: "As a student moving abroad, I had so much luggage. The porter was a huge help and the price was very reasonable. Thank you, SwiftMove!",
+    rating: 5,
+    avatar: "https://placehold.co/48x48.png"
+  },
+  {
+    name: "Emily C.",
+    designation: "Event Coordinator",
+    comment: "We used SwiftMove for our corporate event, and the feedback from our attendees was amazing. Professional, reliable, and efficient.",
+    rating: 5,
+    avatar: "https://placehold.co/48x48.png"
+  },
+]
 
 
 export default function Home() {
@@ -224,7 +274,7 @@ export default function Home() {
                     >
                        <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
                          {features.map((feature, index) => (
-                           <AccordionItem value={`item-${index}`} key={index} className="border-b-0">
+                           <AccordionItem value={`item-${index}`} key={index} className="border-b">
                              <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-4 rounded-lg px-4 data-[state=open]:bg-primary/10 data-[state=open]:text-primary transition-all">
                                <div className="flex items-center gap-4">
                                 {React.cloneElement(feature.icon, {className: "h-8 w-8 text-primary"})}
@@ -254,26 +304,44 @@ export default function Home() {
       <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
         <div className="container px-4 md:px-6">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-center mb-12">What Our Customers Say</h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {[...Array(3)].map((_, i) => (
-              <Card key={i} className="bg-background">
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <Image src={`https://placehold.co/48x48.png`} alt="Customer" data-ai-hint="person portrait" width={48} height={48} className="rounded-full" />
-                    <div>
-                      <CardTitle>Sarah L.</CardTitle>
-                      <div className="flex text-yellow-500">
-                        {[...Array(5)].map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">"SwiftMove was a lifesaver! My porter was on time, professional, and made my airport experience so much smoother. Highly recommend!"</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+            <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}
+                 plugins={[
+                    Autoplay({
+                        delay: 3000,
+                        stopOnInteraction: true,
+                        stopOnMouseEnter: true,
+                    }),
+                ]}
+                className="w-full"
+            >
+                <CarouselContent>
+                    {testimonials.map((testimonial, i) => (
+                        <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3">
+                            <div className="p-1">
+                                 <Card className="bg-background h-full flex flex-col">
+                                    <CardHeader className="flex flex-row items-start gap-4 space-y-0">
+                                        <Image src={testimonial.avatar} alt={testimonial.name} data-ai-hint="person portrait" width={48} height={48} className="rounded-full" />
+                                        <div className="flex-1">
+                                            <CardTitle>{testimonial.name}</CardTitle>
+                                            <CardDescription>{testimonial.designation}</CardDescription>
+                                            <div className="flex text-yellow-500 mt-1">
+                                                {[...Array(testimonial.rating)].map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
+                                            </div>
+                                        </div>
+                                    </CardHeader>
+                                    <CardContent className="flex-1">
+                                        <p className="text-muted-foreground italic">"{testimonial.comment}"</p>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+            </Carousel>
         </div>
       </section>
 
