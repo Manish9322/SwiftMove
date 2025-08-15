@@ -6,23 +6,21 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle, Clock, MapPin, Package, Percent, Phone, Shield, Star, ThumbsUp, Users, Zap, Briefcase, User, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Search, Smartphone, UserCheck, Handshake, ChevronDown, DollarSign } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import TypewriterEffect from '@/components/TypewriterEffect';
-import BookingForm from '@/components/BookingForm';
-import { motion } from "framer-motion";
 import AppLayout from './app-layout';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from "framer-motion";
 
 const stats = [
     { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
     { icon: <TrendingUp className="h-8 w-8 text-white" />, value: "98%", label: "On-Time Arrival" },
-    { icon: <Star className="h-8 w-8 text-white" />, value: "4.9/5", label: "User Rating" },
+    { icon: <Star className="h-4 w-4 fill-current" />, value: "4.9/5", label: "User Rating" },
     { icon: <CalendarDays className="h-8 w-8 text-white" />, value: "500+", label: "Bookings Daily" },
 ];
 
@@ -120,9 +118,19 @@ const testimonials = [
   },
 ]
 
+const Star = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+    </svg>
+);
+
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = React.useState(false);
+
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
 
   return (
     <AppLayout>
@@ -162,9 +170,12 @@ export default function Home() {
                 >
                     <Card className="max-w-4xl mx-auto bg-white/5 backdrop-blur-lg border-white/10 shadow-2xl p-4 sm:p-6">
                         <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
-                            <div className="space-y-1 text-left">
+                            <div className="relative space-y-1 text-left">
                                 <Label htmlFor="pickup" className="text-xs font-semibold text-white/80">PICKUP</Label>
-                                <Input id="pickup" placeholder="Enter pickup address" className="bg-white/10 border-white/20 h-9" />
+                                <Input id="pickup" placeholder="Enter pickup address" className="bg-white/10 border-white/20 h-9 pr-8" />
+                                <Button variant="ghost" size="icon" className="absolute right-0 bottom-0 h-9 w-9 text-white/70 hover:bg-white/20 hover:text-white">
+                                    <LocateFixed className="h-4 w-4" />
+                                </Button>
                             </div>
                              <div className="space-y-1 text-left">
                                 <Label htmlFor="drop" className="text-xs font-semibold text-white/80">DROP</Label>
@@ -309,13 +320,7 @@ export default function Home() {
                     align: "start",
                     loop: true,
                 }}
-                 plugins={[
-                    Autoplay({
-                        delay: 3000,
-                        stopOnInteraction: true,
-                        stopOnMouseEnter: true,
-                    }),
-                ]}
+                plugins={[autoplayPlugin.current]}
                 className="w-full"
             >
                 <CarouselContent>
@@ -439,7 +444,7 @@ export default function Home() {
                <p className="text-muted-foreground">We follow strict protocols to ensure your luggage is handled with care.</p>
              </div>
              <div className="flex flex-col items-center">
-               <Phone className="h-10 w-10 mb-2 text-primary"/>
+               <PhoneCall className="h-10 w-10 mb-2 text-primary"/>
                <h3 className="font-bold text-lg">24/7 Support</h3>
                <p className="text-muted-foreground">Our support team is always available to assist you with any concerns.</p>
              </div>
@@ -517,3 +522,5 @@ export default function Home() {
     </AppLayout>
   );
 }
+
+    
