@@ -27,10 +27,10 @@ const Star = ({ className }: { className?: string }) => (
 );
 
 const stats = [
-    { icon: <BaggageClaim className="h-8 w-8 text-white" />, value: "10k+", label: "Bags Handled" },
-    { icon: <TrendingUp className="h-8 w-8 text-white" />, value: "98%", label: "On-Time Arrival" },
-    { icon: <Star className="h-8 w-8 text-yellow-400" />, value: "4.9/5", label: "User Rating" },
-    { icon: <CalendarDays className="h-8 w-8 text-white" />, value: "500+", label: "Bookings Daily" },
+    { icon: <BaggageClaim className="h-8 w-8 text-primary" />, value: "10k+", label: "Bags Handled" },
+    { icon: <TrendingUp className="h-8 w-8 text-primary" />, value: "98%", label: "On-Time Arrival" },
+    { icon: <Star className="h-8 w-8 text-yellow-500" />, value: "4.9/5", label: "User Rating" },
+    { icon: <CalendarDays className="h-8 w-8 text-primary" />, value: "500+", label: "Bookings Daily" },
 ];
 
 const steps = [
@@ -232,30 +232,18 @@ export default function Home() {
   return (
     <AppLayout>
       {/* Hero Section */}
-       <section className="relative w-full overflow-hidden bg-black text-white">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://placehold.co/1920x1080.png"
-            alt="Busy airport terminal with a porter helping a traveler"
-            data-ai-hint="airport terminal porter"
-            layout="fill"
-            objectFit="cover"
-            className="opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
-        </div>
-
-        <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6">
+       <section className="relative w-full bg-background text-foreground">
+        <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6 py-12 md:py-24">
             <div className="space-y-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl font-headline">
+                    <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl font-headline">
                         Your Journey, <TypewriterEffect text="Unburdened" />
                     </h1>
-                    <p className="mt-4 max-w-3xl mx-auto text-lg text-slate-300">
+                    <p className="mt-4 max-w-3xl mx-auto text-lg text-muted-foreground">
                         Experience seamless travel with SwiftMove. Our AI-powered platform connects you with professional porters instantly. Get a quick estimate and book your service in under a minute.
                     </p>
                 </motion.div>
@@ -265,26 +253,26 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="mt-8"
                 >
-                    <Card className="max-w-4xl mx-auto bg-white/5 backdrop-blur-lg border-white/10 shadow-2xl p-4 sm:p-6">
+                    <Card className="max-w-4xl mx-auto bg-background/50 border-border/50 shadow-lg p-4 sm:p-6">
                         <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
                             <div className="relative space-y-1 text-left">
-                                <Label htmlFor="pickup" className="text-xs font-semibold text-white/80">PICKUP</Label>
-                                <Input id="pickup" placeholder="Enter pickup address" className="bg-white/10 border-white/20 h-9 pr-8" />
-                                <Button variant="ghost" size="icon" className="absolute right-0 bottom-0 h-9 w-9 text-white/70 hover:bg-white/20 hover:text-white">
+                                <Label htmlFor="pickup" className="text-xs font-semibold text-muted-foreground">PICKUP</Label>
+                                <Input id="pickup" placeholder="Enter pickup address" className="bg-background border-border h-9 pr-8" />
+                                <Button variant="ghost" size="icon" className="absolute right-0 bottom-0 h-9 w-9 text-muted-foreground hover:bg-accent hover:text-accent-foreground">
                                     <LocateFixed className="h-4 w-4" />
                                 </Button>
                             </div>
                              <div className="space-y-1 text-left">
-                                <Label htmlFor="drop" className="text-xs font-semibold text-white/80">DROP</Label>
-                                <Input id="drop" placeholder="Enter drop address" className="bg-white/10 border-white/20 h-9" />
+                                <Label htmlFor="drop" className="text-xs font-semibold text-muted-foreground">DROP</Label>
+                                <Input id="drop" placeholder="Enter drop address" className="bg-background border-border h-9" />
                             </div>
                             <div className="space-y-1 text-left">
-                                <Label htmlFor="name" className="text-xs font-semibold text-white/80">NAME</Label>
-                                <Input id="name" placeholder="Your name" className="bg-white/10 border-white/20 h-9" />
+                                <Label htmlFor="name" className="text-xs font-semibold text-muted-foreground">NAME</Label>
+                                <Input id="name" placeholder="Your name" className="bg-background border-border h-9" />
                             </div>
                              <div className="space-y-1 text-left">
-                                <Label htmlFor="phone" className="text-xs font-semibold text-white/80">PHONE</Label>
-                                <Input id="phone" type="tel" placeholder="Phone number" className="bg-white/10 border-white/20 h-9" />
+                                <Label htmlFor="phone" className="text-xs font-semibold text-muted-foreground">PHONE</Label>
+                                <Input id="phone" type="tel" placeholder="Phone number" className="bg-background border-border h-9" />
                             </div>
                             <Button className="w-full bg-accent hover:bg-accent/90 h-9" onClick={() => setIsEstimateModalOpen(true)}>Get Estimate</Button>
                         </div>
@@ -297,10 +285,10 @@ export default function Home() {
                     className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4"
                 >
                     {stats.map((stat, index) => (
-                    <div key={index} className="flex flex-col items-center gap-2 rounded-lg bg-white/10 p-4 backdrop-blur-sm">
+                    <div key={index} className="flex flex-col items-center gap-2 rounded-lg bg-muted/50 border border-border/50 p-4">
                         {React.cloneElement(stat.icon, { className: "h-8 w-8"})}
                         <p className="text-2xl font-bold">{stat.value}</p>
-                        <p className="text-sm text-slate-300">{stat.label}</p>
+                        <p className="text-sm text-muted-foreground">{stat.label}</p>
                     </div>
                     ))}
                 </motion.div>
@@ -813,3 +801,5 @@ export default function Home() {
     </AppLayout>
   );
 }
+
+    
