@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck, Plane } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck, Plane, Package, Truck } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -262,6 +262,11 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
+                    <div className="flex justify-center items-center gap-6 mb-4">
+                        <Package className="h-8 w-8 text-primary" />
+                        <Truck className="h-8 w-8 text-primary" />
+                        <MapPin className="h-8 w-8 text-primary" />
+                    </div>
                     <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl font-headline">
                         Your Journey, <TypewriterEffect text="Unburdened" />
                     </h1>
@@ -323,7 +328,7 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
                     <p className="text-sm text-muted-foreground font-medium mb-4">TRUSTED BY LEADING TRAVEL & TECH COMPANIES</p>
-                    <div className="flex justify-center items-center gap-8 flex-wrap">
+                    <div className="flex justify-center items-center gap-8 flex-wrap mb-6">
                         {trustedLogos.map((logo, index) => (
                             <Image
                                 key={index}
