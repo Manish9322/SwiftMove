@@ -105,7 +105,7 @@ const checklistItems = [
 
 export default function BookingPage() {
     const autoplayPlugin = React.useRef(
-        Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true })
+        Autoplay({ delay: 1, stopOnInteraction: false, stopOnMouseEnter: true })
     );
 
   return (
@@ -289,7 +289,7 @@ export default function BookingPage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6 }}
                      >
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Check Real-Time Availability</h2>
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline mb-4">Check Real-Time Availability</h2>
                         <p className="text-muted-foreground mb-6">
                             Our network is vast, but high-demand slots fill up fast. Enter your date to see available porters in real-time. This helps us guarantee your service.
                         </p>
@@ -326,15 +326,15 @@ export default function BookingPage() {
                     </p>
                 </div>
                 <Carousel
-                    opts={{ align: "start", loop: true }}
+                    opts={{ align: "start", loop: true, duration: 30 }}
                     plugins={[autoplayPlugin.current]}
-                    className="w-full max-w-4xl mx-auto"
+                    className="w-full max-w-6xl mx-auto"
                 >
-                    <CarouselContent>
+                    <CarouselContent className="-ml-1">
                         {testimonials.map((testimonial, i) => (
-                            <CarouselItem key={i} className="md:basis-1/2">
+                            <CarouselItem key={i} className="pl-1 md:basis-1/2 lg:basis-1/3">
                                 <div className="p-1 h-full">
-                                    <Card className="bg-background h-full flex flex-col">
+                                    <Card className="bg-background h-full flex flex-col min-h-[12rem]">
                                         <CardContent className="p-6 flex-1 flex flex-col justify-center">
                                             <div className="flex items-start gap-4">
                                                 <Avatar>
@@ -381,7 +381,7 @@ export default function BookingPage() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline mb-2">
                 Your Pre-Travel Checklist
               </h2>
               <p className="text-muted-foreground md:text-xl/relaxed mt-4 mb-6">A little preparation goes a long way. Follow these steps to ensure a smooth start to your journey.</p>
