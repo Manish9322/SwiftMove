@@ -27,10 +27,10 @@ const Star = ({ className }: { className?: string }) => (
 );
 
 const stats = [
-    { icon: <BaggageClaim className="h-8 w-8 text-primary" />, value: "10k+", label: "Bags Handled" },
-    { icon: <TrendingUp className="h-8 w-8 text-primary" />, value: "98%", label: "On-Time Arrival" },
-    { icon: <Star className="h-8 w-8 text-yellow-500" />, value: "4.9/5", label: "User Rating" },
-    { icon: <CalendarDays className="h-8 w-8 text-primary" />, value: "500+", label: "Bookings Daily" },
+    { icon: <BaggageClaim className="h-8 w-8" />, value: "10k+", label: "Bags Handled" },
+    { icon: <TrendingUp className="h-8 w-8" />, value: "98%", label: "On-Time Arrival" },
+    { icon: <Star className="h-8 w-8 text-yellow-400 fill-yellow-400" />, value: "4.9/5", label: "User Rating" },
+    { icon: <CalendarDays className="h-8 w-8" />, value: "500+", label: "Bookings Daily" },
 ];
 
 const steps = [
@@ -235,9 +235,6 @@ export default function Home() {
        <section className="relative w-full bg-background text-foreground overflow-hidden">
          {/* Decorative Elements */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5 -z-10" style={{backgroundSize: '3rem 3rem'}}></div>
-        <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
-        
         <Plane className="absolute top-[10%] left-[5%] h-24 w-24 text-primary/10 opacity-50 rotate-[25deg] -z-10" />
         <BaggageClaim className="absolute bottom-[15%] right-[8%] h-28 w-28 text-accent/10 opacity-50 -rotate-12 -z-10" />
         <div className="absolute top-[20%] right-[15%] h-8 w-8 bg-primary/20 rounded-full animate-pulse -z-10" />
@@ -290,20 +287,21 @@ export default function Home() {
                         </div>
                     </Card>
                 </motion.div>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4"
-                >
-                    {stats.map((stat, index) => (
-                    <div key={index} className="flex flex-col items-center gap-2 rounded-lg bg-muted/50 border border-border/50 p-4">
-                        {React.cloneElement(stat.icon, { className: "h-8 w-8"})}
-                        <p className="text-2xl font-bold">{stat.value}</p>
-                        <p className="text-sm text-muted-foreground">{stat.label}</p>
-                    </div>
+            </div>
+        </div>
+         <div className="absolute bottom-0 left-0 right-0 py-6 bg-primary text-primary-foreground">
+            <div className="relative overflow-hidden">
+                <div className="flex animate-marquee-slow">
+                    {[...stats, ...stats].map((stat, index) => (
+                        <div key={index} className="flex items-center gap-4 mx-8 flex-shrink-0">
+                            {React.cloneElement(stat.icon, { className: "h-8 w-8"})}
+                            <div>
+                                <p className="text-2xl font-bold">{stat.value}</p>
+                                <p className="text-sm opacity-80">{stat.label}</p>
+                            </div>
+                        </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </div>
       </section>
