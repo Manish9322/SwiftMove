@@ -105,7 +105,7 @@ const checklistItems = [
 
 export default function BookingPage() {
     const autoplayPlugin = React.useRef(
-        Autoplay({ delay: 1, stopOnInteraction: false, stopOnMouseEnter: true })
+        Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
     );
 
   return (
