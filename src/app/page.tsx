@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck, Plane } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -232,7 +232,15 @@ export default function Home() {
   return (
     <AppLayout>
       {/* Hero Section */}
-       <section className="relative w-full bg-background text-foreground">
+       <section className="relative w-full bg-background text-foreground overflow-hidden">
+         {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
+        <Plane className="absolute top-[15%] left-[5%] h-16 w-16 text-primary/20 opacity-50 rotate-45 -z-10" />
+        <BaggageClaim className="absolute bottom-[20%] right-[10%] h-20 w-20 text-accent/20 opacity-50 -rotate-12 -z-10" />
+        <div className="absolute top-[20%] right-[15%] h-4 w-4 bg-primary/50 rounded-full animate-pulse -z-10" />
+        <div className="absolute bottom-[25%] left-[15%] h-3 w-3 bg-accent/50 rounded-full animate-pulse delay-500 -z-10" />
+
         <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6 py-12 md:py-24">
             <div className="space-y-6 text-center">
                 <motion.div
@@ -253,7 +261,7 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="mt-8"
                 >
-                    <Card className="max-w-4xl mx-auto bg-background/50 border-border/50 shadow-lg p-4 sm:p-6">
+                    <Card className="max-w-4xl mx-auto bg-background/50 backdrop-blur-sm border-border/50 shadow-lg p-4 sm:p-6">
                         <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
                             <div className="relative space-y-1 text-left">
                                 <Label htmlFor="pickup" className="text-xs font-semibold text-muted-foreground">PICKUP</Label>
@@ -801,5 +809,3 @@ export default function Home() {
     </AppLayout>
   );
 }
-
-    
