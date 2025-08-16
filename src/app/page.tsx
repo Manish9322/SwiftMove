@@ -234,12 +234,16 @@ export default function Home() {
       {/* Hero Section */}
        <section className="relative w-full bg-background text-foreground overflow-hidden">
          {/* Decorative Elements */}
-        <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
-        <Plane className="absolute top-[15%] left-[5%] h-16 w-16 text-primary/20 opacity-50 rotate-45 -z-10" />
-        <BaggageClaim className="absolute bottom-[20%] right-[10%] h-20 w-20 text-accent/20 opacity-50 -rotate-12 -z-10" />
-        <div className="absolute top-[20%] right-[15%] h-4 w-4 bg-primary/50 rounded-full animate-pulse -z-10" />
-        <div className="absolute bottom-[25%] left-[15%] h-3 w-3 bg-accent/50 rounded-full animate-pulse delay-500 -z-10" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 -z-10" style={{backgroundSize: '3rem 3rem'}}></div>
+        <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
+        
+        <Plane className="absolute top-[10%] left-[5%] h-24 w-24 text-primary/10 opacity-50 rotate-[25deg] -z-10" />
+        <BaggageClaim className="absolute bottom-[15%] right-[8%] h-28 w-28 text-accent/10 opacity-50 -rotate-12 -z-10" />
+        <div className="absolute top-[20%] right-[15%] h-8 w-8 bg-primary/20 rounded-full animate-pulse -z-10" />
+        <div className="absolute bottom-[25%] left-[15%] h-6 w-6 bg-accent/20 rounded-full animate-pulse delay-500 -z-10" />
+        <div className="absolute top-1/2 left-1/4 h-3 w-3 bg-primary/20 rounded-full animate-pulse delay-1000 -z-10" />
+
 
         <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6 py-12 md:py-24">
             <div className="space-y-6 text-center">
