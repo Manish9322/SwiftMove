@@ -116,7 +116,7 @@ export default function ContactPage() {
                         transition={{ duration: 0.5 }}
                     >
                         <Badge variant="secondary" className="mb-4">Get in Touch</Badge>
-                        <h1 className="text-4xl md:text-6xl font-bold font-headline">We're Here to Help</h1>
+                        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl font-headline">We're Here to Help</h1>
                         <p className="mt-4 max-w-2xl mx-auto text-lg opacity-90">
                             Have a question, a suggestion, or need support? Our team is ready to assist you. Whether you're a customer, a potential partner, or just curious, we'd love to hear from you.
                         </p>
@@ -203,8 +203,8 @@ export default function ContactPage() {
             <section className="bg-secondary py-12 md:py-20">
                 <div className="container">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold font-headline">Connect with the Right Team</h2>
-                        <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Connect with the Right Team</h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
                             Find the direct contact information for your specific needs.
                         </p>
                     </div>
@@ -317,8 +317,8 @@ export default function ContactPage() {
             <section className="bg-secondary py-12 md:py-20">
                 <div className="container">
                      <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold font-headline">Our Global Offices</h2>
-                        <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Our Global Offices</h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
                             We have a presence in key cities around the world to better serve you.
                         </p>
                     </div>
@@ -354,12 +354,12 @@ export default function ContactPage() {
             <section className="py-12 md:py-20">
                  <div className="container">
                      <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold font-headline">Find Us Anywhere</h2>
-                        <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Find Us Anywhere</h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
                             Our interactive map shows all our locations. Click on an address to see it on the map.
                         </p>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-3 gap-8 items-start">
                         <div className="md:col-span-2 relative h-[500px] w-full rounded-2xl overflow-hidden shadow-xl">
                              <Image src={`https://placehold.co/1200x500.png?text=${encodeURIComponent(activeLocation.name)}`} layout="fill" objectFit="cover" alt="World map with office locations" data-ai-hint="world map pins" className="transition-all duration-500" key={activeLocation.name}/>
                         </div>
@@ -386,8 +386,8 @@ export default function ContactPage() {
             {/* 7. Social Media Section */}
              <section className="bg-secondary py-12 md:py-20">
                 <div className="container text-center">
-                    <h2 className="text-3xl font-bold font-headline">Follow Our Journey</h2>
-                    <p className="max-w-2xl mx-auto text-muted-foreground mt-4 mb-8">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Follow Our Journey</h2>
+                    <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-8">
                         Stay connected with us on social media for the latest news, updates, and travel tips.
                     </p>
                     <div className="flex justify-center gap-6">
@@ -417,8 +417,8 @@ export default function ContactPage() {
             <section className="py-12 md:py-20">
                 <div className="container">
                     <div className="bg-primary/10 rounded-2xl p-8 md:p-12 text-center">
-                         <h2 className="text-3xl font-bold font-headline">Want to Join Us?</h2>
-                         <p className="max-w-2xl mx-auto text-muted-foreground mt-4 mb-8">
+                         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Want to Join Us?</h2>
+                         <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-8">
                             We're building a team of innovators and problem-solvers. If you're passionate about making travel better, explore our career opportunities.
                         </p>
                         <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
@@ -435,8 +435,8 @@ export default function ContactPage() {
                         <div className="mx-auto bg-primary/10 text-primary p-3 rounded-full w-fit mb-4">
                            <Mail className="h-8 w-8" />
                         </div>
-                        <h2 className="text-3xl font-bold font-headline">Stay in the Loop</h2>
-                        <p className="max-w-2xl mx-auto text-muted-foreground mt-4 mb-8">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Stay in the Loop</h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-8">
                             Subscribe to our newsletter for exclusive offers, new destination announcements, and travel tips. No spam, we promise.
                         </p>
                         <form onSubmit={(e) => handleFormSubmit(e, "Subscribed!")} className="flex sm:flex-row flex-col gap-2 max-w-md mx-auto">
@@ -450,8 +450,8 @@ export default function ContactPage() {
             {/* 10. Customer Feedback Section */}
             <section className="py-12 md:py-20">
                 <div className="container text-center">
-                    <h2 className="text-3xl font-bold font-headline">We Value Your Feedback</h2>
-                    <p className="max-w-2xl mx-auto text-muted-foreground mt-4 mb-8">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">We Value Your Feedback</h2>
+                    <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-8">
                         Your suggestions help us improve. Share your experience or ideas with us.
                     </p>
                     <Dialog open={isFeedbackDialogOpen} onOpenChange={setIsFeedbackDialogOpen}>

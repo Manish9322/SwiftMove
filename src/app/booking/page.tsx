@@ -120,7 +120,7 @@ export default function BookingPage() {
                 transition={{ duration: 0.5 }}
             >
                 <Badge variant="outline" className="mb-4 border-primary text-primary">Secure Booking</Badge>
-                <h1 className="text-5xl md:text-7xl font-bold font-headline">Book Your Porter</h1>
+                <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl font-headline">Book Your Porter</h1>
                 <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                     Just a few details and you'll be on your way to a stress-free travel experience.
                 </p>
@@ -183,8 +183,8 @@ export default function BookingPage() {
       {/* 4. How It Works Section */}
        <section className="bg-secondary py-12 md:py-20">
             <div className="container text-center">
-                <h2 className="text-3xl font-bold font-headline mb-4">A Simple 3-Step Process</h2>
-                <p className="max-w-2xl mx-auto text-muted-foreground mb-12">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">A Simple 3-Step Process</h2>
+                <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-12">
                     We've simplified the booking process to save you time and effort.
                 </p>
                 <div className="relative grid md:grid-cols-3 gap-8">
@@ -213,8 +213,8 @@ export default function BookingPage() {
       {/* 5. Luggage We Handle Section */}
        <section className="py-12 md:py-20">
             <div className="container text-center">
-                <h2 className="text-3xl font-bold font-headline mb-4">We Handle All Types of Luggage</h2>
-                <p className="max-w-2xl mx-auto text-muted-foreground mb-12">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">We Handle All Types of Luggage</h2>
+                <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-12">
                     From single backpacks to oversized items, our porters are equipped to handle it all.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -248,8 +248,8 @@ export default function BookingPage() {
       <section className="bg-secondary py-12 md:py-20">
             <div className="container">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold font-headline">Enhance Your Experience</h2>
-                    <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Enhance Your Experience</h2>
+                    <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
                         Consider these optional add-ons for even greater convenience and peace of mind.
                     </p>
                 </div>
@@ -289,7 +289,7 @@ export default function BookingPage() {
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6 }}
                      >
-                        <h2 className="text-3xl font-bold font-headline mb-4">Check Real-Time Availability</h2>
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">Check Real-Time Availability</h2>
                         <p className="text-muted-foreground mb-6">
                             Our network is vast, but high-demand slots fill up fast. Enter your date to see available porters in real-time. This helps us guarantee your service.
                         </p>
@@ -320,8 +320,8 @@ export default function BookingPage() {
       <section className="bg-secondary py-12 md:py-20">
           <div className="container">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold font-headline">Don't Just Take Our Word</h2>
-                    <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">Don't Just Take Our Word</h2>
+                    <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
                         See what other travelers are saying about our seamless booking experience.
                     </p>
                 </div>
@@ -333,9 +333,9 @@ export default function BookingPage() {
                     <CarouselContent>
                         {testimonials.map((testimonial, i) => (
                             <CarouselItem key={i} className="md:basis-1/2">
-                                <div className="p-1">
+                                <div className="p-1 h-full">
                                     <Card className="bg-background h-full flex flex-col">
-                                        <CardContent className="p-6 flex-1">
+                                        <CardContent className="p-6 flex-1 flex flex-col justify-center">
                                             <div className="flex items-start gap-4">
                                                 <Avatar>
                                                     <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.hint}/>
@@ -381,10 +381,10 @@ export default function BookingPage() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold font-headline mb-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-2">
                 Your Pre-Travel Checklist
               </h2>
-              <p className="text-muted-foreground mb-6">A little preparation goes a long way. Follow these steps to ensure a smooth start to your journey.</p>
+              <p className="text-muted-foreground md:text-xl/relaxed mt-4 mb-6">A little preparation goes a long way. Follow these steps to ensure a smooth start to your journey.</p>
               <ul className="space-y-4">
                 {checklistItems.map((item, index) => (
                   <li
@@ -406,8 +406,8 @@ export default function BookingPage() {
             <div className="container">
                 <div className="max-w-4xl mx-auto text-center">
                     <ShieldCheck className="h-16 w-16 mx-auto text-primary mb-4" />
-                    <h2 className="text-3xl font-bold font-headline">100% Secure & Encrypted Payments</h2>
-                    <p className="text-muted-foreground mt-4 mb-6">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline">100% Secure & Encrypted Payments</h2>
+                    <p className="text-muted-foreground md:text-xl/relaxed mt-4 mb-6">
                         Your security is our top priority. We use industry-standard encryption to protect your payment information. Your data is safe with us.
                     </p>
                     <div className="flex justify-center items-center gap-4">
