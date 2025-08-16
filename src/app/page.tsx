@@ -286,7 +286,7 @@ export default function Home() {
                                 <Label htmlFor="phone" className="text-xs font-semibold text-muted-foreground">PHONE</Label>
                                 <Input id="phone" type="tel" placeholder="Phone number" className="bg-background border-border h-9" />
                             </div>
-                            <Button className="w-full bg-accent hover:bg-accent/90 h-9" onClick={() => setIsEstimateModalOpen(true)}>Get Estimate</Button>
+                            <Button className="w-full bg-primary hover:bg-primary/90 h-9" onClick={() => setIsEstimateModalOpen(true)}>Get Estimate</Button>
                         </div>
                     </Card>
                 </motion.div>
@@ -813,3 +813,5 @@ export default function Home() {
     </AppLayout>
   );
 }
+
+    
