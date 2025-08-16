@@ -255,7 +255,7 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/4 h-3 w-3 bg-primary/20 rounded-full animate-pulse delay-1000 -z-10" />
 
 
-        <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6 py-12 md:py-24">
+        <div className="relative z-10 container mx-auto grid min-h-[calc(100vh-80px)] items-center px-4 md:px-6 py-8 md:py-16">
             <div className="space-y-6 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -295,7 +295,7 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="mt-8"
                 >
-                    <Card className="max-w-4xl mx-auto bg-background/50 backdrop-blur-sm border-border/50 shadow-lg p-4 sm:p-6 mt-8">
+                    <Card className="max-w-4xl mx-auto bg-background/50 backdrop-blur-sm border-border/50 shadow-lg p-4 sm:p-6">
                         <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
                             <div className="relative space-y-1 text-left">
                                 <Label htmlFor="pickup" className="text-xs font-semibold text-muted-foreground">PICKUP</Label>
