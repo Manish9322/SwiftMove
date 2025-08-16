@@ -290,7 +290,7 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="mt-8"
                 >
-                    <Card className="max-w-4xl mx-auto bg-background/50 backdrop-blur-sm border-border/50 shadow-lg p-4 sm:p-6">
+                    <Card className="max-w-4xl mx-auto bg-background/50 backdrop-blur-sm border-border/50 shadow-lg p-4 sm:p-6 mt-8">
                         <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
                             <div className="relative space-y-1 text-left">
                                 <Label htmlFor="pickup" className="text-xs font-semibold text-muted-foreground">PICKUP</Label>
