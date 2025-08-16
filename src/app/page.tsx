@@ -221,6 +221,19 @@ const blogPosts = [
   },
 ];
 
+const heroHighlights = [
+    { icon: Zap, text: "Instant Booking" },
+    { icon: ShieldCheck, text: "Vetted Porters" },
+    { icon: PhoneCall, text: "24/7 Support" },
+];
+
+const trustedLogos = [
+    { src: "https://placehold.co/120x40.png", alt: "Travel Inc", hint: "travel company logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Airways Corp", hint: "airline logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Tech Solutions", hint: "tech company logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Global Events", hint: "events company logo" },
+    { src: "https://placehold.co/120x40.png", alt: "Business Travel Co", hint: "business travel logo" },
+];
 
 export default function Home() {
   const [isEstimateModalOpen, setIsEstimateModalOpen] = React.useState(false);
@@ -256,6 +269,21 @@ export default function Home() {
                         Experience seamless travel with SwiftMove. Our AI-powered platform connects you with professional porters instantly. Get a quick estimate and book your service in under a minute.
                     </p>
                 </motion.div>
+                
+                 <motion.div
+                    className="flex justify-center items-center gap-6 mt-6 flex-wrap"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                    {heroHighlights.map((highlight, index) => (
+                        <div key={index} className="flex items-center gap-2 text-muted-foreground">
+                            <highlight.icon className="h-5 w-5 text-primary" />
+                            <span className="font-medium">{highlight.text}</span>
+                        </div>
+                    ))}
+                </motion.div>
+
                  <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -287,6 +315,29 @@ export default function Home() {
                         </div>
                     </Card>
                 </motion.div>
+                
+                 <motion.div
+                    className="mt-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                    <p className="text-sm text-muted-foreground font-medium mb-4">TRUSTED BY LEADING TRAVEL & TECH COMPANIES</p>
+                    <div className="flex justify-center items-center gap-8 flex-wrap">
+                        {trustedLogos.map((logo, index) => (
+                            <Image
+                                key={index}
+                                src={logo.src}
+                                alt={logo.alt}
+                                data-ai-hint={logo.hint}
+                                width={120}
+                                height={40}
+                                className="opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all"
+                            />
+                        ))}
+                    </div>
+                </motion.div>
+
             </div>
         </div>
          <div className="absolute bottom-0 left-0 right-0 py-6 bg-primary text-primary-foreground">
