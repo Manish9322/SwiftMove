@@ -483,6 +483,11 @@ export default function Home() {
                           <span className="sr-only">Search</span>
                         </Button>
                     </div>
+                    <ul className="text-sm text-muted-foreground mt-6 space-y-2 max-w-md mx-auto">
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /><span>Over 50 major airports worldwide.</span></li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /><span>Key train stations in Europe & Asia.</span></li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /><span>Expanding to more locations monthly.</span></li>
+                    </ul>
                     <p className="text-sm text-center text-muted-foreground mt-4">
                       Popular locations include: <span className="font-semibold text-foreground">JFK, LAX, LHR, CDG, HND</span> & many more.
                     </p>
@@ -535,9 +540,9 @@ export default function Home() {
                         viewport={{ once: true, amount: 0.5 }}
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
-                        <Card className="text-center h-full bg-background/50 backdrop-blur-sm border-primary/20 hover:border-primary transition-all duration-300 transform hover:-translate-y-2">
+                        <Card className="text-center h-full bg-background/50 backdrop-blur-sm border-primary/20 hover:border-primary transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
                              <CardHeader>
-                                <div className="mx-auto bg-primary/10 text-primary p-3 rounded-full w-fit">
+                                <div className="mx-auto bg-primary/10 text-primary p-4 rounded-full w-fit ring-8 ring-primary/5">
                                     <feature.icon className="h-8 w-8" />
                                 </div>
                                 <CardTitle className="mt-4">{feature.title}</CardTitle>

@@ -80,15 +80,25 @@ export default function AboutPage() {
             {/* 2. Our Mission & Vision Section */}
             <section className="py-12 md:py-20">
                 <div className="container">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div className="grid md:grid-cols-2 gap-8 items-stretch">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.6 }}
-                            className="space-y-4"
+                            className="relative aspect-video md:aspect-auto rounded-2xl overflow-hidden shadow-xl"
                         >
-                            <div className="p-6 rounded-lg bg-muted">
+                            <Image src="https://placehold.co/500x600.png" alt="Team collaborating" data-ai-hint="team collaboration office" layout="fill" objectFit="cover" />
+                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </motion.div>
+                        <div className="flex flex-col gap-8">
+                             <motion.div
+                                initial={{ opacity: 0, x: 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, amount: 0.3 }}
+                                transition={{ duration: 0.6 }}
+                                className="p-6 rounded-lg bg-muted/50 border h-full flex flex-col justify-center"
+                            >
                                 <div className="flex items-center gap-4 mb-3">
                                     <div className="bg-primary/10 text-primary p-3 rounded-full">
                                         <Target className="h-6 w-6" />
@@ -96,8 +106,14 @@ export default function AboutPage() {
                                     <h2 className="text-2xl font-bold font-headline">Our Mission</h2>
                                 </div>
                                 <p className="text-muted-foreground">To unburden travelers worldwide by providing a reliable, secure, and hyper-efficient platform for porter services, turning stressful journeys into seamless, positive experiences from the first click to the final destination.</p>
-                            </div>
-                            <div className="p-6 rounded-lg bg-muted">
+                            </motion.div>
+                             <motion.div
+                                initial={{ opacity: 0, x: 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, amount: 0.3 }}
+                                transition={{ duration: 0.6, delay: 0.1 }}
+                                className="p-6 rounded-lg bg-muted/50 border h-full flex flex-col justify-center"
+                            >
                                 <div className="flex items-center gap-4 mb-3">
                                     <div className="bg-primary/10 text-primary p-3 rounded-full">
                                         <Sparkles className="h-6 w-6" />
@@ -105,17 +121,8 @@ export default function AboutPage() {
                                     <h2 className="text-2xl font-bold font-headline">Our Vision</h2>
                                 </div>
                                 <p className="text-muted-foreground">To become the global standard for on-demand travel assistance, integrating predictive AI and exceptional human service to be an indispensable part of every modern journey, recognized for our innovation and unwavering commitment to customer satisfaction.</p>
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="relative aspect-square"
-                        >
-                            <Image src="https://placehold.co/500x500.png" alt="Team collaborating" data-ai-hint="team collaboration office" layout="fill" objectFit="cover" className="rounded-2xl shadow-xl" />
-                        </motion.div>
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -140,7 +147,7 @@ export default function AboutPage() {
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 className={`relative flex items-center w-full my-4 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
                             >
-                                <div className={`md:w-1/2 p-4 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                                <div className={`md:w-1/2 p-2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                                     <div className={`bg-background rounded-lg shadow-lg p-6 border-l-4 ${index % 2 === 0 ? 'border-primary' : 'border-accent'}`}>
                                         <Badge variant="default" className="mb-2">{event.year}</Badge>
                                         <h3 className="text-xl font-bold">{event.title}</h3>
@@ -204,7 +211,7 @@ export default function AboutPage() {
                                 viewport={{ once: true, amount: 0.5 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
-                                <Card className="text-center h-full hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                                <Card className="text-center h-full hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col border-t-4 border-primary/20 hover:border-primary">
                                     <CardHeader>
                                         <div className="mx-auto bg-primary/10 text-primary p-3 rounded-full w-fit">
                                             <value.icon className="h-8 w-8" />
@@ -270,20 +277,20 @@ export default function AboutPage() {
                         </p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
-                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:-translate-y-2">
-                            <Rocket className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
+                        <Card className="p-6 text-center group bg-transparent border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-2">
+                            <Rocket className="h-12 w-12 mx-auto text-primary mb-4 transition-transform duration-300 group-hover:scale-110" />
                             <h3 className="text-xl font-bold">Smart Matching Algorithm</h3>
-                            <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">Our AI instantly connects you with the best available porter based on location, time, and ratings.</p>
+                            <p className="text-muted-foreground mt-2">Our AI instantly connects you with the best available porter based on location, time, and ratings.</p>
                         </Card>
-                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:-translate-y-2">
-                            <GitBranch className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
+                        <Card className="p-6 text-center group bg-transparent border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-2">
+                            <GitBranch className="h-12 w-12 mx-auto text-primary mb-4 transition-transform duration-300 group-hover:scale-110" />
                             <h3 className="text-xl font-bold">Optimized Route Planning</h3>
-                            <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">We calculate the most efficient routes within transport hubs to save you precious time.</p>
+                            <p className="text-muted-foreground mt-2">We calculate the most efficient routes within transport hubs to save you precious time.</p>
                         </Card>
-                        <Card className="p-6 text-center group hover:bg-primary hover:text-primary-foreground transition-all duration-300 transform hover:-translate-y-2">
-                            <Shield className="h-12 w-12 mx-auto text-primary group-hover:text-primary-foreground mb-4 transition-colors" />
+                        <Card className="p-6 text-center group bg-transparent border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-2">
+                            <Shield className="h-12 w-12 mx-auto text-primary mb-4 transition-transform duration-300 group-hover:scale-110" />
                             <h3 className="text-xl font-bold">Secure, Scalable Platform</h3>
-                            <p className="text-muted-foreground group-hover:text-primary-foreground/80 mt-2">Built on robust infrastructure to ensure your data is safe and our service is always available.</p>
+                            <p className="text-muted-foreground mt-2">Built on robust infrastructure to ensure your data is safe and our service is always available.</p>
                         </Card>
                     </div>
                 </div>
@@ -383,17 +390,26 @@ export default function AboutPage() {
                                 We believe in giving back to the communities we operate in and creating a positive impact beyond travel. We are dedicated to fostering local employment, promoting sustainable practices, and supporting community-driven initiatives.
                             </p>
                             <ul className="space-y-4">
-                                <li className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary">
-                                    <Heart className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                                    <span><strong>Local Partnerships:</strong> We collaborate with local charities to support employment initiatives and contribute to community development projects.</span>
+                                <li className="flex items-start gap-4 p-4 rounded-lg bg-muted/50 border-l-4 border-primary">
+                                    <Heart className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
+                                    <div>
+                                        <h4 className="font-bold">Local Partnerships</h4>
+                                        <span>We collaborate with local charities to support employment initiatives and contribute to community development projects.</span>
+                                    </div>
                                 </li>
-                                 <li className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary">
-                                    <GitBranch className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                                    <span><strong>Green Initiatives:</strong> We actively implement eco-friendly practices within transport hubs to minimize our environmental footprint and promote sustainability.</span>
+                                 <li className="flex items-start gap-4 p-4 rounded-lg bg-muted/50 border-l-4 border-primary">
+                                    <GitBranch className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
+                                    <div>
+                                        <h4 className="font-bold">Green Initiatives</h4>
+                                        <span>We actively implement eco-friendly practices within transport hubs to minimize our environmental footprint and promote sustainability.</span>
+                                    </div>
                                 </li>
-                                 <li className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary">
-                                    <Briefcase className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                                    <span><strong>Fair Employment:</strong> We are committed to providing fair, living wages and creating professional growth opportunities for all our porters, empowering our team.</span>
+                                 <li className="flex items-start gap-4 p-4 rounded-lg bg-muted/50 border-l-4 border-primary">
+                                    <Briefcase className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
+                                     <div>
+                                        <h4 className="font-bold">Fair Employment</h4>
+                                        <span>We are committed to providing fair, living wages and creating professional growth opportunities for all our porters, empowering our team.</span>
+                                    </div>
                                 </li>
                             </ul>
                         </motion.div>
