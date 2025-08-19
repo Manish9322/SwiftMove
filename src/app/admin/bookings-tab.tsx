@@ -12,11 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { mockBookings } from "@/lib/mock-data";
 import type { Booking, BookingStatus } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, ListOrdered, CheckCircle, Clock, Ban, ChevronLeft, ChevronRight } from "lucide-react";
+import { MoreHorizontal, ListOrdered, CheckCircle, Clock, Ban, ChevronLeft, ChevronRight, TrendingUp, DollarSign } from "lucide-react";
 
 const getBadgeVariant = (status: BookingStatus) => {
   switch (status) {
@@ -33,18 +34,21 @@ const getBadgeVariant = (status: BookingStatus) => {
   }
 };
 
-const ITEMS_PER_PAGE = 5;
 
 export default function BookingsTab() {
   const [bookings, setBookings] = useState<Booking[]>(mockBookings);
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const totalPages = Math.ceil(bookings.length / ITEMS_PER_PAGE);
+  const totalPages = itemsPerPage === -1 ? 1 : Math.ceil(bookings.length / itemsPerPage);
 
   const currentBookings = useMemo(() => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    return bookings.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  }, [bookings, currentPage]);
+    if (itemsPerPage === -1) {
+        return bookings;
+    }
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return bookings.slice(startIndex, startIndex + itemsPerPage);
+  }, [bookings, currentPage, itemsPerPage]);
   
   const bookingStats = useMemo(() => {
     return bookings.reduce((acc, booking) => {
@@ -52,8 +56,9 @@ export default function BookingsTab() {
         if(booking.status === 'Pending') acc.pending++;
         if(booking.status === 'Completed') acc.completed++;
         if(booking.status === 'In-progress') acc.inProgress++;
+        if(booking.status === 'Cancelled') acc.cancelled++;
         return acc;
-    }, { total: 0, pending: 0, completed: 0, inProgress: 0 });
+    }, { total: 0, pending: 0, completed: 0, inProgress: 0, cancelled: 0 });
   }, [bookings]);
 
   const handleStatusChange = (bookingId: string, newStatus: BookingStatus) => {
@@ -71,6 +76,12 @@ export default function BookingsTab() {
           setCurrentPage(currentPage - 1);
       }
   };
+  
+  const handleItemsPerPageChange = (value: string) => {
+      const numValue = value === "all" ? -1 : parseInt(value, 10);
+      setItemsPerPage(numValue);
+      setCurrentPage(1); 
+  };
 
   return (
     <div className="space-y-8">
@@ -78,38 +89,42 @@ export default function BookingsTab() {
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+                    <DollarSign className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold">$45,231.89</div>
+                    <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+                </CardContent>
+            </Card>
+            <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Total Bookings</CardTitle>
                     <ListOrdered className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{bookingStats.total}</div>
+                     <p className="text-xs text-muted-foreground">+10.5% from last month</p>
                 </CardContent>
             </Card>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Pending</CardTitle>
-                    <Clock className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">{bookingStats.pending}</div>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">In-progress</CardTitle>
-                    <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium">Active Bookings</CardTitle>
+                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">{bookingStats.inProgress}</div>
+                     <p className="text-xs text-muted-foreground">+5 since last hour</p>
                 </CardContent>
             </Card>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Completed</CardTitle>
+                    <CardTitle className="text-sm font-medium">Cancelled</CardTitle>
                     <Ban className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">{bookingStats.completed}</div>
+                    <div className="text-2xl font-bold">{bookingStats.cancelled}</div>
+                    <p className="text-xs text-muted-foreground">+2 since yesterday</p>
                 </CardContent>
             </Card>
         </div>
@@ -168,27 +183,44 @@ export default function BookingsTab() {
             </Table>
           </CardContent>
            <div className="flex items-center justify-between p-4 border-t">
-              <div className="text-sm text-muted-foreground">
-                Page {currentPage} of {totalPages}
-              </div>
+               <div className="flex items-center space-x-2">
+                    <span className="text-sm text-muted-foreground">Rows per page</span>
+                    <Select value={itemsPerPage === -1 ? "all" : itemsPerPage.toString()} onValueChange={handleItemsPerPageChange}>
+                        <SelectTrigger className="w-20">
+                            <SelectValue placeholder={itemsPerPage} />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="10">10</SelectItem>
+                            <SelectItem value="20">20</SelectItem>
+                            <SelectItem value="50">50</SelectItem>
+                            <SelectItem value="100">100</SelectItem>
+                            <SelectItem value="all">All</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
               <div className="flex items-center space-x-2">
+                <span className="text-sm text-muted-foreground">
+                    Page {currentPage} of {totalPages}
+                </span>
                 <Button
                   variant="outline"
-                  size="sm"
+                  size="icon"
                   onClick={() => handlePageChange('prev')}
                   disabled={currentPage === 1}
+                  className="h-8 w-8"
                 >
-                    <ChevronLeft className="h-4 w-4 mr-1" />
-                    Previous
+                    <ChevronLeft className="h-4 w-4" />
+                    <span className="sr-only">Previous</span>
                 </Button>
                 <Button
                   variant="outline"
-                  size="sm"
+                  size="icon"
                   onClick={() => handlePageChange('next')}
                   disabled={currentPage === totalPages}
+                  className="h-8 w-8"
                 >
-                    Next
-                    <ChevronRight className="h-4 w-4 ml-1" />
+                    <ChevronRight className="h-4 w-4" />
+                     <span className="sr-only">Next</span>
                 </Button>
               </div>
             </div>
@@ -196,5 +228,3 @@ export default function BookingsTab() {
     </div>
   );
 }
-
-    
