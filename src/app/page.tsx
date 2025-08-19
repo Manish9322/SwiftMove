@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck, Plane, Package, Truck, PenSquare, CreditCard } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck, Plane, Package, Truck, PenSquare, CreditCard, Calculator } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 const Star = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -34,26 +35,26 @@ const stats = [
 ];
 
 const steps = [
-  {
-    icon: PenSquare,
-    title: "1. Book Instantly",
-    description: "Enter your pickup and drop-off details on our app or website. Get an instant quote and confirm your service in seconds.",
-  },
-  {
-    icon: UserCheck,
-    title: "2. Get Your Porter",
-    description: "Our system assigns the nearest available and verified porter to your request, ensuring a quick and efficient match.",
-  },
-  {
-    icon: Truck,
-    title: "3. Track Your Luggage",
-    description: "Your porter picks up your items. You can track their progress in real-time from pickup to the final destination.",
-  },
-  {
-    icon: CreditCard,
-    title: "4. Confirm & Pay",
-    description: "Once your luggage is safely delivered, you confirm the completion and securely process the payment through the app.",
-  }
+    {
+        icon: PenSquare,
+        title: "1. Book Instantly",
+        description: "Complete our simple form with your journey and luggage details. It's quick, easy, and gets you an instant quote.",
+    },
+    {
+        icon: UserCheck,
+        title: "2. Get Your Porter",
+        description: "Our smart system assigns the nearest available porter. You'll receive their details and photo instantly for peace of mind.",
+    },
+    {
+        icon: Truck,
+        title: "3. Track & Relax",
+        description: "Your porter handles the heavy lifting. Track their progress in real-time and enjoy a hands-free journey.",
+    },
+    {
+        icon: CreditCard,
+        title: "4. Confirm & Pay",
+        description: "Once your luggage arrives safely, confirm the service completion and process your secure payment.",
+    }
 ];
 
 const features = [
@@ -250,7 +251,7 @@ export default function Home() {
   return (
     <AppLayout>
       {/* Hero Section */}
-       <section className="relative w-full bg-white text-foreground overflow-hidden">
+       <section className="relative w-full bg-background text-foreground overflow-hidden">
          {/* Decorative Elements */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5 -z-10" style={{backgroundSize: '3rem 3rem'}}></div>
         <Plane className="absolute top-[10%] left-[5%] h-24 w-24 text-primary/10 opacity-50 rotate-[25deg] -z-10" />
@@ -835,37 +836,46 @@ export default function Home() {
         </div>
       </section>
 
-      <Dialog open={isEstimateModalOpen} onOpenChange={setIsEstimateModalOpen}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Your Estimate</DialogTitle>
-            <DialogDescription>
-              Here is an estimated cost for your porter service.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-2 items-center gap-4">
-              <Label>Base Fare:</Label>
-              <span className="font-semibold text-right">$25.00</span>
+       <Dialog open={isEstimateModalOpen} onOpenChange={setIsEstimateModalOpen}>
+        <DialogContent className="sm:max-w-md">
+            <DialogHeader className="items-center text-center">
+                <div className="p-3 bg-primary/10 rounded-full w-fit">
+                    <Calculator className="h-8 w-8 text-primary"/>
+                </div>
+                <DialogTitle className="text-2xl font-headline">Your Fare Estimate</DialogTitle>
+                <DialogDescription>
+                    This is an approximate cost. The final price may vary.
+                </DialogDescription>
+            </DialogHeader>
+            <div className="py-4 space-y-4">
+                <ul className="space-y-3 text-sm">
+                    <li className="flex justify-between items-center">
+                        <span className="text-muted-foreground">Base Fare</span>
+                        <span className="font-medium">$25.00</span>
+                    </li>
+                    <li className="flex justify-between items-center">
+                        <span className="text-muted-foreground">Distance (approx.)</span>
+                        <span className="font-medium">$5.00</span>
+                    </li>
+                    <li className="flex justify-between items-center">
+                        <span className="text-muted-foreground">Service Fee</span>
+                        <span className="font-medium">$3.00</span>
+                    </li>
+                </ul>
+                <Separator />
+                <div className="flex justify-between items-center text-lg font-bold">
+                    <span>Total Estimate</span>
+                    <span className="text-primary">$33.00</span>
+                </div>
             </div>
-             <div className="grid grid-cols-2 items-center gap-4">
-              <Label>Distance (approx):</Label>
-              <span className="font-semibold text-right">$5.00</span>
-            </div>
-            <div className="grid grid-cols-2 items-center gap-4">
-              <Label>Service Fee:</Label>
-              <span className="font-semibold text-right">$3.00</span>
-            </div>
-            <div className="grid grid-cols-2 items-center gap-4 font-bold text-lg border-t pt-4 mt-2">
-              <Label>Total Estimate:</Label>
-              <span className="text-right">$33.00</span>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit" className="w-full bg-accent hover:bg-accent/90" asChild>
-                <Link href="/booking">Confirm Booking</Link>
-            </Button>
-          </DialogFooter>
+            <DialogFooter className="flex-col gap-2 sm:flex-row">
+                 <Button type="button" variant="outline" onClick={() => setIsEstimateModalOpen(false)} className="w-full">
+                    Cancel
+                </Button>
+                <Button type="submit" className="w-full bg-accent hover:bg-accent/90" asChild>
+                    <Link href="/booking">Confirm & Book Now</Link>
+                </Button>
+            </DialogFooter>
         </DialogContent>
       </Dialog>
     </AppLayout>
