@@ -15,6 +15,7 @@ import {
   HelpCircle,
   Send,
   BadgePercent,
+  BarChart3,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -87,6 +88,13 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             >
               <BadgePercent className="h-4 w-4" />
               <span className={cn(isCollapsed && "hidden")}>Offers</span>
+            </Link>
+             <Link
+              href="/admin/reports"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/reports') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <BarChart3 className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Reports</span>
             </Link>
              <Link
               href="/admin/notifications"
