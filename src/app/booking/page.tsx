@@ -5,7 +5,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, Clock, ShieldCheck, Star, Users, ArrowRight, LifeBuoy, CreditCard, ShoppingCart, Info, Luggage, Gift, Flame, Rocket, Handshake, Smartphone } from 'lucide-react';
+import { CheckCircle, Clock, ShieldCheck, Star, Users, ArrowRight, LifeBuoy, CreditCard, ShoppingCart, Info, Luggage, Gift, Flame, Rocket, Handshake, Smartphone, UserCheck, Truck, PenSquare, ThumbsUp } from 'lucide-react';
 import Link from 'next/link';
 import AppLayout from '../app-layout';
 import BookingForm from '@/components/BookingForm';
@@ -35,19 +35,24 @@ const whyBookWithUs = [
 
 const bookingSteps = [
     {
-        icon: Smartphone,
-        title: "1. Fill Your Details",
-        description: "Complete the form with your journey information. It's quick and easy.",
+        icon: PenSquare,
+        title: "1. Book Instantly",
+        description: "Complete our simple form with your journey and luggage details. It's quick, easy, and gets you an instant quote.",
     },
     {
-        icon: Handshake,
-        title: "2. Confirm & Pay",
-        description: "Review your details and complete the secure payment process.",
+        icon: UserCheck,
+        title: "2. Get Your Porter",
+        description: "Our smart system assigns the nearest available porter. You'll receive their details and photo instantly for peace of mind.",
     },
     {
-        icon: Rocket,
-        title: "3. Meet Your Porter",
-        description: "We'll assign a porter and you'll receive their details instantly.",
+        icon: Truck,
+        title: "3. Track & Relax",
+        description: "Your porter handles the heavy lifting. Track their progress in real-time and enjoy a hands-free journey.",
+    },
+    {
+        icon: CreditCard,
+        title: "4. Confirm & Pay",
+        description: "Once your luggage arrives safely, confirm the service completion and process your secure payment.",
     }
 ];
 
@@ -92,14 +97,22 @@ const testimonials = [
   },
 ];
 
-const checklistItems = [
-    "Double-check your flight/train number and pickup time.",
-    "Verify the pickup location (e.g., Terminal, Gate, Platform).",
-    "Keep your booking confirmation email or SMS handy.",
-    "Ensure your phone is charged for communication with your porter.",
-    "Have your luggage packed and ready for a swift handover.",
-    "If you have special items, confirm they are noted in the booking.",
-    "Relax and look forward to a hassle-free journey!"
+const serviceGuarantees = [
+    {
+        icon: ThumbsUp,
+        title: "Satisfaction Guarantee",
+        description: "We are confident in our service. If you are not completely satisfied with your experience, we will make it right. Your happiness is our ultimate goal.",
+    },
+    {
+        icon: Clock,
+        title: "Punctuality Promise",
+        description: "We value your time. Our porters are guaranteed to be at the pickup location at the scheduled time. If we're late, your service is on us.",
+    },
+    {
+        icon: ShieldCheck,
+        title: "Luggage Safety Commitment",
+        description: "Your belongings are in safe hands. Every booking is insured, and our porters are trained in secure handling protocols for your peace of mind.",
+    },
 ];
 
 
@@ -183,13 +196,12 @@ export default function BookingPage() {
       {/* 4. How It Works Section */}
        <section className="bg-secondary py-12 md:py-20">
             <div className="container text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">A Simple 3-Step Process</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline mb-4">A Simple 4-Step Process</h2>
                 <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-12">
                     We've simplified the booking process to save you time and effort.
                 </p>
-                <div className="relative grid md:grid-cols-3 gap-8">
-                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary/20 -translate-y-1/2 hidden md:block" />
-                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary origin-left hidden md:block" style={{ transform: 'scaleX(0.5)'}}/>
+                <div className="relative grid md:grid-cols-4 gap-8">
+                     <div className="absolute top-12 left-0 w-full h-1 bg-primary/20 -translate-y-1/2 hidden md:block" />
                      {bookingSteps.map((step, index) => (
                          <motion.div
                             key={index}
@@ -356,47 +368,39 @@ export default function BookingPage() {
           </div>
       </section>
 
-      {/* 9. Pre-booking Checklist */}
+      {/* 9. Our Guarantee Section */}
       <section className="py-12 md:py-20">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Image
-                src="https://placehold.co/500x600.png"
-                alt="Traveler with luggage looking prepared"
-                data-ai-hint="prepared traveler luggage"
-                width={500}
-                height={600}
-                className="rounded-lg shadow-xl object-cover"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline mb-2">
-                Your Pre-Travel Checklist
-              </h2>
-              <p className="text-muted-foreground md:text-xl/relaxed mt-4 mb-6">A little preparation goes a long way. Follow these steps to ensure a smooth start to your journey.</p>
-              <ul className="space-y-4">
-                {checklistItems.map((item, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start gap-3 p-3 rounded-md bg-muted/50 border-l-4 border-primary transition-all hover:bg-muted"
-                  >
-                    <CheckCircle className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
-                    <span className="text-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline mb-2">
+              Our Service Guarantee
+            </h2>
+            <p className="text-muted-foreground md:text-xl/relaxed mt-4 mb-6 max-w-3xl mx-auto">
+              We are committed to providing a reliable, safe, and professional service. Our guarantee is our promise to you.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {serviceGuarantees.map((guarantee, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="text-center h-full hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col border-t-4 border-primary/20 hover:border-primary">
+                    <CardHeader>
+                        <div className="mx-auto bg-primary/10 text-primary p-3 rounded-full w-fit">
+                            <guarantee.icon className="h-8 w-8" />
+                        </div>
+                        <CardTitle>{guarantee.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                        <p className="text-muted-foreground">{guarantee.description}</p>
+                    </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

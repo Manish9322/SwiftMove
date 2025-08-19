@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck, Plane, Package, Truck } from 'lucide-react';
+import { CheckCircle, Clock, MapPin, ThumbsUp, Users, Zap, UserCheck, PhoneCall, ArrowRight, TrendingUp, BaggageClaim, CalendarDays, Rocket, Smartphone, Handshake, DollarSign, Shield, LocateFixed, Globe, Search, Building, Briefcase, Star as StarIcon, CheckSquare, BarChart2, MessageSquare, Mail, User, HelpCircle, ShieldCheck, Plane, Package, Truck, PenSquare, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -35,20 +35,25 @@ const stats = [
 
 const steps = [
   {
-    icon: Smartphone,
-    title: "1. Instant Booking",
-    description: "Enter your travel details on our website or mobile app. Get an instant price estimate and confirm your booking in seconds.",
+    icon: PenSquare,
+    title: "1. Book Instantly",
+    description: "Enter your pickup and drop-off details on our app or website. Get an instant quote and confirm your service in seconds.",
   },
   {
-    icon: Handshake,
-    title: "2. Meet Your Porter",
-    description: "A professional, vetted porter will be waiting for you at your specified pickup point, ready to assist with your luggage.",
+    icon: UserCheck,
+    title: "2. Get Your Porter",
+    description: "Our system assigns the nearest available and verified porter to your request, ensuring a quick and efficient match.",
   },
   {
-    icon: Rocket,
-    title: "3. Travel Freely",
-    description: "Enjoy a stress-free journey while we handle the heavy lifting, ensuring your bags get to your destination safely.",
+    icon: Truck,
+    title: "3. Track Your Luggage",
+    description: "Your porter picks up your items. You can track their progress in real-time from pickup to the final destination.",
   },
+  {
+    icon: CreditCard,
+    title: "4. Confirm & Pay",
+    description: "Once your luggage is safely delivered, you confirm the completion and securely process the payment through the app.",
+  }
 ];
 
 const features = [
@@ -245,7 +250,7 @@ export default function Home() {
   return (
     <AppLayout>
       {/* Hero Section */}
-       <section className="relative w-full bg-background text-foreground overflow-hidden">
+       <section className="relative w-full bg-white text-foreground overflow-hidden">
          {/* Decorative Elements */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5 -z-10" style={{backgroundSize: '3rem 3rem'}}></div>
         <Plane className="absolute top-[10%] left-[5%] h-24 w-24 text-primary/10 opacity-50 rotate-[25deg] -z-10" />
@@ -345,7 +350,7 @@ export default function Home() {
 
             </div>
         </div>
-         <div className="absolute bottom-0 left-0 right-0 py-3 bg-primary text-primary-foreground">
+         <div className="absolute bottom-0 left-0 right-0 py-4 bg-primary text-primary-foreground">
             <div className="relative overflow-hidden">
                 <div className="flex animate-marquee-slow">
                     {[...stats, ...stats].map((stat, index) => (
@@ -370,12 +375,11 @@ export default function Home() {
                         How It Works
                     </h2>
                     <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4">
-                        Your seamless journey is just three steps away.
+                        Your seamless journey is just a few steps away.
                     </p>
                 </div>
-                <div className="relative grid md:grid-cols-3 gap-8">
-                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary/20 -translate-y-1/2 hidden md:block" />
-                     <div className="absolute top-1/2 left-0 w-full h-1 bg-primary origin-left hidden md:block" />
+                <div className="relative grid md:grid-cols-4 gap-8">
+                     <div className="absolute top-12 left-0 w-full h-1 bg-primary/20 -translate-y-1/2 hidden md:block" />
                     {steps.map((step, index) => (
                         <motion.div
                             key={index}
