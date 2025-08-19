@@ -71,3 +71,12 @@ export interface Coupon {
     redemptions: number;
     status: CouponStatus;
 }
+
+export type FenceStatus = "Active" | "Inactive";
+
+export interface Fence {
+    id: string;
+    name: string;
+    description: string;
+    status: FenceStatus;
+}

@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 
-const reports = [
+const allReports = [
     {
         title: "Bookings Report",
         description: "Detailed analysis of all bookings, including status, locations, and timings.",
@@ -73,6 +73,11 @@ const reports = [
 
 export default function ReportsTab() {
   const [selectedReport, setSelectedReport] = useState<any>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredReports = allReports.filter(report =>
+    report.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="space-y-8">
@@ -81,10 +86,21 @@ export default function ReportsTab() {
                 <CardTitle>Generate & View Reports</CardTitle>
                 <CardDescription>Access detailed reports to gain insights into your business operations and performance.</CardDescription>
             </CardHeader>
+            <CardContent>
+                <div className="relative max-w-md">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input 
+                        placeholder="Search reports..." 
+                        className="pl-9" 
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+            </CardContent>
         </Card>
       
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {reports.map((report, index) => (
+            {filteredReports.map((report, index) => (
                 <Card key={index} className="flex flex-col">
                     <CardHeader className="flex flex-row items-start gap-4 space-y-0">
                         <div className="p-2 bg-primary/10 rounded-md">{report.icon}</div>

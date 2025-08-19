@@ -1,5 +1,5 @@
 
-import type { User, Porter, Booking, Enquiry, FaqItem, Notification, Coupon } from './types';
+import type { User, Porter, Booking, Enquiry, FaqItem, Notification, Coupon, Fence } from './types';
 
 export const mockUsers: User[] = [
   { id: 'usr_1', name: 'Alice Johnson', email: 'alice@example.com', memberSince: '2023-01-15' },
@@ -88,4 +88,11 @@ export const mockCoupons: Coupon[] = [
     { id: 'cpn_2', code: 'WELCOME10', type: 'fixed', value: 10, startDate: '2024-01-01', endDate: '2024-12-31', usageLimit: 5000, redemptions: 1234, status: 'Active' },
     { id: 'cpn_3', code: 'FIRST5', type: 'fixed', value: 5, startDate: '2024-01-01', endDate: '2024-12-31', usageLimit: 100, redemptions: 100, status: 'Expired' },
     { id: 'cpn_4', code: 'BIZTRIP', type: 'percentage', value: 15, startDate: '2024-05-01', endDate: '2024-12-31', usageLimit: 200, redemptions: 34, status: 'Inactive' },
+];
+
+export const mockFences: Fence[] = [
+    { id: 'fnc_1', name: 'Downtown Core', description: 'Central business district and surrounding areas.', status: 'Active' },
+    { id: 'fnc_2', name: 'Airport Zone', description: 'JFK International Airport and nearby hotels.', status: 'Active' },
+    { id: 'fnc_3', name: 'North Suburbs', description: 'Residential areas in the northern part of the city.', status: 'Inactive' },
+    { id: 'fnc_4', name: 'Convention Center Area', description: 'The main convention center and entertainment complex.', status: 'Active' },
 ];
