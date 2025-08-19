@@ -12,6 +12,9 @@ import {
   Settings,
   Truck,
   Users,
+  MessageSquare,
+  HelpCircle,
+  Send,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -32,7 +35,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   const isActive = (path: string) => {
-    return pathname === path;
+    return pathname.startsWith(path);
   };
 
   return (
@@ -77,6 +80,27 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             >
               <Users className="h-4 w-4" />
               <span className={cn(isCollapsed && "hidden")}>Users</span>
+            </Link>
+             <Link
+              href="/admin/notifications"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/notifications') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <Send className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Notifications</span>
+            </Link>
+             <Link
+              href="/admin/enquiries"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/enquiries') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <MessageSquare className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Enquiries</span>
+            </Link>
+            <Link
+              href="/admin/faq"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/faq') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <HelpCircle className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>FAQ</span>
             </Link>
           </div>
         </nav>

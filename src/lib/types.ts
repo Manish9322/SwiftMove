@@ -1,3 +1,4 @@
+
 export interface User {
   id: string;
   name: string;
@@ -12,6 +13,8 @@ export interface Porter {
   name: string;
   contact: string;
   status: PorterStatus;
+  zone: string;
+  rating: number;
 }
 
 export type BookingStatus = "Pending" | "In-progress" | "Completed" | "Cancelled";
@@ -25,4 +28,32 @@ export interface Booking {
   time: string;
   status: BookingStatus;
   porterId?: string;
+}
+
+export type EnquiryStatus = "Open" | "Pending" | "Resolved";
+
+export interface Enquiry {
+  id: string;
+  customerName: string;
+  subject: string;
+  status: EnquiryStatus;
+  date: string;
+}
+
+export interface FaqItem {
+    id: string;
+    question: string;
+    answer: string;
+    category: string;
+}
+
+export type NotificationStatus = "Sent" | "Scheduled" | "Draft";
+
+export interface Notification {
+    id: string;
+    title: string;
+    message: string;
+    date: string;
+    status: NotificationStatus;
+    recipients: number;
 }
