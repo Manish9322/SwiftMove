@@ -328,7 +328,7 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
                     <p className="text-sm text-muted-foreground font-medium mb-4">TRUSTED BY LEADING TRAVEL & TECH COMPANIES</p>
-                    <div className="flex justify-center items-center gap-8 flex-wrap mb-6">
+                    <div className="flex justify-center items-center gap-8 flex-wrap mb-10">
                         {trustedLogos.map((logo, index) => (
                             <Image
                                 key={index}
@@ -345,7 +345,7 @@ export default function Home() {
 
             </div>
         </div>
-         <div className="absolute bottom-0 left-0 right-0 py-4 bg-primary text-primary-foreground">
+         <div className="absolute bottom-0 left-0 right-0 py-2 bg-primary text-primary-foreground">
             <div className="relative overflow-hidden">
                 <div className="flex animate-marquee-slow">
                     {[...stats, ...stats].map((stat, index) => (
