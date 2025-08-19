@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -15,6 +14,7 @@ import {
   MessageSquare,
   HelpCircle,
   Send,
+  BadgePercent,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -80,6 +80,13 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             >
               <Users className="h-4 w-4" />
               <span className={cn(isCollapsed && "hidden")}>Users</span>
+            </Link>
+            <Link
+              href="/admin/offers"
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${isActive('/admin/offers') ? 'bg-muted text-primary' : ''} ${isCollapsed ? 'justify-center' : ''}`}
+            >
+              <BadgePercent className="h-4 w-4" />
+              <span className={cn(isCollapsed && "hidden")}>Offers</span>
             </Link>
              <Link
               href="/admin/notifications"

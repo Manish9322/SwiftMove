@@ -1,5 +1,5 @@
 
-import type { User, Porter, Booking, Enquiry, FaqItem, Notification } from './types';
+import type { User, Porter, Booking, Enquiry, FaqItem, Notification, Coupon } from './types';
 
 export const mockUsers: User[] = [
   { id: 'usr_1', name: 'Alice Johnson', email: 'alice@example.com', memberSince: '2023-01-15' },
@@ -81,4 +81,11 @@ export const mockNotifications: Notification[] = [
     { id: 'notif_1', title: 'Summer Discount!', message: 'Get 20% off all bookings this summer. Use code SUMMER20.', date: '2024-07-20', status: 'Sent', recipients: 1250 },
     { id: 'notif_2', title: 'New Service Area: LAX', message: 'We are now live at Los Angeles International Airport!', date: '2024-07-15', status: 'Sent', recipients: 8500 },
     { id: 'notif_3', title: 'Scheduled Maintenance', message: 'The app will be down for maintenance on July 30th from 2-3 AM EST.', date: '2024-07-25', status: 'Scheduled', recipients: 0 },
+];
+
+export const mockCoupons: Coupon[] = [
+    { id: 'cpn_1', code: 'SUMMER20', type: 'percentage', value: 20, startDate: '2024-06-01', endDate: '2024-08-31', usageLimit: 1000, redemptions: 452, status: 'Active' },
+    { id: 'cpn_2', code: 'WELCOME10', type: 'fixed', value: 10, startDate: '2024-01-01', endDate: '2024-12-31', usageLimit: 5000, redemptions: 1234, status: 'Active' },
+    { id: 'cpn_3', code: 'FIRST5', type: 'fixed', value: 5, startDate: '2024-01-01', endDate: '2024-12-31', usageLimit: 100, redemptions: 100, status: 'Expired' },
+    { id: 'cpn_4', code: 'BIZTRIP', type: 'percentage', value: 15, startDate: '2024-05-01', endDate: '2024-12-31', usageLimit: 200, redemptions: 34, status: 'Inactive' },
 ];

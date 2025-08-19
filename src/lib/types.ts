@@ -57,3 +57,17 @@ export interface Notification {
     status: NotificationStatus;
     recipients: number;
 }
+
+export type CouponStatus = "Active" | "Inactive" | "Expired";
+
+export interface Coupon {
+    id: string;
+    code: string;
+    type: 'percentage' | 'fixed';
+    value: number;
+    startDate: string;
+    endDate: string;
+    usageLimit: number;
+    redemptions: number;
+    status: CouponStatus;
+}
