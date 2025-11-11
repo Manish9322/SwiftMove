@@ -92,10 +92,10 @@ export default function ContactPage() {
 
         try {
             await addContact({
-                name: data.name,
-                email: data.email,
-                reason: data.reason,
-                message: data.message,
+                name: data.name as string,
+                email: data.email as string,
+                reason: data.reason as string,
+                message: data.message as string,
             }).unwrap();
 
             toast({
