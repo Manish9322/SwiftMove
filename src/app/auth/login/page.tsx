@@ -7,13 +7,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Mail, KeyRound, LogIn, UserCog } from "lucide-react";
+import { ArrowLeft, Mail, KeyRound, LogIn, UserCog, Eye, EyeOff } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [role, setRole] = useState("customer");
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const handleLogin = () => {
@@ -102,7 +103,17 @@ export default function LoginPage() {
                 </div>
                 <div className="relative">
                   <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <Input id="password" type="password" required className="pl-10"/>
+                  <Input id="password" type={showPassword ? "text" : "password"} required className="pl-10 pr-10"/>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 text-muted-foreground hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5"/> : <Eye className="h-5 w-5"/>}
+                    <span className="sr-only">Toggle password visibility</span>
+                  </Button>
                 </div>
               </div>
               <Button onClick={handleLogin} className="w-full bg-primary hover:bg-primary/90">
