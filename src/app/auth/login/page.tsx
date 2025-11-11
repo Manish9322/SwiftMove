@@ -7,9 +7,30 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Mail, KeyRound, LogIn } from "lucide-react";
+import { ArrowLeft, Mail, KeyRound, LogIn, UserCog } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const [role, setRole] = useState("customer");
+  const router = useRouter();
+
+  const handleLogin = () => {
+    switch (role) {
+      case "admin":
+        router.push("/admin");
+        break;
+      case "agent":
+        router.push("/agent");
+        break;
+      case "customer":
+      default:
+        router.push("/customer");
+        break;
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-secondary via-background to-background p-4 relative overflow-hidden">
       <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
@@ -42,7 +63,23 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-6">
+            <div className="grid gap-4">
+               <div className="grid gap-2">
+                <Label htmlFor="role">Login as</Label>
+                 <div className="relative">
+                   <UserCog className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                   <Select value={role} onValueChange={setRole}>
+                    <SelectTrigger className="pl-10">
+                      <SelectValue placeholder="Select a role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="customer">Customer</SelectItem>
+                      <SelectItem value="agent">Agent</SelectItem>
+                      <SelectItem value="admin">Admin</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <div className="relative">
@@ -68,7 +105,7 @@ export default function LoginPage() {
                   <Input id="password" type="password" required className="pl-10"/>
                 </div>
               </div>
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+              <Button onClick={handleLogin} className="w-full bg-primary hover:bg-primary/90">
                 Login
               </Button>
             </div>

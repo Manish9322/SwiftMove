@@ -16,6 +16,8 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
   { href: "/booking", label: "Book Now" },
   { href: "/admin", label: "Admin" },
+  { href: "/agent", label: "Agent" },
+  { href: "/customer", label: "Customer" },
 ];
 
 export default function Header() {
@@ -28,7 +30,8 @@ export default function Header() {
       onClick={() => setIsOpen(false)}
       className={cn(
         "text-sm font-medium transition-colors hover:text-primary",
-        pathname === href ? "text-primary" : "text-muted-foreground"
+        pathname.startsWith(href) && href !== "/" ? "text-primary" : "text-muted-foreground",
+        pathname === "/" && href === "/" ? "text-primary" : ""
       )}
     >
       {label}
