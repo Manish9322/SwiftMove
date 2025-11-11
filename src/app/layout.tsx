@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import Header from '@/components/Header';
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from '@/components/theme-provider';
+import StoreProvider from '@/lib/StoreProvider';
 
 export const metadata: Metadata = {
   title: 'SwiftMove',
@@ -24,15 +25,17 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body className={cn('min-h-screen bg-background font-body antialiased')}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-        >
-            {children}
-            <Toaster />
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+          >
+              {children}
+              <Toaster />
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
