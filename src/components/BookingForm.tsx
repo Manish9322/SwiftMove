@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useTransition, useCallback } from "react";
@@ -16,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, Loader2 } from "lucide-react";
+import { CalendarIcon, Loader2, MapPin, LocateFixed } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { suggestDestination } from "@/ai/flows/suggest-destination";
@@ -37,6 +38,7 @@ type BookingFormValues = z.infer<typeof bookingSchema>;
 export default function BookingForm() {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isSuggestionsLoading, startSuggestionsTransition] = useTransition();
+  const [isLocating, setIsLocating] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<BookingFormValues>({
@@ -69,6 +71,45 @@ export default function BookingForm() {
     }
   }, [form]);
 
+  const handleGetCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      toast({
+        variant: "destructive",
+        title: "Geolocation not supported",
+        description: "Your browser does not support geolocation.",
+      });
+      return;
+    }
+
+    setIsLocating(true);
+    form.setValue("pickupLocation", "Fetching location...");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setIsLocating(false);
+        // For now, we'll just use a placeholder.
+        // In a real app, you'd use a reverse geocoding service here.
+        const address = `Current Location (${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)})`;
+        form.setValue("pickupLocation", address);
+        toast({
+          title: "Location Found!",
+          description: "Your pickup location has been set.",
+        });
+      },
+      (error) => {
+        setIsLocating(false);
+        form.setValue("pickupLocation", ""); // Clear the field
+        toast({
+          variant: "destructive",
+          title: "Failed to get location",
+          description: error.message,
+        });
+      },
+      { enableHighAccuracy: true }
+    );
+  };
+
+
   function onSubmit(data: BookingFormValues) {
     console.log(data);
     toast({
@@ -100,32 +141,67 @@ export default function BookingForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Pickup Location</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g., Terminal 4, Gate 2B" {...field} />
-              </FormControl>
+              <div className="relative">
+                <FormControl>
+                  <Input 
+                    placeholder="e.g., Terminal 4, Gate 2B" 
+                    {...field} 
+                    className="pr-10" 
+                    disabled={isLocating}
+                  />
+                </FormControl>
+                <Button variant="ghost" size="icon" type="button" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-primary">
+                    <MapPin className="h-5 w-5" />
+                    <span className="sr-only">Pinpoint on map</span>
+                </Button>
+              </div>
               <FormMessage />
             </FormItem>
           )}
         />
+        
+        <Button 
+            type="button" 
+            variant="outline" 
+            className="w-full"
+            onClick={handleGetCurrentLocation}
+            disabled={isLocating}
+        >
+            {isLocating ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+                <LocateFixed className="mr-2 h-4 w-4" />
+            )}
+            Use Current Location for Pickup
+        </Button>
+
         <FormField
           control={form.control}
           name="destination"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Destination</FormLabel>
-              <FormControl>
-                <div className="relative">
-                  <Input
-                    placeholder="e.g., Main Taxi Stand"
-                    {...field}
-                    onChange={(e) => handleDestinationChange(e.target.value)}
-                    autoComplete="off"
-                  />
-                  {isSuggestionsLoading && (
-                    <Loader2 className="absolute right-2 top-2.5 h-5 w-5 animate-spin text-muted-foreground" />
-                  )}
-                </div>
-              </FormControl>
+              <div className="relative">
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      placeholder="e.g., Main Taxi Stand"
+                      {...field}
+                      onChange={(e) => handleDestinationChange(e.target.value)}
+                      autoComplete="off"
+                       className="pr-10"
+                    />
+                    {isSuggestionsLoading && (
+                      <Loader2 className="absolute right-12 top-2.5 h-5 w-5 animate-spin text-muted-foreground" />
+                    )}
+                  </div>
+                </FormControl>
+                <Button variant="ghost" size="icon" type="button" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-primary">
+                    <MapPin className="h-5 w-5" />
+                    <span className="sr-only">Pinpoint on map</span>
+                </Button>
+              </div>
+
               {suggestions.length > 0 && (
                 <ul className="mt-2 rounded-md border bg-background p-2 shadow-sm">
                   {suggestions.map((suggestion, index) => (
@@ -177,7 +253,7 @@ export default function BookingForm() {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) => date < new Date() || date < new Date("1900-01-01")}
+                      disabled={(date) => date < new Date(new Date().toDateString())}
                       initialFocus
                     />
                   </PopoverContent>
