@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { Truck, Menu } from "lucide-react";
+import { Truck, Menu, LogIn, UserPlus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
@@ -91,14 +91,18 @@ export default function Header() {
         
         <div className="flex flex-1 items-center justify-end space-x-2">
             <ThemeToggle />
-            <Link href="/auth/login">
-                <Button variant="ghost">Login</Button>
-            </Link>
-            <Link href="/auth/register">
-                <Button variant="outline" className="hidden md:inline-flex border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                    Register
-                </Button>
-            </Link>
+            <Button variant="ghost" size="icon" asChild>
+              <Link href="/auth/login">
+                <LogIn className="h-5 w-5" />
+                <span className="sr-only">Login</span>
+              </Link>
+            </Button>
+            <Button variant="outline" size="icon" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground" asChild>
+              <Link href="/auth/register">
+                <UserPlus className="h-5 w-5" />
+                 <span className="sr-only">Register</span>
+              </Link>
+            </Button>
         </div>
       </div>
     </header>
