@@ -11,7 +11,8 @@ export const api = createApi({
     "Faq",
     "Notification",
     "Coupon",
-    "Fence"
+    "Fence",
+    "Contact"
   ], 
   endpoints: (builder) => ({
     // ================================================== Booking Endpoints ================================================== //
@@ -104,6 +105,36 @@ export const api = createApi({
       }),
       invalidatesTags: ["Porter"],
     }),
+
+    // ================================================== Contact Endpoints ================================================== //
+    getContacts: builder.query({
+      query: () => "/contact",
+      providesTags: ["Contact"],
+    }),
+    addContact: builder.mutation({
+      query: (contact) => ({
+        url: "/contact",
+        method: "POST",
+        body: contact,
+      }),
+      invalidatesTags: ["Contact"],
+    }),
+    updateContact: builder.mutation({
+      query: ({ id, ...contact }) => ({
+        url: `/contact`,
+        method: "PUT",
+        body: { id, ...contact },
+      }),
+      invalidatesTags: ["Contact"],
+    }),
+    deleteContact: builder.mutation({
+      query: (id) => ({
+        url: `/contact`,
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: ["Contact"],
+    }),
     
   }),
 });
@@ -122,4 +153,8 @@ export const {
   useAddPorterMutation,
   useUpdatePorterMutation,
   useDeletePorterMutation,
+  useGetContactsQuery,
+  useAddContactMutation,
+  useUpdateContactMutation,
+  useDeleteContactMutation,
 } = api;
