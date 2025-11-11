@@ -17,6 +17,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { useAddContactMutation } from '@/services/api';
 
 const contactPoints = [
     {
@@ -82,8 +83,36 @@ export default function ContactPage() {
     const [activeLocation, setActiveLocation] = React.useState(locations[0]);
     const { toast } = useToast();
     const [isFeedbackDialogOpen, setIsFeedbackDialogOpen] = useState(false);
+    const [addContact, { isLoading }] = useAddContactMutation();
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>, title: string) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            await addContact({
+                name: data.name,
+                email: data.email,
+                reason: data.reason,
+                message: data.message,
+            }).unwrap();
+
+            toast({
+                title: "Message Sent!",
+                description: "We've received your message and will get back to you shortly.",
+            });
+            (e.target as HTMLFormElement).reset();
+        } catch (error) {
+            toast({
+                title: "Uh oh! Something went wrong.",
+                description: "There was a problem with your request. Please try again.",
+                variant: "destructive",
+            });
+        }
+    };
+    
+    const handleGenericSubmit = (e: React.FormEvent<HTMLFormElement>, title: string) => {
         e.preventDefault();
         toast({
             title: title,
@@ -91,6 +120,7 @@ export default function ContactPage() {
         });
         (e.target as HTMLFormElement).reset();
     };
+
 
     const handleFeedbackSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -140,12 +170,12 @@ export default function ContactPage() {
                                     <CardDescription>We'll get back to you as soon as possible.</CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <form onSubmit={(e) => handleFormSubmit(e, "Message Sent!")} className="space-y-4">
+                                    <form onSubmit={handleFormSubmit} className="space-y-4">
                                         <div className="grid sm:grid-cols-2 gap-4">
-                                            <Input placeholder="Your Name" required/>
-                                            <Input type="email" placeholder="Your Email" required/>
+                                            <Input name="name" placeholder="Your Name" required/>
+                                            <Input name="email" type="email" placeholder="Your Email" required/>
                                         </div>
-                                        <Select required>
+                                        <Select name="reason" required>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Reason for contacting" />
                                             </SelectTrigger>
@@ -156,8 +186,10 @@ export default function ContactPage() {
                                                 <SelectItem value="press">Press</SelectItem>
                                             </SelectContent>
                                         </Select>
-                                        <Textarea placeholder="Your Message" rows={5} required/>
-                                        <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90">Submit Message</Button>
+                                        <Textarea name="message" placeholder="Your Message" rows={5} required/>
+                                        <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90" disabled={isLoading}>
+                                            {isLoading ? "Submitting..." : "Submit Message"}
+                                        </Button>
                                     </form>
                                 </CardContent>
                             </Card>
@@ -272,7 +304,7 @@ export default function ContactPage() {
                                     </div>
                                 </CardHeader>
                                 <CardContent className="p-0">
-                                    <form onSubmit={(e) => handleFormSubmit(e, "Question Submitted!")} className="space-y-4">
+                                    <form onSubmit={(e) => handleGenericSubmit(e, "Question Submitted!")} className="space-y-4">
                                         <div className="relative">
                                             <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                                             <Input id="faq-name" placeholder="Your name" className="pl-10" required/>
@@ -439,7 +471,7 @@ export default function ContactPage() {
                         <p className="max-w-2xl mx-auto text-muted-foreground md:text-xl/relaxed mt-4 mb-8">
                             Subscribe to our newsletter for exclusive offers, new destination announcements, and travel tips. No spam, we promise.
                         </p>
-                        <form onSubmit={(e) => handleFormSubmit(e, "Subscribed!")} className="flex sm:flex-row flex-col gap-2 max-w-md mx-auto">
+                        <form onSubmit={(e) => handleGenericSubmit(e, "Subscribed!")} className="flex sm:flex-row flex-col gap-2 max-w-md mx-auto">
                             <Input type="email" placeholder="Enter your email" className="flex-1 h-12" required/>
                             <Button type="submit" size="lg" className="bg-primary hover:bg-primary/90 h-12">Subscribe</Button>
                         </form>
